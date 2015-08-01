@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.CustomdishMapper" >
+  	<sql id="dishTableName">r_dish</sql>
+  	<sql id="dish_contentDishTableName">r_dish_content</sql>
+  	<select id="findAllDish" resultType="customdish">
+  		select * from <include refid="dishTableName"></include>
+  	</select>
+  	
+  	<select id="findAllDishByType" parameterType="int" resultType="customdish">
+  		select * from <include refid="dishTableName"></include> dish , <include refid="rms.mapper.CustomcategoryMapper.categoryTableName"></include> category
+  		where dish.rCategoryId=category.id and category.id=#{id}
+  	</select>
+  	
+  	<select id="findDishByIds" parameterType="java.lang.String" resultType="customdish">
+  		select * from <include refid="dishTableName"></include> where id in ( #{auxiliarydishes} )
+  	</select>
+  	
+  	<select id="findsubMaterialsBydishId" resultType="custommaterials" parameterType="java.lang.Integer">
+  		select materials.*,content.materials_quantity quantity from <include refid="rms.mapper.CustommaterialsMapper.materialsTableName"></include> materials ,r_dish_content content
+  		where content.dish_id=#{id} and content.materials_id=materials.id
+  	</select>
+  	
+  	<select id="findsubDishBydishId" resultType="customdish" parameterType="java.lang.Integer">
+  		select dish.*,content.sub_dish_quantity sub_customdish_quantity from <include refid="dishTableName"></include> dish ,r_dish_content content
+  		where content.dish_id=#{id} and content.sub_dish_id=dish.id
+  	</select>
+  	
+  	<insert id="insertSelectiveRetrunPk"  parameterType="customdish" >
+  		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			select LAST_INSERT_ID() 
+	   </selectKey>
+	   	 insert into <include refid="dishTableName"></include> (id, name, price, 
+	      	rCategoryId
+	      )
+	      values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+	    	 #{rcategoryid,jdbcType=INTEGER}
+	      )
+  </insert>
+  
+  	<insert id="insertDishRelation" parameterType="dishcotent">
+  			insert into <include refid="dish_contentDishTableName"></include>
+  			<trim prefix="(" suffix=")" suffixOverrides="," >
+		      <if test="dishid != null" >
+		        dish_id,
+		      </if>
+		      <if test="materialsid != null" >
+		        materials_id,
+		      </if>
+		      <if test="materialsquantity != null" >
+		        materials_quantity,
+		      </if>
+		       <if test="subdishid != null" >
+		        sub_dish_id,
+		      </if>
+		       <if test="subdishquantity != null" >
+		        sub_dish_quantity,
+		      </if>
+		    </trim>
+		    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		       <if test="dishid != null" >
+		        #{dishid,jdbcType=INTEGER},
+		      </if>
+		      <if test="materialsid != null" >
+		      #{materialsid,jdbcType=INTEGER},
+		      </if>
+		      <if test="materialsquantity != null" >
+		      #{materialsquantity,jdbcType=DECIMAL},
+		      </if>
+		       <if test="subdishid != null" >
+		      	#{subdishid,jdbcType=INTEGER},
+		      </if>
+		       <if test="subdishquantity != null" >
+		      	#{subdishquantity,jdbcType=INTEGER},
+		      </if>
+		    </trim>
+  	</insert>
+  	
+  	<update id="updateDishRelation" parameterType="dishcotent">
+		update <include refid="dish_contentDishTableName"></include>  
+		<set>
+	    		materials_quantity=#{materialsquantity,jdbcType=DECIMAL},
+	      		sub_dish_quantity=#{subdishquantity,jdbcType=INTEGER}
+		</set>
+		<where >
+		    	dish_id=#{dishid,jdbcType=INTEGER} 
+		        and materials_id=#{materialsid,jdbcType=INTEGER} 
+		        and sub_dish_id=#{subdishid,jdbcType=INTEGER}
+		</where>
+  	</update>
+  	
+  	<delete id="deleteDishContentByid" parameterType="java.lang.Integer">
+  		delete from <include refid="dish_contentDishTableName"></include>
+  		where dish_id=#{id}
+  	</delete>
+  	
+</mapper>

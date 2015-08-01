@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.CustomdishImageMapper" >
+  	<sql id="dishImageTableName">r_dishimage</sql>
+  	<select id="findDishImageBydishId" parameterType="int" resultType="dishImage">
+		  select * from <include refid="dishImageTableName"></include> where rDishId=#{id}
+  	</select>
+  	<delete id="deleteDishImageBydishId" parameterType="int">
+  		delete from <include refid="dishImageTableName"></include> where rDishId=#{id}
+  	</delete>
+</mapper>

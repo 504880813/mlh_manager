@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.orderMapper" >
+  <resultMap id="BaseResultMap" type="rms.po.order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="createtime" property="createtime" jdbcType="DATE" />
+    <result column="isbalance" property="isbalance" jdbcType="BIT" />
+    <result column="ispayment" property="ispayment" jdbcType="BIT" />
+    <result column="waiter" property="waiter" jdbcType="VARCHAR" />
+    <result column="r_diningtable_id" property="rDiningtableId" jdbcType="INTEGER" />
+    <result column="numberofpeople" property="numberofpeople" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, price, createtime, isbalance, ispayment, waiter, r_diningtable_id, numberofpeople
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.orderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="rms.po.orderExample" >
+    delete from c_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="rms.po.order" >
+    insert into c_order (id, price, createtime, 
+      isbalance, ispayment, waiter, 
+      r_diningtable_id, numberofpeople)
+    values (#{id,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{createtime,jdbcType=DATE}, 
+      #{isbalance,jdbcType=BIT}, #{ispayment,jdbcType=BIT}, #{waiter,jdbcType=VARCHAR}, 
+      #{rDiningtableId,jdbcType=INTEGER}, #{numberofpeople,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="rms.po.order" >
+    insert into c_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="isbalance != null" >
+        isbalance,
+      </if>
+      <if test="ispayment != null" >
+        ispayment,
+      </if>
+      <if test="waiter != null" >
+        waiter,
+      </if>
+      <if test="rDiningtableId != null" >
+        r_diningtable_id,
+      </if>
+      <if test="numberofpeople != null" >
+        numberofpeople,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="isbalance != null" >
+        #{isbalance,jdbcType=BIT},
+      </if>
+      <if test="ispayment != null" >
+        #{ispayment,jdbcType=BIT},
+      </if>
+      <if test="waiter != null" >
+        #{waiter,jdbcType=VARCHAR},
+      </if>
+      <if test="rDiningtableId != null" >
+        #{rDiningtableId,jdbcType=INTEGER},
+      </if>
+      <if test="numberofpeople != null" >
+        #{numberofpeople,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="rms.po.orderExample" resultType="java.lang.Integer" >
+    select count(*) from c_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.isbalance != null" >
+        isbalance = #{record.isbalance,jdbcType=BIT},
+      </if>
+      <if test="record.ispayment != null" >
+        ispayment = #{record.ispayment,jdbcType=BIT},
+      </if>
+      <if test="record.waiter != null" >
+        waiter = #{record.waiter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rDiningtableId != null" >
+        r_diningtable_id = #{record.rDiningtableId,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberofpeople != null" >
+        numberofpeople = #{record.numberofpeople,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_order
+    set id = #{record.id,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      createtime = #{record.createtime,jdbcType=DATE},
+      isbalance = #{record.isbalance,jdbcType=BIT},
+      ispayment = #{record.ispayment,jdbcType=BIT},
+      waiter = #{record.waiter,jdbcType=VARCHAR},
+      r_diningtable_id = #{record.rDiningtableId,jdbcType=INTEGER},
+      numberofpeople = #{record.numberofpeople,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="rms.po.order" >
+    update c_order
+    <set >
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="isbalance != null" >
+        isbalance = #{isbalance,jdbcType=BIT},
+      </if>
+      <if test="ispayment != null" >
+        ispayment = #{ispayment,jdbcType=BIT},
+      </if>
+      <if test="waiter != null" >
+        waiter = #{waiter,jdbcType=VARCHAR},
+      </if>
+      <if test="rDiningtableId != null" >
+        r_diningtable_id = #{rDiningtableId,jdbcType=INTEGER},
+      </if>
+      <if test="numberofpeople != null" >
+        numberofpeople = #{numberofpeople,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rms.po.order" >
+    update c_order
+    set price = #{price,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=DATE},
+      isbalance = #{isbalance,jdbcType=BIT},
+      ispayment = #{ispayment,jdbcType=BIT},
+      waiter = #{waiter,jdbcType=VARCHAR},
+      r_diningtable_id = #{rDiningtableId,jdbcType=INTEGER},
+      numberofpeople = #{numberofpeople,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

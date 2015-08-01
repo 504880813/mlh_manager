@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.CustomdiningTableMapper" >
+  	<sql id="CustomtableName">r_diningtable</sql>
+  	<sql id="selectMinIdOfdiningTable">
+  		(select min(id) from <include refid="CustomtableName" /> )
+  	</sql>
+  	<select id="findAlldiningTable" resultType="customdiningTable">
+  		select * from <include refid="CustomtableName" />
+  	</select>
+  	<select id="findDefultImage" resultType="customdiningTable">
+		 select freeImage,busyImage from <include refid="CustomtableName" /> where id=<include refid="selectMinIdOfdiningTable" />
+  	</select>
+  	<update id="updateStateByid" parameterType="customdiningTable">
+  		update <include refid="CustomtableName" />
+    	set IsFree = ${isfree}
+      	where id = ${id}
+  	</update>
+  	<update id="updateImage" parameterType="customdiningTable">
+  		update <include refid="CustomtableName" />
+    	set freeImage = '${freeimage}',busyImage = '${busyimage}'
+  	</update>
+</mapper>

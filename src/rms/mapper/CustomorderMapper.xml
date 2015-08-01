@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.CustomorderMapper" >
+  	<sql id="orderTableName">c_order</sql>
+  	<sql id="orderdetailTableName">c_orderdetail</sql>
+  	
+  	<insert id="insertorder" parameterType="customOrder" >
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into <include refid="orderTableName"></include>
+	 <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="isbalance != null" >
+        isbalance,
+      </if>
+      <if test="ispayment != null" >
+        ispayment,
+      </if>
+      <if test="waiter != null" >
+        waiter,
+      </if>
+      <if test="rDiningtableId != null" >
+        r_diningtable_id,
+      </if>
+      <if test="numberofpeople != null" >
+        numberofpeople,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="isbalance != null" >
+        #{isbalance,jdbcType=BIT},
+      </if>
+      <if test="ispayment != null" >
+        #{ispayment,jdbcType=BIT},
+      </if>
+      <if test="waiter != null" >
+        #{waiter,jdbcType=VARCHAR},
+      </if>
+      <if test="rDiningtableId != null" >
+        #{rDiningtableId,jdbcType=INTEGER},
+      </if>
+      <if test="numberofpeople != null" >
+        #{numberofpeople,jdbcType=INTEGER},
+      </if>
+    </trim>
+	</insert>
+	
+	<delete id="deleteorderdetailByorderId" parameterType="java.lang.Integer">
+		delete from <include refid="orderdetailTableName"></include>
+		where id=#{id}	
+	</delete>
+	<update id="updateorderdetail" parameterType="orderdetail">
+		update <include refid="orderdetailTableName"></include>
+		<set>
+			dishNumber=#{dishnumber},
+  			price=#{price}
+		</set>
+		<where>
+			cOrderId = #{corderid} and rDishId=#{rdishid}
+		</where>
+	</update>
+	
+	<select id="findAllBystatus" parameterType="customOrder" resultType="customOrder">
+		select * from <include refid="orderTableName"></include>
+		where isbalance=#{isbalance} and ispayment=#{ispayment}
+	</select>
+	
+	<select id="findorderByid" parameterType="java.lang.Integer" resultType="customOrder">
+		select * from <include refid="orderTableName"></include>
+		where id=#{id}
+	</select>
+	
+	<select id="findOrderdetailsByorderid" parameterType="java.lang.Integer" resultType="customOrder">
+		select * from <include refid="orderdetailTableName"></include>
+		where cOrderId=#{id}
+	</select>
+</mapper>

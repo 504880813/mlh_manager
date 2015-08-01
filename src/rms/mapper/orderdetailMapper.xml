@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.orderdetailMapper" >
+  <resultMap id="BaseResultMap" type="rms.po.orderdetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dishNumber" property="dishnumber" jdbcType="INTEGER" />
+    <result column="rDishId" property="rdishid" jdbcType="INTEGER" />
+    <result column="cOrderId" property="corderid" jdbcType="INTEGER" />
+    <result column="echelon" property="echelon" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dishNumber, rDishId, cOrderId, echelon, price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.orderdetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_orderdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_orderdetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_orderdetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="rms.po.orderdetailExample" >
+    delete from c_orderdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="rms.po.orderdetail" >
+    insert into c_orderdetail (id, dishNumber, rDishId, 
+      cOrderId, echelon, price
+      )
+    values (#{id,jdbcType=INTEGER}, #{dishnumber,jdbcType=INTEGER}, #{rdishid,jdbcType=INTEGER}, 
+      #{corderid,jdbcType=INTEGER}, #{echelon,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="rms.po.orderdetail" >
+    insert into c_orderdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dishnumber != null" >
+        dishNumber,
+      </if>
+      <if test="rdishid != null" >
+        rDishId,
+      </if>
+      <if test="corderid != null" >
+        cOrderId,
+      </if>
+      <if test="echelon != null" >
+        echelon,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dishnumber != null" >
+        #{dishnumber,jdbcType=INTEGER},
+      </if>
+      <if test="rdishid != null" >
+        #{rdishid,jdbcType=INTEGER},
+      </if>
+      <if test="corderid != null" >
+        #{corderid,jdbcType=INTEGER},
+      </if>
+      <if test="echelon != null" >
+        #{echelon,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="rms.po.orderdetailExample" resultType="java.lang.Integer" >
+    select count(*) from c_orderdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_orderdetail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dishnumber != null" >
+        dishNumber = #{record.dishnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.rdishid != null" >
+        rDishId = #{record.rdishid,jdbcType=INTEGER},
+      </if>
+      <if test="record.corderid != null" >
+        cOrderId = #{record.corderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.echelon != null" >
+        echelon = #{record.echelon,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_orderdetail
+    set id = #{record.id,jdbcType=INTEGER},
+      dishNumber = #{record.dishnumber,jdbcType=INTEGER},
+      rDishId = #{record.rdishid,jdbcType=INTEGER},
+      cOrderId = #{record.corderid,jdbcType=INTEGER},
+      echelon = #{record.echelon,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="rms.po.orderdetail" >
+    update c_orderdetail
+    <set >
+      <if test="dishnumber != null" >
+        dishNumber = #{dishnumber,jdbcType=INTEGER},
+      </if>
+      <if test="rdishid != null" >
+        rDishId = #{rdishid,jdbcType=INTEGER},
+      </if>
+      <if test="corderid != null" >
+        cOrderId = #{corderid,jdbcType=INTEGER},
+      </if>
+      <if test="echelon != null" >
+        echelon = #{echelon,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rms.po.orderdetail" >
+    update c_orderdetail
+    set dishNumber = #{dishnumber,jdbcType=INTEGER},
+      rDishId = #{rdishid,jdbcType=INTEGER},
+      cOrderId = #{corderid,jdbcType=INTEGER},
+      echelon = #{echelon,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

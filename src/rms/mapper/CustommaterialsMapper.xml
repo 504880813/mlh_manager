@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.CustommaterialsMapper" >
+	<sql id="materialsTableName">r_materials</sql>
+	<select id="findAll" resultType="custommaterials">
+		select * from <include refid="materialsTableName"></include>
+	</select>
+	<select id="findMaterialsByIds" parameterType="java.lang.String" resultType="custommaterials">
+  		select * from <include refid="materialsTableName"></include> where id in ( #{rmaterialsid} )
+  	</select>
+</mapper>
