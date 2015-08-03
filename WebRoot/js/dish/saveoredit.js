@@ -1,12 +1,24 @@
-
+	
+	/**
+	 * 显示所有菜品
+	
 	function showDishes(){
 		document.getElementById("Dishes").setAttribute("style","display:block");
 		document.getElementById("Materials").setAttribute("style","display:none");
 	}
+	/**
+	 * 显示所有原料
+	 
 	function showMaterials(){
 		document.getElementById("Dishes").setAttribute("style","display:none");
 		document.getElementById("Materials").setAttribute("style","display:block");
 	}
+	 */
+	/**
+	 * 显示菜品和菜品数量
+	 * @param dishes
+	 * @param dishQuantitys
+	 */
 	function showDishes(dishes,dishQuantitys){
 		
 		var Quantitys= new Array();
@@ -36,6 +48,11 @@
 		document.getElementById("Dishes").setAttribute("style","display:block");
 		document.getElementById("Materials").setAttribute("style","display:none");
 	}
+	/**
+	 * 显示分类和分类数量
+	 * @param materialsIds
+	 * @param MaterialsQuantitys
+	 */
 	function showMaterials(materialsIds,MaterialsQuantitys){
 		var Quantitys= new Array();
 		if(MaterialsQuantitys.indexOf(",") > 0){
@@ -63,3 +80,34 @@
 		document.getElementById("Dishes").setAttribute("style","display:none");
 		document.getElementById("Materials").setAttribute("style","display:block");
 	}
+	/**
+	 * 根据节点ID克隆节点，并放到指定父节点下
+	 * @param Nodeid
+	 * @param parentNodeid
+	 */
+	function CloneNodeByid(Nodeid,parentNodeid){
+		//将克隆 的元素添加到父节点
+		$("#"+parentNodeid).append($("#"+Nodeid).clone());
+		$("#"+parentNodeid).append("<br>");
+	}
+	/**
+	 * 根据节点名称删除最后一个节点，以及节点下方的<br>
+	 * @param NodeName
+	 * 
+	 */
+	function removeNodeByid(NodeName){
+		var selectd="input[name="+NodeName+"]:last";
+		var rootselectd="input[name="+NodeName+"]";
+		if($(rootselectd).length!=1){
+			$(selectd).next("br").remove();
+			$(selectd).remove();
+		}else{
+			alert("至少需要一张图片");
+		}
+//		$("#"+Nodeid+":last").next().remove();
+//		$("#"+Nodeid+":last").remove();
+//		$("#"+Nodeid).parent().remove("br:last");
+	}
+	
+	
+	

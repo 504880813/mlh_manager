@@ -27,9 +27,13 @@
 	</c:forEach>
 	
 	<c:if test="${dish.id==null }">
-	暂时两个图片:
-	<input type="file" name="dishImages" id="dishImages">
-	<input type="file" name="dishImages" id="dishImages">
+	<div id="images">
+		<input type="button" value="addImages" onclick="CloneNodeByid('dishImages','images')">
+		<input type="button" value="removeImages" onclick="removeNodeByid('dishImages')"><br/>
+		<input type="file" name="dishImages" id="dishImages"><br>
+	</div>
+<!-- 	<input type="file" name="dishImages" id="dishImages">
+	<input type="file" name="dishImages" id="dishImages"> -->
 	</c:if>
 	<label><input   type="radio" onclick="showDishes('${hasAuxiliarydishesid}','${hasAuxiliarydishesQuantitys }')" />套餐</label> 
 	<label><input  type="radio" onclick="showMaterials('${hasMaterialsid}','${ hasMaterialsQuantitys}')" />单菜</label> 
