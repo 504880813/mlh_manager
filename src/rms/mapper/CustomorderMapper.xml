@@ -78,7 +78,7 @@
 		</where>
 	</update>
 	
-	<select id="findAllBystatus" parameterType="customOrder" resultType="customOrder">
+<!-- 	<select id="findAllBystatus" parameterType="customOrder" resultType="customOrder">
 		select * from <include refid="orderTableName"></include>
 		where isbalance=#{isbalance} and ispayment=#{ispayment}
 	</select>
@@ -86,10 +86,73 @@
 	<select id="findorderByid" parameterType="java.lang.Integer" resultType="customOrder">
 		select * from <include refid="orderTableName"></include>
 		where id=#{id}
-	</select>
+	</select> -->
 	
 	<select id="findOrderdetailsByorderid" parameterType="java.lang.Integer" resultType="customOrder">
 		select * from <include refid="orderdetailTableName"></include>
 		where cOrderId=#{id}
+	</select>
+	
+<!-- 	<select id="findorderofnotcheckoutBydiningtableid" parameterType="java.lang.Integer" resultType="customOrder">
+		select * from <include refid="orderTableName"></include>
+		where r_diningtable_id=#{id} and isbalance=0 and ispayment=0
+	</select> -->
+	<select id="findorderByCustomOrder" parameterType="customOrder" resultType="customOrder">
+		select * from <include refid="orderTableName"></include>
+		<where>
+			<if test="id != null" >
+       			 id=#{id,jdbcType=INTEGER},
+      		</if>
+      		<if test="price != null" >
+       			and price= #{price,jdbcType=DECIMAL},
+      		</if>
+            <if test="createtime != null" >
+                and createtime=#{createtime,jdbcType=DATE},
+            </if>
+            <if test="isbalance != null" >
+                and isbalance=#{isbalance,jdbcType=BIT},
+            </if>
+            <if test="ispayment != null" >
+                and ispayment=#{ispayment,jdbcType=BIT},
+            </if>
+            <if test="waiter != null" >
+                and waiter=#{waiter,jdbcType=VARCHAR},
+            </if>
+            <if test="rDiningtableId != null" >
+                and r_diningtable_id=#{rDiningtableId,jdbcType=INTEGER},
+            </if>
+            <if test="numberofpeople != null" >
+                and numberofpeople=#{numberofpeople,jdbcType=INTEGER},
+            </if>
+		</where>
+	</select>
+	<select id="findorderByCustomOrderofList" parameterType="customOrder" resultType="customOrder">
+		select * from <include refid="orderTableName"></include>
+		<where>
+			<if test="id != null" >
+       			 id=#{id,jdbcType=INTEGER},
+      		</if>
+      		<if test="price != null" >
+       			and price= #{price,jdbcType=DECIMAL},
+      		</if>
+            <if test="createtime != null" >
+                and createtime=#{createtime,jdbcType=DATE},
+            </if>
+            <if test="isbalance != null" >
+                and isbalance=#{isbalance,jdbcType=BIT},
+            </if>
+            <if test="ispayment != null" >
+                and ispayment=#{ispayment,jdbcType=BIT},
+            </if>
+            <if test="waiter != null" >
+                and waiter=#{waiter,jdbcType=VARCHAR},
+            </if>
+            <if test="rDiningtableId != null" >
+                and r_diningtable_id=#{rDiningtableId,jdbcType=INTEGER},
+            </if>
+            <if test="numberofpeople != null" >
+                and numberofpeople=#{numberofpeople,jdbcType=INTEGER},
+            </if>
+		</where>
 	</select>
 </mapper>

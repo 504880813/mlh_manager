@@ -127,7 +127,7 @@ public class OrderServiceImpl implements OrderService {
 		customOrder.setId(id);
 		orderMapper.updateByPrimaryKey(customOrder);
 	}
-	/*
+	/*	
 	 * (非 Javadoc) 
 	* <p>Title: findAllOrder</p> 
 	* <p>Description:查询所有订单(基本信息)</p> 
@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public List<CustomOrder> findAllOrderBystatus(CustomOrder customorder) throws Exception {
-		return customorderMapper.findAllBystatus(customorder);
+		return customorderMapper.findorderByCustomOrderofList(customorder);
 	}
 	/*
 	 * (非 Javadoc) 
@@ -150,11 +150,38 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public CustomOrder findOrderdetailsByid(Integer id) throws Exception {
+		//构建查询信息
+		CustomOrder query=new CustomOrder();
+		query.setId(id);
 		//查询订单基础信息
-		CustomOrder customOrder=customorderMapper.findorderByid(id);
+		CustomOrder customOrder=customorderMapper.findorderByCustomOrder(query);
 		//查询所有订单明细
 		List<orderdetail> orderdetails=customorderMapper.findOrderdetailsByorderid(id);
 		
+		customOrder.setOrderdetailList(orderdetails);
+		
+		return customOrder;
+	}
+	/*
+	 * (非 Javadoc) 
+	* <p>Title: findOrderBydiningtableid</p> 
+	* <p>Description: 根据餐桌id查询订单信息包括明细</p> 
+	* @param diningtableid
+	* @return
+	* @throws Exception 
+	* @see rms.service.OrderService#findOrderBydiningtableid(java.lang.Integer)
+	 */
+	@Override
+	public CustomOrder findOrderBydiningtableid(Integer diningtableid)
+			throws Exception {
+		//构建查询信息
+		CustomOrder query=new CustomOrder();
+		query.setrDiningtableId(diningtableid);
+		//查询订单基础信息
+		CustomOrder customOrder=customorderMapper.findorderByCustomOrder(query);
+		//查询所有订单明细
+		List<orderdetail> orderdetails=customorderMapper.findOrderdetailsByorderid(customOrder.getId());
+				
 		customOrder.setOrderdetailList(orderdetails);
 		
 		return customOrder;

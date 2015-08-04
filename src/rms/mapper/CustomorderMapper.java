@@ -44,28 +44,28 @@ public interface CustomorderMapper {
 	 */
 	public void updateorderdetail(orderdetail now) throws Exception;
 
-	/**
-	 * 
-	* @Title: findAllBystatus 
-	* @Description: 根据状态查询状态下所有订单 
-	* @param @param customorder
-	* @param @return
-	* @param @throws Exception    设定文件 
-	* @return List<CustomOrder>    返回类型 
-	* @throws
-	 */
-	public List<CustomOrder> findAllBystatus(CustomOrder customorder) throws Exception;
-	/**
-	 * 
-	* @Title: findorderByid 
-	* @Description: 根据订单ID查询订单基础信息
-	* @param @param id
-	* @param @return
-	* @param @throws Exception    设定文件 
-	* @return CustomOrder    返回类型 
-	* @throws
-	 */
-	public CustomOrder findorderByid(Integer id) throws Exception;
+//	/**
+//	 * 
+//	* @Title: findAllBystatus 
+//	* @Description: 根据状态查询状态下所有订单 
+//	* @param @param customorder
+//	* @param @return
+//	* @param @throws Exception    设定文件 
+//	* @return List<CustomOrder>    返回类型 
+//	* @throws
+//	 */
+//	public List<CustomOrder> findAllBystatus(CustomOrder customorder) throws Exception;
+//	/**
+//	 * 
+//	* @Title: findorderByid 
+//	* @Description: 根据订单ID查询订单基础信息
+//	* @param @param id
+//	* @param @return
+//	* @param @throws Exception    设定文件 
+//	* @return CustomOrder    返回类型 
+//	* @throws
+//	 */
+//	public CustomOrder findorderByid(Integer id) throws Exception;
 	/**
 	 * 
 	* @Title: findOrderdetailsByorderid 
@@ -77,5 +77,29 @@ public interface CustomorderMapper {
 	* @throws
 	 */
 	public List<orderdetail> findOrderdetailsByorderid(Integer id) throws Exception;
+	/**
+	 * 
+	* @Title: findorderByCustomOrder 
+	* @Description: 将查询条件设置进入customorder中，定制查询条件  返回一条记录
+	* @param @param customorder
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return CustomOrder    返回类型 
+	* @throws
+	 */
+	public CustomOrder findorderByCustomOrder(
+			CustomOrder customorder) throws Exception;
+	
+	/**
+	 * 
+	* @Title: findorderByCustomOrderofList 
+	* @Description:将查询条件设置进入customorder中，定制查询条件  返回所有查询到的记录
+	* @param @param customOrder
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<CustomOrder>    返回类型 
+	* @throws
+	 */
+	public List<CustomOrder> findorderByCustomOrderofList(CustomOrder customOrder) throws Exception;
     
 }

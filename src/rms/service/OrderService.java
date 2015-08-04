@@ -91,4 +91,15 @@ public interface OrderService {
 	* @throws
 	 */
 	public CustomOrder findOrderdetailsByid(Integer id) throws Exception;
+	/**
+	 * 
+	* @Title: findOrderBydiningtableid 
+	* @Description: 根据餐桌id查询订单信息包括明细
+	* @param @param diningtableid
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return CustomOrder    返回类型 
+	* @throws
+	 */
+	public CustomOrder findOrderBydiningtableid(Integer diningtableid) throws Exception;
 }

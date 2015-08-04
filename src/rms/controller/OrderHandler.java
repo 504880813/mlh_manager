@@ -91,7 +91,6 @@ public class OrderHandler {
 		List<Customcategory> categorys=categoryService.findAllCategory();
 		
 		
-		
 		ModelAndView mav=new ModelAndView();
 		
 
@@ -104,7 +103,17 @@ public class OrderHandler {
 		
 		return mav;
 	}
-	
+	/**
+	 * 
+	* @Title: startOrderofdishSubmit 
+	* @Description: 保存订单信息同时将餐桌换成忙碌
+	* @param @param customOrder
+	* @param @param bindingResult
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return ModelAndView    返回类型 
+	* @throws
+	 */
 	@RequestMapping("startOrderofdishSubmit")
 	public ModelAndView startOrderofdishSubmit(@Validated CustomOrder customOrder,BindingResult bindingResult) throws Exception{
 		ModelAndView mav=new ModelAndView();
@@ -123,6 +132,33 @@ public class OrderHandler {
 		
 		return mav;
 	}
+	
+	/**
+	 * 
+	* @Title: Checkoutofdiningtableid 
+	* @Description: 根据餐桌id付款 
+	* @param @param diningtableid
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return ModelAndView    返回类型 
+	* @throws
+	 */
+	@RequestMapping("Checkoutofdiningtableid")
+	public ModelAndView Checkoutofdiningtableid(Integer diningtableid) throws Exception{
+		
+		CustomOrder order=orderService.findOrderBydiningtableid(diningtableid);
+			
+		ModelAndView mav=new ModelAndView();
+		//包括明细数据
+		mav.addObject("order", order);
+		
+		mav.setViewName("order/Ordercheckout");
+		
+		return mav;
+	}
+	
+	
+//	public ModelAndView getAllOrderof
 	
 
 
