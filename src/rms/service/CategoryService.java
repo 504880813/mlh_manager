@@ -7,7 +7,7 @@ import rms.po.Customcategory;
 
 /**
  * 
-* @ClassName: DiningTableService 
+* @ClassName: CategoryService 
 * @Description: 分类操作接口 
 * @author random
 * @date 2015年7月15日 上午11:37:23 
