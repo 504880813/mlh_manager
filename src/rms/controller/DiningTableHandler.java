@@ -124,7 +124,7 @@ public class DiningTableHandler {
 			diningTableService.uploadImage(freeimageFile,busyimageFile,customdiningTable);
 		}
 		diningTableService.saveDiningTable(customdiningTable);
-		return "redirect:getAllDiningTable.action";
+		return "redirect:getAllDiningTableofManager.action";
 	}
 	/**
 	 * 
@@ -171,7 +171,7 @@ public class DiningTableHandler {
 		}
 		diningTableService.updateDiningTableById(id, customdiningTable);
 		
-		return "redirect:getAllDiningTable.action";
+		return "redirect:getAllDiningTableofManager.action";
 	}
 	/**
 	 * 
@@ -186,7 +186,7 @@ public class DiningTableHandler {
 	@RequestMapping("deleteDiningTable")
 	public String deleteDiningTable(Integer id) throws Exception{
 		diningTableService.deleteDiningTableByID(id);
-		return "redirect:getAllDiningTable.action";
+		return "redirect:getAllDiningTableofManager.action";
 	}
 
 	/**
@@ -203,13 +203,13 @@ public class DiningTableHandler {
 	@RequestMapping("changeDiningTableState")
 	public String changeDiningTableState(Integer id,Boolean currtstate) throws Exception{
 		diningTableService.updateStateById(id, !currtstate);;
-		return "redirect:getAllDiningTable.action";
+		return "redirect:getAllDiningTableofManager.action";
 	}
 	
 	/**
 	 * 
 	* @Title: changeImage 
-	* @Description: TODO暂缓
+	* @Description: 
 	* @param @param freeimageFile
 	* @param @param busyimageFile
 	* @param @return
@@ -221,7 +221,7 @@ public class DiningTableHandler {
 	public String changeImage(MultipartFile freeimageFile, MultipartFile busyimageFile)  throws Exception{
 		return "diningTable/changeImage";
 	}
-	@RequestMapping("changeImageSubmit")
+	
 	/**
 	 * 
 	* @Title: changeImageSubmit 
@@ -233,13 +233,14 @@ public class DiningTableHandler {
 	* @return String    返回类型 
 	* @throws
 	 */
+	@RequestMapping("changeImageSubmit")
 	public String changeImageSubmit(MultipartFile freeimageFile, MultipartFile busyimageFile) throws Exception{
 		
 		if(freeimageFile!=null && busyimageFile!=null){
 			diningTableService.updateImage(freeimageFile,busyimageFile);
 		}
 		
-		return "redirect:getAllDiningTable.action";
+		return "redirect:getAllDiningTableofManager.action";
 	}
 	
 	
