@@ -236,62 +236,192 @@ public class materialsExample {
         }
 
         public Criteria andSurplusIsNull() {
-            addCriterion("Surplus is null");
+            addCriterion("surplus is null");
             return (Criteria) this;
         }
 
         public Criteria andSurplusIsNotNull() {
-            addCriterion("Surplus is not null");
+            addCriterion("surplus is not null");
             return (Criteria) this;
         }
 
         public Criteria andSurplusEqualTo(BigDecimal value) {
-            addCriterion("Surplus =", value, "surplus");
+            addCriterion("surplus =", value, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusNotEqualTo(BigDecimal value) {
-            addCriterion("Surplus <>", value, "surplus");
+            addCriterion("surplus <>", value, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusGreaterThan(BigDecimal value) {
-            addCriterion("Surplus >", value, "surplus");
+            addCriterion("surplus >", value, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("Surplus >=", value, "surplus");
+            addCriterion("surplus >=", value, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusLessThan(BigDecimal value) {
-            addCriterion("Surplus <", value, "surplus");
+            addCriterion("surplus <", value, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("Surplus <=", value, "surplus");
+            addCriterion("surplus <=", value, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusIn(List<BigDecimal> values) {
-            addCriterion("Surplus in", values, "surplus");
+            addCriterion("surplus in", values, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusNotIn(List<BigDecimal> values) {
-            addCriterion("Surplus not in", values, "surplus");
+            addCriterion("surplus not in", values, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("Surplus between", value1, value2, "surplus");
+            addCriterion("surplus between", value1, value2, "surplus");
             return (Criteria) this;
         }
 
         public Criteria andSurplusNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("Surplus not between", value1, value2, "surplus");
+            addCriterion("surplus not between", value1, value2, "surplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusIsNull() {
+            addCriterion("lastsurplus is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusIsNotNull() {
+            addCriterion("lastsurplus is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusEqualTo(Long value) {
+            addCriterion("lastsurplus =", value, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusNotEqualTo(Long value) {
+            addCriterion("lastsurplus <>", value, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusGreaterThan(Long value) {
+            addCriterion("lastsurplus >", value, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusGreaterThanOrEqualTo(Long value) {
+            addCriterion("lastsurplus >=", value, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusLessThan(Long value) {
+            addCriterion("lastsurplus <", value, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusLessThanOrEqualTo(Long value) {
+            addCriterion("lastsurplus <=", value, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusIn(List<Long> values) {
+            addCriterion("lastsurplus in", values, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusNotIn(List<Long> values) {
+            addCriterion("lastsurplus not in", values, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusBetween(Long value1, Long value2) {
+            addCriterion("lastsurplus between", value1, value2, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastsurplusNotBetween(Long value1, Long value2) {
+            addCriterion("lastsurplus not between", value1, value2, "lastsurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitIsNull() {
+            addCriterion("unit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitIsNotNull() {
+            addCriterion("unit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitEqualTo(String value) {
+            addCriterion("unit =", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotEqualTo(String value) {
+            addCriterion("unit <>", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitGreaterThan(String value) {
+            addCriterion("unit >", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitGreaterThanOrEqualTo(String value) {
+            addCriterion("unit >=", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitLessThan(String value) {
+            addCriterion("unit <", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitLessThanOrEqualTo(String value) {
+            addCriterion("unit <=", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitLike(String value) {
+            addCriterion("unit like", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotLike(String value) {
+            addCriterion("unit not like", value, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitIn(List<String> values) {
+            addCriterion("unit in", values, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotIn(List<String> values) {
+            addCriterion("unit not in", values, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitBetween(String value1, String value2) {
+            addCriterion("unit between", value1, value2, "unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNotBetween(String value1, String value2) {
+            addCriterion("unit not between", value1, value2, "unit");
             return (Criteria) this;
         }
     }

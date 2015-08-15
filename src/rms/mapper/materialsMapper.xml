@@ -4,7 +4,9 @@
   <resultMap id="BaseResultMap" type="rms.po.materials" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="Surplus" property="surplus" jdbcType="DECIMAL" />
+    <result column="surplus" property="surplus" jdbcType="DECIMAL" />
+    <result column="lastsurplus" property="lastsurplus" jdbcType="DECIMAL" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, Surplus
+    id, name, surplus, lastsurplus, unit
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.materialsExample" >
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="rms.po.materials" >
-    insert into r_materials (id, name, Surplus
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{surplus,jdbcType=DECIMAL}
-      )
+    insert into r_materials (id, name, surplus, 
+      lastsurplus, unit)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{surplus,jdbcType=DECIMAL}, 
+      #{lastsurplus,jdbcType=DECIMAL}, #{unit,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="rms.po.materials" >
     insert into r_materials
@@ -113,7 +115,13 @@
         name,
       </if>
       <if test="surplus != null" >
-        Surplus,
+        surplus,
+      </if>
+      <if test="lastsurplus != null" >
+        lastsurplus,
+      </if>
+      <if test="unit != null" >
+        unit,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -125,6 +133,12 @@
       </if>
       <if test="surplus != null" >
         #{surplus,jdbcType=DECIMAL},
+      </if>
+      <if test="lastsurplus != null" >
+        #{lastsurplus,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -144,7 +158,13 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.surplus != null" >
-        Surplus = #{record.surplus,jdbcType=DECIMAL},
+        surplus = #{record.surplus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastsurplus != null" >
+        lastsurplus = #{record.lastsurplus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -155,7 +175,9 @@
     update r_materials
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      Surplus = #{record.surplus,jdbcType=DECIMAL}
+      surplus = #{record.surplus,jdbcType=DECIMAL},
+      lastsurplus = #{record.lastsurplus,jdbcType=DECIMAL},
+      unit = #{record.unit,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -167,7 +189,13 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="surplus != null" >
-        Surplus = #{surplus,jdbcType=DECIMAL},
+        surplus = #{surplus,jdbcType=DECIMAL},
+      </if>
+      <if test="lastsurplus != null" >
+        lastsurplus = #{lastsurplus,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -175,7 +203,9 @@
   <update id="updateByPrimaryKey" parameterType="rms.po.materials" >
     update r_materials
     set name = #{name,jdbcType=VARCHAR},
-      Surplus = #{surplus,jdbcType=DECIMAL}
+      surplus = #{surplus,jdbcType=DECIMAL},
+      lastsurplus = #{lastsurplus,jdbcType=DECIMAL},
+      unit = #{unit,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

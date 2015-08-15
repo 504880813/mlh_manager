@@ -29,7 +29,7 @@
 <tr>
 	<td>菜品号</td>
 	<td>菜品名</td>
-	<td>价格</td>
+	<td>价格(元)</td>
 	<td>操作</td>
 </tr>
 <c:forEach items="${dishs}" var="dish">

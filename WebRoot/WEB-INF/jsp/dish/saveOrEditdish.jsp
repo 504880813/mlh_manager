@@ -25,7 +25,8 @@
 	<c:forEach items="${ categorys}" var="category"> 
 		<input type="radio" name="rcategoryid" id="rcategoryid" value="${category.id }" ${dish.rcategoryid==category.id?'checked':'' }>${category.name }
 	</c:forEach>
-	
+	<br />
+	子材料类型：
 	<c:if test="${dish.id==null }">
 	<div id="images">
 		<input type="button" value="addImages" onclick="CloneNodeByid('dishImages','images')">
@@ -45,7 +46,7 @@
 	<div name="Materials" id="Materials" style="display:none">
 		<c:forEach items="${Materials }" var="material">
 			<input type="checkbox" name="MaterialsId" id="MaterialsId" class="MaterialsId" value="${material.id }" >${material.name }
-			<input type="text" name="MaterialsQuantity" id="MaterialsQuantity" class="MaterialsQuantity"> g <br/>
+			<input type="text" name="MaterialsQuantity" id="MaterialsQuantity" class="MaterialsQuantity">${material.unit }<br/>
 		</c:forEach>
 	</div>
 	<div name="Dishes" id="Dishes" style="display:none">

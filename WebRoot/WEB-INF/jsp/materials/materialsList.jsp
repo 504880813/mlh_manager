@@ -20,7 +20,7 @@
 <tr>	
 	<td>${material.id}</td>
 	<td>${material.name}</td>
-	<td>${material.surplus}g</td>
+	<td>${material.surplus}${material.unit }</td>
 	<td>
 	<a href="${pageContext.request.contextPath }/materials/editmaterials.action?id=${material.id}">修改</a>
 	<a href="${pageContext.request.contextPath }/materials/deletematerials.action?id=${material.id}">删除</a>

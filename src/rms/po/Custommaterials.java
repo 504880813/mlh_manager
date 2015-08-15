@@ -15,7 +15,7 @@ public class Custommaterials extends materials{
 	/**
 	 * 当前菜品所需数量
 	 */
-   private BigDecimal quantity;
+    private BigDecimal quantity;
 
 	public BigDecimal getQuantity() {
 		return quantity;

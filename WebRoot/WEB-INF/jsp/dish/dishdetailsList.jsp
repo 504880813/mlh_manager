@@ -22,13 +22,13 @@
 	<td>${categoryName }</td>
 </tr>
 <tr>
-	<td>价格</td>
+	<td>价格(元)</td>
 	<td>${dish.price }</td>
 </tr>
 <tr>
 	<td>菜品包含原料或附属菜品名</td><td>
 	<c:forEach items="${materialslist }" var="materials">
-		${materials.name}:${materials.quantity}g,
+		${materials.name}:${materials.quantity}${materials.unit},
 	</c:forEach>
 	<c:forEach items="${auxiliarydishes }" var="auxiliarydish">
 		${auxiliarydish.name }:${auxiliarydish.sub_customdish_quantity}份,

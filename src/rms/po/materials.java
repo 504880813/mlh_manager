@@ -2,15 +2,16 @@ package rms.po;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.Size;
-
 public class materials {
     private Integer id;
-    
-    @Size(min=1,max=10,message="{all.name.length.error}")
+
     private String name;
-    //剩余数量
+
     private BigDecimal surplus;
+
+    private Long lastsurplus;
+
+    private String unit;
 
     public Integer getId() {
         return id;
@@ -34,5 +35,21 @@ public class materials {
 
     public void setSurplus(BigDecimal surplus) {
         this.surplus = surplus;
+    }
+
+    public Long getLastsurplus() {
+        return lastsurplus;
+    }
+
+    public void setLastsurplus(Long lastsurplus) {
+        this.lastsurplus = lastsurplus;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit == null ? null : unit.trim();
     }
 }

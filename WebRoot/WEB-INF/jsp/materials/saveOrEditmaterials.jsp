@@ -18,6 +18,7 @@
 	<input type="hidden" name="id" value="${materials.id}" />
 	原料名<input type="text" name="name" value="${materials.name }" />
 	库存<input type="text" name="surplus" value="${materials.surplus}" />
+	库存单位<input type="text" name="unit" value="${materials.unit }">
 	<input type="submit" value="submit"/>
 </form>
 </body>
