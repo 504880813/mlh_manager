@@ -548,7 +548,20 @@ public class DishHandler {
 		List<Customdish> dishs=dishService.findAllDish();
 		return dishs;
 	}
-	
+	/**
+	 * 
+	* @Title: finddishBysetMealIdRetrunJson 
+	* @Description: 
+	* @param @return
+	* @param @throws Exception    
+	* @return Customdish   
+	* @throws
+	 */
+	@RequestMapping("finddishBysetMealIdRetrunJson")
+	public @ResponseBody Customdish finddishBysetMealIdRetrunJson(Integer setMealId) throws Exception{
+		Customdish setMeal= dishService.findDishWithImageById(setMealId);
+		return setMeal;
+	}
 	
 	
 }

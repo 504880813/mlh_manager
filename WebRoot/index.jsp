@@ -15,6 +15,6 @@
 
 <a href="${pageContext.request.contextPath }/diningTable/getAllDiningTableoforder.action">订单流程</a>
 
-<a href="${pageContext.request.contextPath }/order/">收银界面</a>
+<a href="${pageContext.request.contextPath }/order/getAllOrderofNotCheckout.action">收银界面</a>
 </body>
 </html>

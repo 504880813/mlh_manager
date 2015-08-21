@@ -10,6 +10,9 @@
     <result column="waiter" property="waiter" jdbcType="VARCHAR" />
     <result column="r_diningtable_id" property="rDiningtableId" jdbcType="INTEGER" />
     <result column="numberofpeople" property="numberofpeople" jdbcType="INTEGER" />
+    <result column="DiscountAmount" property="discountamount" jdbcType="DECIMAL" />
+    <result column="CouponAmount" property="couponamount" jdbcType="DECIMAL" />
+    <result column="servingstatus" property="servingstatus" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, price, createtime, isbalance, ispayment, waiter, r_diningtable_id, numberofpeople
+    id, price, createtime, isbalance, ispayment, waiter, r_diningtable_id, numberofpeople, 
+    DiscountAmount, CouponAmount, servingstatus
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.orderExample" >
     select
@@ -105,10 +109,12 @@
   <insert id="insert" parameterType="rms.po.order" >
     insert into c_order (id, price, createtime, 
       isbalance, ispayment, waiter, 
-      r_diningtable_id, numberofpeople)
+      r_diningtable_id, numberofpeople, DiscountAmount, 
+      CouponAmount, servingstatus)
     values (#{id,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{createtime,jdbcType=DATE}, 
       #{isbalance,jdbcType=BIT}, #{ispayment,jdbcType=BIT}, #{waiter,jdbcType=VARCHAR}, 
-      #{rDiningtableId,jdbcType=INTEGER}, #{numberofpeople,jdbcType=INTEGER})
+      #{rDiningtableId,jdbcType=INTEGER}, #{numberofpeople,jdbcType=INTEGER}, #{discountamount,jdbcType=DECIMAL}, 
+      #{couponamount,jdbcType=DECIMAL}, #{servingstatus,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="rms.po.order" >
     insert into c_order
@@ -137,6 +143,15 @@
       <if test="numberofpeople != null" >
         numberofpeople,
       </if>
+      <if test="discountamount != null" >
+        DiscountAmount,
+      </if>
+      <if test="couponamount != null" >
+        CouponAmount,
+      </if>
+      <if test="servingstatus != null" >
+        servingstatus,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -162,6 +177,15 @@
       </if>
       <if test="numberofpeople != null" >
         #{numberofpeople,jdbcType=INTEGER},
+      </if>
+      <if test="discountamount != null" >
+        #{discountamount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponamount != null" >
+        #{couponamount,jdbcType=DECIMAL},
+      </if>
+      <if test="servingstatus != null" >
+        #{servingstatus,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -198,6 +222,15 @@
       <if test="record.numberofpeople != null" >
         numberofpeople = #{record.numberofpeople,jdbcType=INTEGER},
       </if>
+      <if test="record.discountamount != null" >
+        DiscountAmount = #{record.discountamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.couponamount != null" >
+        CouponAmount = #{record.couponamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.servingstatus != null" >
+        servingstatus = #{record.servingstatus,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +245,10 @@
       ispayment = #{record.ispayment,jdbcType=BIT},
       waiter = #{record.waiter,jdbcType=VARCHAR},
       r_diningtable_id = #{record.rDiningtableId,jdbcType=INTEGER},
-      numberofpeople = #{record.numberofpeople,jdbcType=INTEGER}
+      numberofpeople = #{record.numberofpeople,jdbcType=INTEGER},
+      DiscountAmount = #{record.discountamount,jdbcType=DECIMAL},
+      CouponAmount = #{record.couponamount,jdbcType=DECIMAL},
+      servingstatus = #{record.servingstatus,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +277,15 @@
       <if test="numberofpeople != null" >
         numberofpeople = #{numberofpeople,jdbcType=INTEGER},
       </if>
+      <if test="discountamount != null" >
+        DiscountAmount = #{discountamount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponamount != null" >
+        CouponAmount = #{couponamount,jdbcType=DECIMAL},
+      </if>
+      <if test="servingstatus != null" >
+        servingstatus = #{servingstatus,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -252,7 +297,10 @@
       ispayment = #{ispayment,jdbcType=BIT},
       waiter = #{waiter,jdbcType=VARCHAR},
       r_diningtable_id = #{rDiningtableId,jdbcType=INTEGER},
-      numberofpeople = #{numberofpeople,jdbcType=INTEGER}
+      numberofpeople = #{numberofpeople,jdbcType=INTEGER},
+      DiscountAmount = #{discountamount,jdbcType=DECIMAL},
+      CouponAmount = #{couponamount,jdbcType=DECIMAL},
+      servingstatus = #{servingstatus,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

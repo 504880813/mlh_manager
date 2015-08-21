@@ -464,6 +464,66 @@ public class orderdetailExample {
             addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
+
+        public Criteria andServingstatusIsNull() {
+            addCriterion("servingstatus is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusIsNotNull() {
+            addCriterion("servingstatus is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusEqualTo(Byte value) {
+            addCriterion("servingstatus =", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusNotEqualTo(Byte value) {
+            addCriterion("servingstatus <>", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusGreaterThan(Byte value) {
+            addCriterion("servingstatus >", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("servingstatus >=", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusLessThan(Byte value) {
+            addCriterion("servingstatus <", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusLessThanOrEqualTo(Byte value) {
+            addCriterion("servingstatus <=", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusIn(List<Byte> values) {
+            addCriterion("servingstatus in", values, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusNotIn(List<Byte> values) {
+            addCriterion("servingstatus not in", values, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusBetween(Byte value1, Byte value2) {
+            addCriterion("servingstatus between", value1, value2, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("servingstatus not between", value1, value2, "servingstatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

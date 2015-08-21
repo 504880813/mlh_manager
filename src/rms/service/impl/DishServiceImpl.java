@@ -51,6 +51,21 @@ public class DishServiceImpl implements DishService {
 	@Override
 	public List<Customdish> findAllDish() throws Exception {
 		List<Customdish> dishs=customdishMapper.findAllDish();
+		for(Customdish dish:dishs) {
+			//查询子原料
+			List<Custommaterials> custommaList=customdishMapper.findsubMaterialsBydishId(dish.getId());
+			
+			if(custommaList!=null&custommaList.size()>0){
+			    dish.setCustommaterials(custommaList);
+			}
+			
+			//查询子菜品
+			List<Customdish> customdishList=customdishMapper.findsubDishBydishId(dish.getId());
+			
+			if(customdishList!=null&customdishList.size()>0){
+			    dish.setSub_customdish(customdishList);
+			}
+		}
 		return dishs;
 	}
 	/*

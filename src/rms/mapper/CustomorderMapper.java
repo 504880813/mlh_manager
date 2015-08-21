@@ -3,6 +3,7 @@ package rms.mapper;
 import java.util.List;
 
 import rms.po.CustomOrder;
+import rms.po.Customorderdetail;
 import rms.po.orderdetail;
 /**
  * 
@@ -76,7 +77,7 @@ public interface CustomorderMapper {
 	* @return List<orderdetail>    返回类型 
 	* @throws
 	 */
-	public List<orderdetail> findOrderdetailsByorderid(Integer id) throws Exception;
+	public List<Customorderdetail> findOrderdetailsByorderid(Integer id) throws Exception;
 	/**
 	 * 
 	* @Title: findorderByCustomOrder 

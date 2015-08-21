@@ -20,6 +20,12 @@ public class order {
 
     private Integer numberofpeople;
 
+    private Long discountamount;
+
+    private Long couponamount;
+
+    private Byte servingstatus;
+
     public Integer getId() {
         return id;
     }
@@ -82,5 +88,29 @@ public class order {
 
     public void setNumberofpeople(Integer numberofpeople) {
         this.numberofpeople = numberofpeople;
+    }
+
+    public Long getDiscountamount() {
+        return discountamount;
+    }
+
+    public void setDiscountamount(Long discountamount) {
+        this.discountamount = discountamount;
+    }
+
+    public Long getCouponamount() {
+        return couponamount;
+    }
+
+    public void setCouponamount(Long couponamount) {
+        this.couponamount = couponamount;
+    }
+
+    public Byte getServingstatus() {
+        return servingstatus;
+    }
+
+    public void setServingstatus(Byte servingstatus) {
+        this.servingstatus = servingstatus;
     }
 }

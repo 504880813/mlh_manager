@@ -13,13 +13,24 @@ import java.util.List;
 public class CustomOrder extends order {
 	
 	//订单类的所有订单项
-	private List<orderdetail> orderdetailList;
+	private List<Customorderdetail> orderdetailList;
+	//餐桌名称用于显示
+	private String diningTableName;
+	
 
-	public List<orderdetail> getOrderdetailList() {
+	public String getDiningTableName() {
+	    return diningTableName;
+	}
+
+	public void setDiningTableName(String diningTableName) {
+	    this.diningTableName = diningTableName;
+	}
+
+	public List<Customorderdetail> getOrderdetailList() {
 		return orderdetailList;
 	}
 
-	public void setOrderdetailList(List<orderdetail> orderdetailList) {
+	public void setOrderdetailList(List<Customorderdetail> orderdetailList) {
 		this.orderdetailList = orderdetailList;
 	}
 	

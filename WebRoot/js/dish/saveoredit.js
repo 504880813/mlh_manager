@@ -11,7 +11,7 @@
 	 
 	function showMaterials(){
 		document.getElementById("Dishes").setAttribute("style","display:none");
-		document.getElementById("Materials").setAttribute("style","display:block");
+		document.getElementById("Maeterials").setAttribute("style","display:block");
 	}
 	 */
 	/**

@@ -1,10 +1,7 @@
 package rms.mapper;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
-
-import rms.po.CustomOrder;
 import rms.po.order;
 import rms.po.orderExample;
 
@@ -30,5 +27,4 @@ public interface orderMapper {
     int updateByPrimaryKeySelective(order record);
 
     int updateByPrimaryKey(order record);
-
 }

@@ -15,6 +15,8 @@ public class orderdetail {
 
     private BigDecimal price;
 
+    private Byte servingstatus;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class orderdetail {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Byte getServingstatus() {
+        return servingstatus;
+    }
+
+    public void setServingstatus(Byte servingstatus) {
+        this.servingstatus = servingstatus;
     }
 }

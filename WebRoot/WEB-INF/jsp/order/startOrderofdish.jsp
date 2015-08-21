@@ -24,10 +24,20 @@
 	<input type="hidden" name="price" />
 	<div id="orderdishs">
 		<table>
-			<tr>
+			<tr id="dishs">
 				<td>菜品号</td>
 				<td>菜品名称</td>
 				<td>菜品单价</td>
+				<td>数量(份)</td>
+				<td>价格(元)</td>
+				<td>操作</td>
+			</tr>
+		</table>
+		<table>
+			<tr id="setMeal">
+				<td>套餐号</td>
+				<td>套餐名称</td>
+				<td>套餐单价</td>
 				<td>数量(份)</td>
 				<td>价格(元)</td>
 				<td>操作</td>
@@ -55,10 +65,10 @@
 			<c:forEach items="${dishs }" var="dish">
 			<tr>
 				<td>${dish.id }</td>
-				<td>${dish.name }</td>
+				<td class="dishName">${dish.name }</td>
 				<td>${dish.price }</td>
 				<td>
-				<input type="button" value="add" onclick="adddishToorder('${dish.id }','${dish.name}','${dish.price }',this)">
+				<input type="button" value="add" onclick="adddishToorderOfsetMeal('${dish.id }','${dish.name}','${dish.price }',this,'${dish.sub_customdish!=null }','${pageContext.request.contextPath}')">
 				</td>
 			</tr>
 			</c:forEach>

@@ -8,6 +8,7 @@
     <result column="cOrderId" property="corderid" jdbcType="INTEGER" />
     <result column="echelon" property="echelon" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="servingstatus" property="servingstatus" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, dishNumber, rDishId, cOrderId, echelon, price
+    id, dishNumber, rDishId, cOrderId, echelon, price, servingstatus
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.orderdetailExample" >
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="rms.po.orderdetail" >
     insert into c_orderdetail (id, dishNumber, rDishId, 
-      cOrderId, echelon, price
-      )
+      cOrderId, echelon, price, 
+      servingstatus)
     values (#{id,jdbcType=INTEGER}, #{dishnumber,jdbcType=INTEGER}, #{rdishid,jdbcType=INTEGER}, 
-      #{corderid,jdbcType=INTEGER}, #{echelon,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}
-      )
+      #{corderid,jdbcType=INTEGER}, #{echelon,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{servingstatus,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="rms.po.orderdetail" >
     insert into c_orderdetail
@@ -129,6 +130,9 @@
       <if test="price != null" >
         price,
       </if>
+      <if test="servingstatus != null" >
+        servingstatus,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,6 +152,9 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="servingstatus != null" >
+        #{servingstatus,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.price != null" >
         price = #{record.price,jdbcType=DECIMAL},
       </if>
+      <if test="record.servingstatus != null" >
+        servingstatus = #{record.servingstatus,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       rDishId = #{record.rdishid,jdbcType=INTEGER},
       cOrderId = #{record.corderid,jdbcType=INTEGER},
       echelon = #{record.echelon,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DECIMAL}
+      price = #{record.price,jdbcType=DECIMAL},
+      servingstatus = #{record.servingstatus,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
+      <if test="servingstatus != null" >
+        servingstatus = #{servingstatus,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,8 @@
       rDishId = #{rdishid,jdbcType=INTEGER},
       cOrderId = #{corderid,jdbcType=INTEGER},
       echelon = #{echelon,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL}
+      price = #{price,jdbcType=DECIMAL},
+      servingstatus = #{servingstatus,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

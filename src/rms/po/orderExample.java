@@ -622,6 +622,186 @@ public class orderExample {
             addCriterion("numberofpeople not between", value1, value2, "numberofpeople");
             return (Criteria) this;
         }
+
+        public Criteria andDiscountamountIsNull() {
+            addCriterion("DiscountAmount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountIsNotNull() {
+            addCriterion("DiscountAmount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountEqualTo(Long value) {
+            addCriterion("DiscountAmount =", value, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountNotEqualTo(Long value) {
+            addCriterion("DiscountAmount <>", value, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountGreaterThan(Long value) {
+            addCriterion("DiscountAmount >", value, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountGreaterThanOrEqualTo(Long value) {
+            addCriterion("DiscountAmount >=", value, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountLessThan(Long value) {
+            addCriterion("DiscountAmount <", value, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountLessThanOrEqualTo(Long value) {
+            addCriterion("DiscountAmount <=", value, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountIn(List<Long> values) {
+            addCriterion("DiscountAmount in", values, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountNotIn(List<Long> values) {
+            addCriterion("DiscountAmount not in", values, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountBetween(Long value1, Long value2) {
+            addCriterion("DiscountAmount between", value1, value2, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountamountNotBetween(Long value1, Long value2) {
+            addCriterion("DiscountAmount not between", value1, value2, "discountamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountIsNull() {
+            addCriterion("CouponAmount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountIsNotNull() {
+            addCriterion("CouponAmount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountEqualTo(Long value) {
+            addCriterion("CouponAmount =", value, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountNotEqualTo(Long value) {
+            addCriterion("CouponAmount <>", value, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountGreaterThan(Long value) {
+            addCriterion("CouponAmount >", value, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountGreaterThanOrEqualTo(Long value) {
+            addCriterion("CouponAmount >=", value, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountLessThan(Long value) {
+            addCriterion("CouponAmount <", value, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountLessThanOrEqualTo(Long value) {
+            addCriterion("CouponAmount <=", value, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountIn(List<Long> values) {
+            addCriterion("CouponAmount in", values, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountNotIn(List<Long> values) {
+            addCriterion("CouponAmount not in", values, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountBetween(Long value1, Long value2) {
+            addCriterion("CouponAmount between", value1, value2, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponamountNotBetween(Long value1, Long value2) {
+            addCriterion("CouponAmount not between", value1, value2, "couponamount");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusIsNull() {
+            addCriterion("servingstatus is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusIsNotNull() {
+            addCriterion("servingstatus is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusEqualTo(Byte value) {
+            addCriterion("servingstatus =", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusNotEqualTo(Byte value) {
+            addCriterion("servingstatus <>", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusGreaterThan(Byte value) {
+            addCriterion("servingstatus >", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("servingstatus >=", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusLessThan(Byte value) {
+            addCriterion("servingstatus <", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusLessThanOrEqualTo(Byte value) {
+            addCriterion("servingstatus <=", value, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusIn(List<Byte> values) {
+            addCriterion("servingstatus in", values, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusNotIn(List<Byte> values) {
+            addCriterion("servingstatus not in", values, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusBetween(Byte value1, Byte value2) {
+            addCriterion("servingstatus between", value1, value2, "servingstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andServingstatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("servingstatus not between", value1, value2, "servingstatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

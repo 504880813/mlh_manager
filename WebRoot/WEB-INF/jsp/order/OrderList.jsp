@@ -18,22 +18,24 @@
 	<td>消费金额</td>
 	<td>操作</td>
 </tr>
-<c:forEach items="${diningTables}" var="diningTable">
+<c:forEach items="${orders}" var="order">
 <tr>	
+	<td>${order.diningTableName }</td>
+	<td>${order.numberofpeople }</td>
+	<td>${order.waiter }</td>
 	<td>
-		<c:if test="${diningTable.isfree}">
-			<img alt="空闲" src="${diningTable.freeimage}">
-		</c:if>
-		<c:if test="${!diningTable.isfree}">
-		   <img alt="繁忙" src="${diningTable.busyimage}">
-		</c:if>
+		<c:if test="${order.servingstatus==0 }">未上菜</c:if>
+		<c:if test="${order.servingstatus==1 }">上菜中</c:if>
+		<c:if test="${order.servingstatus==2 }">已上菜</c:if>
 	</td>
-	<td>${diningTable.seatnumber}</td>
-	<td>${diningTable.isfree}</td>
 	<td>
-	<c:if test="${diningTable.isfree }">
-	<a href="${pageContext.request.contextPath }/order/startOrder.action?diningTableId=${diningTable.id}&&diningTableSeatnumber=${diningTable.seatnumber}">开台</a>
-	</c:if>
+		<c:if test="${!order.ispayment}">未付款</c:if>
+	</td>
+	<td>${order.price}</td>
+	<td>
+		<a href="${pageContext.request.contextPath }/order/Checkoutofdiningtableid.action?diningtableid=${order.rDiningtableId}">结账</a>
+		<a href="${pageContext.request.contextPath }/order/editOrderofdiningtableid。action?diningtableid=${order.rDiningtableId}">修改菜单</a>
+		<a href="${pageContext.request.contextPath }/order/edit"></a>
 	</td>
 </tr>
 </c:forEach>

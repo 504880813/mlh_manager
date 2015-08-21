@@ -6,10 +6,17 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import rms.mapper.CustomdishMapper;
 import rms.mapper.CustomorderMapper;
+import rms.mapper.diningTableMapper;
+import rms.mapper.dishMapper;
 import rms.mapper.orderMapper;
 import rms.mapper.orderdetailMapper;
 import rms.po.CustomOrder;
+import rms.po.Customdish;
+import rms.po.Customorderdetail;
+import rms.po.diningTable;
+import rms.po.dish;
 import rms.po.orderdetail;
 import rms.service.OrderService;
 /**
@@ -30,6 +37,12 @@ public class OrderServiceImpl implements OrderService {
 	private CustomorderMapper customorderMapper;
 	@Resource
 	private orderdetailMapper orderdetailMapper;
+	@Resource
+	private CustomdishMapper customdishMapper;
+	@Resource
+	private dishMapper dishMapper;
+	@Resource
+	private diningTableMapper diningTableMapper;
 	/*
 	 * (非 Javadoc) 
 	* <p>Title: saveOrder</p> 
@@ -43,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 		//保存订单基础数据
 		customorderMapper.insertorder(customOrder);
 		//保存订单明细数据
-		List<orderdetail> orderdetails=customOrder.getOrderdetailList();
+		List<Customorderdetail> orderdetails=customOrder.getOrderdetailList();
 		for(orderdetail orderdetail:orderdetails){
 			//明细关联到订单
 			orderdetail.setCorderid(customOrder.getId());
@@ -100,7 +113,7 @@ public class OrderServiceImpl implements OrderService {
 //		List<orderdetail> dborderdetails=customorderMapper.findOrderdetailsByid(id);
 		//得到更新的明细
 		//因为确保，只是更新操作,因此可以对比数据差异进行更新
-		List<orderdetail> orderdetails=customOrder.getOrderdetailList();
+		List<Customorderdetail> orderdetails=customOrder.getOrderdetailList();
 		for(orderdetail now:orderdetails){
 			now.setCorderid(id);
 			customorderMapper.updateorderdetail(now);
@@ -156,7 +169,7 @@ public class OrderServiceImpl implements OrderService {
 		//查询订单基础信息
 		CustomOrder customOrder=customorderMapper.findorderByCustomOrder(query);
 		//查询所有订单明细
-		List<orderdetail> orderdetails=customorderMapper.findOrderdetailsByorderid(id);
+		List<Customorderdetail> orderdetails=customorderMapper.findOrderdetailsByorderid(id);
 		
 		customOrder.setOrderdetailList(orderdetails);
 		
@@ -177,11 +190,21 @@ public class OrderServiceImpl implements OrderService {
 		//构建查询信息
 		CustomOrder query=new CustomOrder();
 		query.setrDiningtableId(diningtableid);
+		query.setIspayment(false);
 		//查询订单基础信息
 		CustomOrder customOrder=customorderMapper.findorderByCustomOrder(query);
+		
+		diningTable dt=diningTableMapper.selectByPrimaryKey(diningtableid);
+		
+		customOrder.setDiningTableName(dt.getSeatnumber());
 		//查询所有订单明细
-		List<orderdetail> orderdetails=customorderMapper.findOrderdetailsByorderid(customOrder.getId());
-				
+		List<Customorderdetail> orderdetails=customorderMapper.findOrderdetailsByorderid(customOrder.getId());
+		
+		for(Customorderdetail orderdetail:orderdetails) {
+		    dish dish=dishMapper.selectByPrimaryKey(orderdetail.getRdishid());
+		    orderdetail.setDishName(dish.getName());
+		    
+		}
 		customOrder.setOrderdetailList(orderdetails);
 		
 		return customOrder;

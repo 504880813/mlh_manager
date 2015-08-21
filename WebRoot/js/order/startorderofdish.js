@@ -1,26 +1,40 @@
 
 //初始化
-//$(function () {
-//	//input[name=dishnumber]
-//	$(".dishnumberInput").change(function() {
-//		alert("aabb");
-//		var s=$(this).val();
-//		alert(s);
-//	});
-//	$(".dishnumberInput")[0].onchange
-////	alert($(".dishnumberInput").val());
-//});
 
 
 
 var orderdishsId= new Array();
+
+/**
+ * 
+ * @param id
+ * @param name
+ * @param price
+ * @param self
+ * @param issetMeal
+ */
+function adddishToorderOfsetMeal(id,name,price,self,issetMeal,Rootpath){
+	//判断是套餐还是单菜
+	if(issetMeal=='true'){
+		adddishToorder(id,name,price,self,"true");
+//		finddishBysetMealId(Rootpath,id);
+	}else{
+//		if(!ArrayContain(orderdishsId,id)){
+		adddishToorder(id,name,price,self,"false");
+//		}
+		changePriceBydishId(id,1);
+	}
+}
+
+
 /**
  * 将菜品列表的菜品加入订单菜品列表，并且在菜品列表删除该菜品
  * @param id
  * @param name
  * @param price
  */
-function adddishToorder(id,name,price,self){
+function adddishToorder(id,name,price,self,issetMeal){
+	
 	orderdishsId.push(id);
 	var jqs=$(self);
 	jqs.parent().parent().remove();
@@ -78,7 +92,12 @@ function adddishToorder(id,name,price,self){
 	html+="</td>";
 	html+="</tr>";
 //	alert(html);
-	$("#orderdishs table:first").append(html);
+	if(issetMeal=="true"){
+		$("#orderdishs table:last").append(html);
+	}else{
+		$("#orderdishs table:first").append(html);
+	}
+	
 	$("input[name=submit]").show();
 	
 	changeAllprice();
@@ -132,8 +151,28 @@ function finddishs(Rootpath){
 		url : Rootpath+"/dish/findAllDishRetrunJson.action", 
 		dataType:'json', 
 		success: function(json){//如果调用成功 
+			return adddishsfromAJaxBysetMeal(json);
+		},
+		error : function(data) {  
+			$("#categorydishs table:first").append("请求失败");
+		}  
+	}); 
+}
+/**
+ * 根据套餐id查询套餐下的单菜，并返回json数组
+ * @param Rootpath
+ * @param id
+ */
+function finddishBysetMealId(Rootpath,id){
+	$.ajax({ //一个Ajax过程 
+		type: "post", //以post方式与后台沟通 
+		url : Rootpath+"/dish/finddishBysetMealIdRetrunJson.action", 
+		dataType:'json', 
+		data: 'setMealId='+id, 
+		success: function(json){//如果调用成功 
 //			alert("succes");
-			adddishsfromAJaxBycategory(json);
+//			alert(json.sub_customdish[1].sub_customdish_quantity);
+			 adddishsfromAJaxBysetMeal(json);
 		},
 		error : function(data) {  
 			$("#categorydishs table:first").append("请求失败");
@@ -155,6 +194,21 @@ function adddishsfromAJaxBycategory(json){
 	});
 }
 /**
+ * 
+ */
+function adddishsfromAJaxBysetMeal(json){
+	$.each(json.sub_customdish,function(key, val){
+		var id=json.sub_customdish[key].id;
+		var name=json.sub_customdish[key].name;
+		var price=json.sub_customdish[key].price;
+		var quantity=json.sub_customdish[key].sub_customdish_quantity;
+		if(!ArrayContain(orderdishsId,id)){
+			adddishToorder(id,name,price,null,"true");
+		}
+			changePriceBydishId(id,quantity);
+	});
+}
+/**
  * 相应菜品数量变化时事件
  * @param source
  */
@@ -172,6 +226,23 @@ function dishNumberchange(source){
 	jqs.parent().parent().find(".orderdetailPrice").val(allprice);
 	
 	changeAllprice();
+}
+/**
+ * 改变指定菜品的数量
+ * @param id
+ */
+function changePriceBydishId(id,quantity){
+	var index=$("tr").parent("tr").find(".dishName").text();
+//	alert(orderdishsId.length-1);
+	var oldquantity=$("input[name='orderdetailList["+index+"].dishnumber']").val();
+	if(oldquantity==1){
+		$("input[name='orderdetailList["+index+"].dishnumber']").val(quantity);
+	}else{
+		var newquantity=parseInt(oldquantity)+parseInt(quantity);
+		$("input[name='orderdetailList["+index+"].dishnumber']").val(newquantity);
+	}
+	//改变价格
+	dishNumberchange($("input[name='orderdetailList["+index+"].dishnumber']"));
 }
 
 /**

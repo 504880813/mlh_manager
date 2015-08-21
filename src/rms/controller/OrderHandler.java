@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import rms.po.CustomOrder;
 import rms.po.Customcategory;
 import rms.po.Customdish;
+import rms.po.diningTable;
 import rms.service.CategoryService;
 import rms.service.DiningTableService;
 import rms.service.DishService;
@@ -128,10 +129,41 @@ public class OrderHandler {
 		//改变餐桌状态信息 变为忙碌状态
 		diningTableService.updateStateById(customOrder.getrDiningtableId(), false);
 		//跳转到餐桌界面 
-		mav.setViewName("redirect:/diningTable/getAllDiningTable.action");
+		mav.setViewName("redirect:/diningTable/getAllDiningTableoforder.action");
 		
 		return mav;
 	}
+	
+	/**
+	 * @throws Exception 
+	 * 
+	* @Title: getAllOrderofNotCheckout 
+	* @Description: 得到未结账的账单列表
+	* @param @return    
+	* @return ModelAndView    
+	* @throws
+	 */
+	@RequestMapping("getAllOrderofNotCheckout")
+	public ModelAndView getAllOrderofNotCheckout() throws Exception {
+	    
+	    ModelAndView mav=new ModelAndView();
+	    CustomOrder queryorder=new CustomOrder();
+	    queryorder.setIspayment(false);
+	    List<CustomOrder> orders=orderService.findAllOrderBystatus(queryorder);
+	    
+	    for(CustomOrder order:orders) {
+		
+		diningTable dt=diningTableService.findDiningTableById(order.getrDiningtableId());
+		
+		order.setDiningTableName(dt.getSeatnumber());
+	    }
+	    
+	    mav.addObject("orders", orders);
+	    mav.setViewName("order/OrderList");
+	    
+	    return mav;
+	}
+	
 	
 	/**
 	 * 
@@ -147,19 +179,40 @@ public class OrderHandler {
 	public ModelAndView Checkoutofdiningtableid(Integer diningtableid) throws Exception{
 		
 		CustomOrder order=orderService.findOrderBydiningtableid(diningtableid);
-			
+		
 		ModelAndView mav=new ModelAndView();
 		//包括明细数据
 		mav.addObject("order", order);
-		
+		mav.addObject("endtime",StringUtils.DateToString(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		mav.setViewName("order/Ordercheckout");
 		
 		return mav;
 	}
 	
+	/**
+	 * 
+	* @Title: Checkoutofdiningtableid 
+	* @Description: 根据餐桌id为修改订单准备数据
+	* @param @param diningtableid
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return ModelAndView    返回类型 
+	* @throws
+	 */
+	@RequestMapping("editOrderofdiningtableid")
+	public ModelAndView editOrderofdiningtableid(Integer diningtableid) throws Exception{
+		
+		CustomOrder order=orderService.findOrderBydiningtableid(diningtableid);
+		
+		ModelAndView mav=new ModelAndView();
+		//包括明细数据
+		mav.addObject("order", order);
+		mav.addObject("endtime",StringUtils.DateToString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+		mav.setViewName("order/editOrder");
+		return mav;
+	}
 	
-//	public ModelAndView getAllOrderof
-	
+
 
 
 }
