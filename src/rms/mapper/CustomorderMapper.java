@@ -102,5 +102,17 @@ public interface CustomorderMapper {
 	* @throws
 	 */
 	public List<CustomOrder> findorderByCustomOrderofList(CustomOrder customOrder) throws Exception;
+	
+	/**
+	 * 
+	* @Title: findOrderdetailsByOrderdetail 
+	* @Description: 根据传入的订单明细类属性值，构建查询条件，查询符合的订单明细
+	* @param @param customorderdetail
+	* @param @return
+	* @param @throws Exception    
+	* @return List<Customorderdetail>    
+	* @throws
+	 */
+	public List<Customorderdetail> findOrderdetailsByOrderdetail(Customorderdetail customorderdetail) throws Exception;
     
 }

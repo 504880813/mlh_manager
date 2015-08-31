@@ -34,7 +34,7 @@
 	<td>${order.price}</td>
 	<td>
 		<a href="${pageContext.request.contextPath }/order/Checkoutofdiningtableid.action?diningtableid=${order.rDiningtableId}">结账</a>
-		<a href="${pageContext.request.contextPath }/order/editOrderofdiningtableid。action?diningtableid=${order.rDiningtableId}">修改菜单</a>
+		<a href="${pageContext.request.contextPath }/order/editOrderofdiningtableid.action?diningtableid=${order.rDiningtableId}">修改菜单</a>
 		<a href="${pageContext.request.contextPath }/order/edit"></a>
 	</td>
 </tr>

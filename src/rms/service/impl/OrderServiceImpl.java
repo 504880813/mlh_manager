@@ -1,5 +1,6 @@
 package rms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -109,22 +110,71 @@ public class OrderServiceImpl implements OrderService {
 	public void updateOrder(CustomOrder customOrder, Integer id)
 			throws Exception {
 		customOrder.setId(id);
-		//查询数据库中的明细
-//		List<orderdetail> dborderdetails=customorderMapper.findOrderdetailsByid(id);
-		//得到更新的明细
-		//因为确保，只是更新操作,因此可以对比数据差异进行更新
-		List<Customorderdetail> orderdetails=customOrder.getOrderdetailList();
-		for(orderdetail now:orderdetails){
-			now.setCorderid(id);
-			customorderMapper.updateorderdetail(now);
+		
+		//先根据订单id更新订单的基础数据
+//		customorderMapper.updateOrd
+		orderMapper.updateByPrimaryKeySelective(customOrder);
+		
+		//查询条件
+		Customorderdetail orderdetailofselect=null;
+		//得到加菜更新的明细
+		List<Customorderdetail> adddishorderdetails=customOrder.getAdddishList();
+		if(adddishorderdetails!=null) {
+        		//查询数据库中的加菜明细
+        		orderdetailofselect=new Customorderdetail();
+        		orderdetailofselect.setCorderid(id);
+        		orderdetailofselect.setEchelon(2);
+        		List<Customorderdetail> DBadddishorderdetails=customorderMapper.findOrderdetailsByOrderdetail(orderdetailofselect);
+        		//临时，用来记录加菜更新数据
+        		List<Customorderdetail> Tempadddishorderdetails=new ArrayList<>();
+        		//对比加菜明细，如果有相关菜，加菜记录，则更新，否则插入
+        		for(Customorderdetail dbadddish:DBadddishorderdetails) {
+        		    for(Customorderdetail adddish:adddishorderdetails) {
+        			if(dbadddish.getId()==adddish.getId()) {
+        			    Tempadddishorderdetails.add(adddish);
+        			}
+        		    }
+        		}
+        		//更新加菜数据
+        		for(Customorderdetail adddish:Tempadddishorderdetails) {
+        			customorderMapper.updateorderdetail(adddish);
+        			adddishorderdetails.remove(adddish);
+        		}
+        		//插入新加菜数据
+        		for(Customorderdetail adddish:adddishorderdetails) {
+        			adddish.setCorderid(id);
+        			orderdetailMapper.insertSelective(adddish);
+        		}
 		}
-//		for(orderdetail now:orderdetails){
-//			for(orderdetail old:dborderdetails){
-//				if(now.getRdishid()==old.getRdishid()){
-//					
-//				}
-//			}
-//		}
+		//得到退菜更新的明细
+		List<Customorderdetail> retreatdishorderdetails=customOrder.getRetreatdishList();
+		if(retreatdishorderdetails!=null) {
+        		//查询数据库中的退菜明细
+        		orderdetailofselect=new Customorderdetail();
+        		orderdetailofselect.setCorderid(id);
+        		orderdetailofselect.setEchelon(0);
+        		List<Customorderdetail> DBretreatdishorderdetails=customorderMapper.findOrderdetailsByOrderdetail(orderdetailofselect);
+        		//临时，用来记录退菜更新数据
+        		List<Customorderdetail> Tempretreatdishorderdetails=new ArrayList<>();
+        		//对比退菜明细，如果有相关菜，退菜记录，则更新，否则插入
+        		for(Customorderdetail dbretreatdish:DBretreatdishorderdetails) {
+        		    for(Customorderdetail retreatdish:retreatdishorderdetails) {
+        			if(dbretreatdish.getId()==retreatdish.getId()) {
+        			    Tempretreatdishorderdetails.add(retreatdish);
+        			}
+        		    }
+        		}
+        		//更新退菜数据
+        		for(Customorderdetail retreatdish:Tempretreatdishorderdetails) {
+        		    customorderMapper.updateorderdetail(retreatdish);
+        		    retreatdishorderdetails.remove(retreatdish);
+        		}
+        		//插入新退菜数据
+        		for(Customorderdetail retreatdish:retreatdishorderdetails) {
+        		    retreatdish.setCorderid(id);
+        		    orderdetailMapper.insertSelective(retreatdish);
+        		}
+		}
 		
 	}
 	/*
@@ -209,6 +259,5 @@ public class OrderServiceImpl implements OrderService {
 		
 		return customOrder;
 	}
-
 
 }

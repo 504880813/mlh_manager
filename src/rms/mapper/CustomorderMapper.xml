@@ -93,6 +93,28 @@
 		where cOrderId=#{id}
 	</select>
 	
+	<!-- 可构建自定义查询条件 -->
+	<select id="findOrderdetailsByOrderdetail" parameterType="Customorderdetail" resultType="Customorderdetail">
+		select * from <include refid="orderdetailTableName"></include>
+		<where>
+			<if test="id != null" >
+       			 id=#{id,jdbcType=INTEGER}
+      		</if>
+      		<if test="corderid != null" >
+       			and cOrderId= #{corderid,jdbcType=INTEGER}
+      		</if>
+            <if test="rdishid != null" >
+                and rDishId=#{rdishid,jdbcType=INTEGER}
+            </if>
+            <if test="echelon != null" >
+                and echelon=#{echelon,jdbcType=INTEGER}
+            </if>
+            <if test="servingstatus != null" >
+                and servingstatus=#{servingstatus,jdbcType=Byte}
+            </if>
+		</where>
+	</select>
+	
 <!-- 	<select id="findorderofnotcheckoutBydiningtableid" parameterType="java.lang.Integer" resultType="customOrder">
 		select * from <include refid="orderTableName"></include>
 		where r_diningtable_id=#{id} and isbalance=0 and ispayment=0
