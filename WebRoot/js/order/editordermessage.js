@@ -25,14 +25,14 @@ $(function(){
 	var adddishname=$("#alldish").next("table").find(".dishname");
 	$.each(adddishname,function(key,val){
 		adddishsname.push(val.innerHTML);
-		var currentdishnumber=$(val).next().find("input").val();
+		var currentdishnumber=$(val).next().text();
 		adddishsMap[val.innerHTML]=currentdishnumber;
 	});
 	//初始化删除菜品数组数据 
 	var retreatdishname=$("#orderdish").next("table").find(".dishname");
 	$.each(retreatdishname,function(key,val){
 		retreatdishsname.push(val.innerHTML);
-		var currentdishnumber=$(val).next().find("input").val();
+		var currentdishnumber=$(val).next().text();
 		retreatdishsMap[val.innerHTML]=currentdishnumber;
 	});
 });
@@ -187,19 +187,19 @@ function adddishToList(id,name,price,isadd,self){
 	var html="<tr class='orderdish'>";
 	
 	if("true"==isadd){
-			html+="<input type='hidden' name=adddishsList[";
+			html+="<input type='hidden' name=adddishList[";
 			html+=adddishsname.length-1;
 			html+="].rdishid value=" ;
 			html+=id;
 			html+=">";
 			
-			html+="<input type='hidden' name=adddishsList[";
+			html+="<input type='hidden' name=adddishList[";
 			html+=adddishsname.length-1;
 			html+="].echelon value=" ;
 			html+=2;
 			html+=">";
 			
-			html+="<input type='hidden' name=adddishsList[";
+			html+="<input type='hidden' name=adddishList[";
 			html+=adddishsname.length-1;
 			html+="].price class='orderdetailPrice' value=";
 			html+=price;
@@ -359,17 +359,41 @@ function changedishToList(name,price,isadd,self){
 		if(name==text){
 			var currentdish=$(val);
 			var currentdishnumber=currentdish.parent().find(".dishnumber").find("input");
-			var currentnumber=currentdishnumber.val();
+			var currentnumber=0;
+			if(currentdishnumber.length==0){
+				currentnumber=currentdish.parent().find(".dishnumber").text();
+			}else{
+				currentnumber=currentdishnumber.val();
+			}
+//			
+//			var currentnumber=currentdishnumber.val();
 			var addnumber=parseInt(currentnumber)+1;
 			if("true"==isadd){
-				currentdishnumber.val(addnumber);
-			}else{
-				alert("add-->"+text);
-				alert("adddishsMap[text]-->"+normaldishsMap[text]);
-				if(addnumber>normaldishsMap[text]){
-					alert("已经无法退菜了");
+				if(currentdishnumber.length==0){
+					currentdish.parent().find(".dishnumber").text(addnumber);
 				}else{
 					currentdishnumber.val(addnumber);
+				}
+			}else{
+				alert("add-->"+text);
+				var allnumber=0;
+				if(typeof(normaldishsMap[text])!="undefined"){
+					allnumber+=parseInt(normaldishsMap[text]);
+				}
+				if(typeof(adddishsMap[text])!="undefined"){
+					allnumber+=parseInt(adddishsMap[text]);	
+				}
+				if(typeof(retreatdishsMap[text])!="undefined"){
+					allnumber-=parseInt(retreatdishsMap[text]);
+				}
+				if(addnumber>allnumber){
+					alert("已经无法退菜了");
+				}else{
+					if(currentdishnumber.length==0){
+						currentdish.parent().find(".dishnumber").text(addnumber);
+					}else{
+						currentdishnumber.val(addnumber);
+					}
 				}
 			}
 		}
@@ -386,7 +410,13 @@ function changeprice(dishnameList,isadd){
 	
 	$.each(dishnameList,function(key,val){
 		var currentdish=$(val);
-		var currentdishnumber=currentdish.parent().find(".dishnumber").find("input").val();
+		var currentdishDom=currentdish.parent().find(".dishnumber").find("input");
+		var currentdishnumber;
+		if(currentdishDom.length==0){
+			currentdishnumber=currentdish.parent().find(".dishnumber").text();
+		}else{
+			currentdishnumber=currentdish.parent().find(".dishnumber").find("input").val();
+		}
 		var currentdishprice=currentdish.parent().find(".price");
 		var currentdishaddtotalprice;
 		if(isadd=="true"){
