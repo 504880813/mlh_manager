@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/order/checkout.js"></script>
 <title>结账界面</title>
 </head>
 <body>
@@ -14,9 +16,10 @@
 </c:forEach>
 </c:if>
 <br />
-<form action="${pageContext.request.contextPath}/order/CheckoutSubmit.action" method="post">
-	<input type="hidden" name="diningTableId" value="${order.rDiningtableId}"/>
-	<input type="hidden" name="createtime" value="${order.createtime }" />
+<form action="${pageContext.request.contextPath}/order/Checkout.action" method="post">
+	<input type="hidden" name="id" value="${order.id }"/>
+	<input type="hidden" name="rDiningtableId" value="${order.rDiningtableId}"/>
+	<input type="hidden" name="createtime" value="${endtime }" />
 	<input type="hidden" name="numberofpeople" value="${order.numberofpeople }" />
 	<input type="hidden" name="waiter" value="${order.waiter }" />
 	桌号:${order.diningTableName }<br />
@@ -62,12 +65,21 @@
 	</c:forEach>
 	</table>
 	<hr style="height:10px;border:none;border-top:10px groove skyblue;" />
-	折扣<input type="text" name="discountamount" >
-	优惠券<input type="text" name="couponamount" >元
-	总价：${order.price}元	
-	<input type="button" name="payment"  value="payment" />
-	<input type="button" name="writtenPermission" value="writtenPermission" />
-	<input type="button" name="cancel"  value="cancel" />
+	折扣<input type="text" name="discountamountPercent" onchange="CalculatingDiscount(this)">折
+	<span id="discountamountValue"></span>元
+	<input type="hidden" name="discountamount"/>
+	优惠券<input type="text" name="couponamount" onchange="changeAllprice()">元
+<%-- 	总价：
+	
+	<span id="allprice">${order.price}</span>
+	元	 --%>
+	<input type="hidden" name="price" value="${order.price}">
+	应付：
+	<span id="showpayprice">${order.price}</span>
+	
+	<input type="button" name="payment"  value="payment" onclick="pay('true')"/>
+	<input type="button" name="writtenPermission" value="writtenPermission" onclick="pay('false')"/>
+	<input type="button" name="cancel"  value="cancel" onclick="back()"/>
 </form>
 </body>
 </html>

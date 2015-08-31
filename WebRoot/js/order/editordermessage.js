@@ -309,7 +309,7 @@ function reducethisself(self,isadd){
 	var container=$(self).parent().parent().parent();
 	var dishnameList=container.find(".dishname");
 	
-	var dishnumber=parseInt(dishnumberObject.val())-1;
+	var dishnumber=parseFloat(dishnumberObject.val())-1;
 	if(dishnumber==0){
 		$(self).parent().parent().remove();
 		if(isadd=="true"){
@@ -367,7 +367,7 @@ function changedishToList(name,price,isadd,self){
 			}
 //			
 //			var currentnumber=currentdishnumber.val();
-			var addnumber=parseInt(currentnumber)+1;
+			var addnumber=parseFloat(currentnumber)+1;
 			if("true"==isadd){
 				if(currentdishnumber.length==0){
 					currentdish.parent().find(".dishnumber").text(addnumber);
@@ -378,13 +378,13 @@ function changedishToList(name,price,isadd,self){
 				alert("add-->"+text);
 				var allnumber=0;
 				if(typeof(normaldishsMap[text])!="undefined"){
-					allnumber+=parseInt(normaldishsMap[text]);
+					allnumber+=parseFloat(normaldishsMap[text]);
 				}
 				if(typeof(adddishsMap[text])!="undefined"){
-					allnumber+=parseInt(adddishsMap[text]);	
+					allnumber+=parseFloat(adddishsMap[text]);	
 				}
 				if(typeof(retreatdishsMap[text])!="undefined"){
-					allnumber-=parseInt(retreatdishsMap[text]);
+					allnumber-=parseFloat(retreatdishsMap[text]);
 				}
 				if(addnumber>allnumber){
 					alert("已经无法退菜了");
@@ -424,7 +424,7 @@ function changeprice(dishnameList,isadd){
 		}else{
 			currentdishaddtotalprice=currentdish.parent().find(".reducetotalprice");
 		}
-		currentdishaddtotalprice.text(parseInt(currentdishprice.text())*parseInt(currentdishnumber));
+		currentdishaddtotalprice.text(parseFloat(currentdishprice.text())*parseFloat(currentdishnumber));
 	});
 }
 /**
@@ -441,13 +441,13 @@ function changeAllprice(){
 	var allprice=0;
 	
 	$.each(normaltotalpriceList,function(key,val){
-		allprice=allprice+parseInt(val.innerHTML);
+		allprice=allprice+parseFloat(val.innerHTML);
 	});
 	$.each(addtotalpriceList,function(key,val){
-		allprice=allprice+parseInt(val.innerHTML);
+		allprice=allprice+parseFloat(val.innerHTML);
 	});
 	$.each(reducetotalpriceList,function(key,val){
-		allprice=allprice-parseInt(val.innerHTML);
+		allprice=allprice-parseFloat(val.innerHTML);
 	});
 //	alert(allprice);
 	$("#allprice").text(allprice);

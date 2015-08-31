@@ -40,7 +40,7 @@ public interface DiningTableService {
 	* @Title: updateStateById 
 	* @Description: 根据id修改餐桌状态(繁忙，空闲) 
 	* @param @param id
-	* @param @param isfree
+	* @param @param isfree 当前状态
 	* @param @throws Exception    设定文件 
 	* @return void    返回类型 
 	* @throws

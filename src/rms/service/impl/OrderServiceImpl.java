@@ -18,7 +18,9 @@ import rms.po.Customdish;
 import rms.po.Customorderdetail;
 import rms.po.diningTable;
 import rms.po.dish;
+import rms.po.order;
 import rms.po.orderdetail;
+import rms.service.DiningTableService;
 import rms.service.OrderService;
 /**
  * 
@@ -31,9 +33,11 @@ import rms.service.OrderService;
 @Component
 public class OrderServiceImpl implements OrderService {
 	
+    	@Resource
+    	private DiningTableService diningTableService;
+    
 	@Resource
 	private orderMapper orderMapper;
-	
 	@Resource
 	private CustomorderMapper customorderMapper;
 	@Resource
@@ -258,6 +262,49 @@ public class OrderServiceImpl implements OrderService {
 		customOrder.setOrderdetailList(orderdetails);
 		
 		return customOrder;
+	}
+	/*
+	 * (非 Javadoc) 
+	* <p>Title: changeorderdiningtable</p> 
+	* <p>Description: 修改订单对应的餐桌</p> 
+	* @param orderid
+	* @param newdiningtableid
+	* @throws Exception 
+	* @see rms.service.OrderService#changeorderdiningtable(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public void changeorderdiningtable(Integer orderid,
+		Integer newdiningtableid) throws Exception {
+	    order order=orderMapper.selectByPrimaryKey(orderid);
+	    //修改餐桌状态
+	    diningTableService.updateStateById(order.getrDiningtableId(), true);
+
+	    diningTableService.updateStateById(newdiningtableid, false);
+	    order.setrDiningtableId(newdiningtableid);
+	    //更新订单餐桌
+	    orderMapper.updateByPrimaryKeySelective(order);
+	    
+	}
+	/*
+	 * (非 Javadoc) 
+	* <p>Title: checkoutByorderid</p> 
+	* <p>Description:根据订单id结账 </p> 
+	* @param customorder
+	* @param id
+	* @throws Exception 
+	* @see rms.service.OrderService#checkoutByorderid(rms.po.CustomOrder, java.lang.Integer)
+	 */
+	@Override
+	public void checkoutByorderid(CustomOrder customorder, Integer id)
+		throws Exception {
+	    customorder.setId(id);
+	    
+	    //修改订单状态
+	    orderMapper.updateByPrimaryKeySelective(customorder);
+	    //修改餐桌状态
+	    diningTableService.updateStateById(customorder.getrDiningtableId(), false);
+	    //TODO 打印小票
+	    
 	}
 
 }

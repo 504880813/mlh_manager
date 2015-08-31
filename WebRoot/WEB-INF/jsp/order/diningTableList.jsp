@@ -28,8 +28,13 @@
 	<td>${diningTable.seatnumber}</td>
 	<td>${diningTable.isfree}</td>
 	<td>
-	<c:if test="${diningTable.isfree }">
+	<c:if test="${diningTable.isfree}">
+	<c:if test="${orderid==null }">
 	<a href="${pageContext.request.contextPath }/order/startOrder.action?diningTableId=${diningTable.id}&&diningTableSeatnumber=${diningTable.seatnumber}">开台</a>
+	</c:if>
+	<c:if test="${orderid!=null }">
+	<a href="${pageContext.request.contextPath }/order/changeOrderdiningtableofdiningtableidSubmit.action?orderid=${orderid}&&newdiningtableid=${diningTable.id}">改变餐桌</a>	
+	</c:if>
 	</c:if>
 	</td>
 </tr>

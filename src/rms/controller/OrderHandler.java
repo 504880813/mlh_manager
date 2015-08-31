@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rms.po.CustomOrder;
 import rms.po.Customcategory;
+import rms.po.CustomdiningTable;
 import rms.po.Customdish;
 import rms.po.Customorderdetail;
 import rms.po.diningTable;
@@ -189,10 +190,25 @@ public class OrderHandler {
 		
 		return mav;
 	}
+	/**
+	 * 
+	* @Title: Checkout 
+	* @Description: 结账
+	* @param @param customorder
+	* @param @return
+	* @param @throws Exception    
+	* @return String    
+	* @throws
+	 */
+	@RequestMapping("Checkout")
+	public String Checkout(CustomOrder customorder,Integer id) throws Exception{
+	    orderService.checkoutByorderid(customorder,id);
+	    return "redirect:/order/getAllOrderofNotCheckout.action";
+	}
 	
 	/**
 	 * 
-	* @Title: Checkoutofdiningtableid 
+	* @Title: editOrderofdiningtableid 
 	* @Description: 根据餐桌id为修改订单基础数据准备数据
 	* @param @param diningtableid
 	* @param @return
@@ -228,10 +244,6 @@ public class OrderHandler {
 	 */
 	@RequestMapping("editorder")
 	public ModelAndView editorder(CustomOrder customOrder,Integer id) throws Exception{
-//	public ModelAndView editorder(CustomOrder CustomOrder) throws Exception{  	
-//	    	List list=CustomOrder.getOrderdetailList();
-//	    	list.size();
-//	    	retreatdishList.size();
 	    
 	    	orderService.updateOrder(customOrder, id);
 	    	
@@ -245,7 +257,30 @@ public class OrderHandler {
 	/**
 	 * 
 	* @Title: changeOrderdiningtableofdiningtableid 
-	* @Description: TODO 修改订单的餐桌
+	* @Description:为修改订单的餐桌操作准备数据 
+	* @param @param diningtableid
+	* @param @return
+	* @param @throws Exception    
+	* @return ModelAndView    
+	* @throws
+	 */
+	@RequestMapping("changeOrderdiningtableofdiningtableid")
+	public ModelAndView changeOrderdiningtableofdiningtableid(Integer orderid) throws Exception{
+	    	
+	    	
+	    	List<CustomdiningTable> diningTables = diningTableService
+			.fingAllDiningTable();
+		ModelAndView mav=new ModelAndView();
+		//包括明细数据
+		mav.addObject("orderid",orderid);
+		mav.addObject("diningTables", diningTables);
+		mav.setViewName("order/diningTableList");
+		return mav;
+	}
+	/**
+	 * 
+	* @Title: changeOrderdiningtableofdiningtableidSubmit 
+	* @Description: 根据餐桌信息修改 
 	* @param @param olddiningtableid
 	* @param @param newdiningtableid
 	* @param @return
@@ -253,17 +288,14 @@ public class OrderHandler {
 	* @return ModelAndView    
 	* @throws
 	 */
-	@RequestMapping("changeOrderdiningtableofdiningtableid")
-	public ModelAndView changeOrderdiningtableofdiningtableid(Integer olddiningtableid,Integer newdiningtableid) throws Exception{
-		
-//		CustomOrder order=orderService.findOrderBydiningtableid(diningtableid);
-//		
-		ModelAndView mav=new ModelAndView();
-		//包括明细数据
-//		mav.addObject("order", order);
-		mav.addObject("endtime",StringUtils.DateToString(new Date(), "yyyy-MM-dd HH:mm:ss"));
-		mav.setViewName("order/editOrder");
-		return mav;
+	@RequestMapping("changeOrderdiningtableofdiningtableidSubmit")
+	public ModelAndView changeOrderdiningtableofdiningtableidSubmit(Integer orderid,Integer newdiningtableid) throws Exception{
+	    
+	    orderService.changeorderdiningtable(orderid,newdiningtableid);
+	    
+	    ModelAndView mav=new ModelAndView();
+	    mav.setViewName("redirect:/order/getAllOrderofNotCheckout.action");
+	    return mav;
 	}
 	
 

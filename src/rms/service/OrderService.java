@@ -102,4 +102,27 @@ public interface OrderService {
 	* @throws
 	 */
 	public CustomOrder findOrderBydiningtableid(Integer diningtableid) throws Exception;
+	/**
+	 * 
+	* @Title: changeorderdiningtable 
+	* @Description: 修改该订单对应的餐桌
+	* @param @param orderid
+	* @param @param newdiningtableid
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void changeorderdiningtable(Integer orderid,
+		Integer newdiningtableid) throws Exception;
+	/**
+	 * 
+	* @Title: checkoutByorderid 
+	* @Description: 根据订单id结账 
+	* @param @param customorder
+	* @param @param id
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void checkoutByorderid(CustomOrder customorder, Integer id) throws Exception;
 }
