@@ -125,7 +125,6 @@ public class OrderHandler {
 			mav.setViewName("error");
 			return mav;
 		}
-		
 		//保存订单以及关联信息
 		orderService.saveOrder(customOrder);
 		//改变餐桌状态信息 变为忙碌状态
