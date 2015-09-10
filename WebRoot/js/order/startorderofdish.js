@@ -238,7 +238,7 @@ function changePriceBydishId(id,quantity){
 	if(oldquantity==1){
 		$("input[name='orderdetailList["+index+"].dishnumber']").val(quantity);
 	}else{
-		var newquantity=parseInt(oldquantity)+parseInt(quantity);
+		var newquantity=parseFloat(oldquantity)+parseFloat(quantity);
 		$("input[name='orderdetailList["+index+"].dishnumber']").val(newquantity);
 	}
 	//改变价格
@@ -280,7 +280,7 @@ function adddishsofhtml(id,name,price){
 function changeAllprice(){
 	var sum=0;
 	$(".orderdetailPrice").each(function(){
-		var tempInt=parseInt($(this).val());
+		var tempInt=parseFloat($(this).val());
 		sum+=tempInt;
 //	    alert($(this).val());
 	 });

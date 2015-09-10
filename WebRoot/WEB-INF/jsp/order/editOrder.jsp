@@ -16,7 +16,7 @@
 </c:forEach>
 </c:if>
 <br />
-<form action="${pageContext.request.contextPath}/order/editorder.action" method="post">
+<form id="editform" action="${pageContext.request.contextPath}/order/editorder.action" method="post">
 	<input type="hidden" name="id" value="${order.id }">
 	<input type="hidden" name="rDiningtableId" value="${order.rDiningtableId}"/>
 	<input type="hidden" name="createtime" value="${endtime }" />
@@ -114,7 +114,7 @@
 	<hr style="height:10px;border:none;border-top:10px groove skyblue;" />
 	总价：<span id="allprice">${order.price}</span>元	
 	<input type="hidden" name="price" value="${order.price}" />
-	<input type="submit" name="ok"  value="ok"/>
+	<input type="button" name="ok"  value="ok" onclick="formsubmit()"/>
 	<input type="button" name="cancel"  value="cancel" onclick="PageToUrl('${pageContext.request.contextPath}/order/getAllOrderofNotCheckout.action')"/>
 </form>
 </body>
