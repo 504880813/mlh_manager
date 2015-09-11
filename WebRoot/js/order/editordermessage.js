@@ -47,6 +47,7 @@ function formsubmit(){
 	//分别获取对应的table
 	var adddishData=$("#alldish").next();
 	var retreatdishData=$("#orderdish").next();
+	
 	//查询添加的菜品的菜品ID
 	var adddishidList=adddishData.find("input[name=adddishList.rdishid]");
 	//查询添加的菜品的菜品类型
@@ -57,13 +58,13 @@ function formsubmit(){
 	var adddishnumberList=adddishData.find("input[name=adddishList.dishnumber]");
 	
 	//查询要退的菜品的菜品ID
-	var retreatdishidList=retreatdishData.find("input[name=adddishList.rdishid]");
+	var retreatdishidList=retreatdishData.find("input[name=retreatdishList.rdishid]");
 	//查询要退的菜品的菜品类型
-	var retreatechelonList=retreatdishData.find("input[name=adddishList.echelon]");
+	var retreatechelonList=retreatdishData.find("input[name=retreatdishList.echelon]");
 	//查询要退的菜品的价格
-	var retreatpriceList=retreatdishData.find("input[name=adddishList.price]");
+	var retreatpriceList=retreatdishData.find("input[name=retreatdishList.price]");
 	//查询要退的菜品的数量
-	var retreatdishnumberList=retreatdishData.find("input[name=adddishList.dishnumber]");
+	var retreatdishnumberList=retreatdishData.find("input[name=retreatdishList.dishnumber]");
 	initAddDishIndex(adddishidList,addechelonList,addpriceList,adddishnumberList);
 	initRetreatDishIndex(retreatdishidList,retreatechelonList,retreatpriceList,retreatdishnumberList);
 	$("#editform").submit();
@@ -120,8 +121,8 @@ function adddishofMessage(Rootpath){
 /**
  * 为退菜准备资源
  */
-function RetreatdishofMessage(){
-	findorderdishs();
+function RetreatdishofMessage(self){
+	findorderdishs(self);
 }
 /**
  * 利用ajax查询所有菜品
@@ -200,7 +201,12 @@ function adddishsofhtml(id,name,price,isadd){
  * 查询所有可以退的菜
  */
 function findorderdishs(self){
+	//移除旧数据
+	$(self).next().find("table tr:not(first)").remove();
+	
+	//添加新数据
 	var orderdishList=$(".orderdish");
+	
 	$.each(orderdishList,function(key,val){
 		var dishname=$(val).find(".dishname").text();
 		var dishid=$(val).find("input:first").val();

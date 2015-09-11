@@ -81,7 +81,7 @@
 	</table>
 	<hr style="height:10px;border:none;border-top:10px groove skyblue;" />
 	退菜
-	<input type="button" value="Retreatdish" onclick="RetreatdishofMessage()">
+	<input type="button" value="Retreatdish" onclick="RetreatdishofMessage(this)">
 	<div id="orderdish" style="display:none">
 		<table>
 			<tr>

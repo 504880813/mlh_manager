@@ -235,7 +235,7 @@ public class OrderServiceImpl implements OrderService {
 	    // 对比加菜明细，如果有相关菜，加菜记录，则更新，否则插入
 	    for (Customorderdetail dbadddish : DBadddishorderdetails) {
 		for (Customorderdetail adddish : adddishorderdetails) {
-		    if (dbadddish.getId() == adddish.getId()) {
+		    if (dbadddish.getRdishid() == adddish.getRdishid()) {
 			Tempadddishorderdetails.add(adddish);
 		    }
 		}
@@ -260,8 +260,11 @@ public class OrderServiceImpl implements OrderService {
 		    ChangeMaterials(dish.getCustommaterials(), false,
 			    adddish.getDishnumber());
 		}
+		//关联订单
+		adddish.setCorderid(id);
 		// 更新数据
 		customorderMapper.updateorderdetail(adddish);
+		
 		adddishorderdetails.remove(adddish);
 	    }
 	    // 插入新加菜数据
@@ -284,7 +287,6 @@ public class OrderServiceImpl implements OrderService {
 		    ChangeMaterials(dish.getCustommaterials(), false,
 			    adddish.getDishnumber());
 		}
-
 		// 插入数据
 		adddish.setCorderid(id);
 		orderdetailMapper.insertSelective(adddish);
@@ -305,7 +307,7 @@ public class OrderServiceImpl implements OrderService {
 	    // 对比退菜明细，如果有相关菜，退菜记录，则更新，否则插入
 	    for (Customorderdetail dbretreatdish : DBretreatdishorderdetails) {
 		for (Customorderdetail retreatdish : retreatdishorderdetails) {
-		    if (dbretreatdish.getId() == retreatdish.getId()) {
+		    if (dbretreatdish.getRdishid() == retreatdish.getRdishid()) {
 			Tempretreatdishorderdetails.add(retreatdish);
 		    }
 		}
@@ -329,6 +331,8 @@ public class OrderServiceImpl implements OrderService {
 		    ChangeMaterials(dish.getCustommaterials(), true,
 			    retreatdish.getDishnumber());
 		}
+		//关联订单
+		retreatdish.setCorderid(id);
 		customorderMapper.updateorderdetail(retreatdish);
 		retreatdishorderdetails.remove(retreatdish);
 	    }
@@ -524,7 +528,7 @@ public class OrderServiceImpl implements OrderService {
 
 	    BigDecimal nowQuantity = materials.getQuantity().multiply(
 		    new BigDecimal(dishNumber));
-	    ;
+	    
 	    if (isadd) {
 		nowQuantity = dbmaterials.getSurplus().add(nowQuantity);
 	    } else {
