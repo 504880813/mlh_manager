@@ -149,7 +149,7 @@ public class OrderHandler {
 	    
 	    ModelAndView mav=new ModelAndView();
 	    CustomOrder queryorder=new CustomOrder();
-	    queryorder.setIspayment(false);
+	    queryorder.setIsbalance(false);
 	    List<CustomOrder> orders=orderService.findAllOrderBystatus(queryorder);
 	    
 	    for(CustomOrder order:orders) {
@@ -181,6 +181,7 @@ public class OrderHandler {
 		
 		CustomOrder order=orderService.findOrderBydiningtableid(diningtableid);
 		
+		order.setrDiningtableId(diningtableid);
 		ModelAndView mav=new ModelAndView();
 		//包括明细数据
 		mav.addObject("order", order);
@@ -297,6 +298,27 @@ public class OrderHandler {
 	    return mav;
 	}
 	
+	/**
+	 * 
+	* @Title: ChangeOrderservingstatus 
+	* @Description: TODO ChangeOrderservingstatus 暂定
+	* @param @param orderid
+	* @param @param dishid
+	* @param @return
+	* @param @throws Exception    
+	* @return ModelAndView    
+	* @throws
+	 */
+	public ModelAndView ChangeOrderservingstatus(String orderid,String dishid) throws Exception{
+	    
+	    
+	    ModelAndView mav=new ModelAndView();
+	    
+	    mav.setViewName("");
+	    
+	    return mav;
+	    
+	}
 
 
 

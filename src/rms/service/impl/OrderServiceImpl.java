@@ -441,7 +441,7 @@ public class OrderServiceImpl implements OrderService {
 	// 构建查询信息
 	CustomOrder query = new CustomOrder();
 	query.setrDiningtableId(diningtableid);
-	query.setIspayment(false);
+	query.setIsbalance(false);
 	// 查询订单基础信息
 	CustomOrder customOrder = customorderMapper
 		.findorderByCustomOrder(query);
@@ -506,11 +506,11 @@ public class OrderServiceImpl implements OrderService {
 	    throws Exception {
 	customorder.setId(id);
 
-	// 修改订单状态
+	// 修改订单状态,并修改订单总价格
 	orderMapper.updateByPrimaryKeySelective(customorder);
 	// 修改餐桌状态
 	diningTableService.updateStateById(customorder.getrDiningtableId(),
-		false);
+		true);
 	// TODO 打印小票
 
     }

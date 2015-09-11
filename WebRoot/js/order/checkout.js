@@ -39,6 +39,7 @@ function changeAllprice(){
 	}
 //	alert("--->"+temp);
 	$("#showpayprice").text(temp);
+	
 //	$("input[name=price]").val(temp);
 	
 }
@@ -52,18 +53,19 @@ function changeAllprice(){
 function pay(ispayment){
 	var html="<input type='hidden'";
 	html+="name=isbalance";
-	html+="value=";
+	html+="  value=";
 	html+="true >";
 	
 	html+="<input type='hidden'";
 	html+="name=ispayment";
-	html+="value=";
+	html+="  value=";
 	html+=ispayment;
 	html+=">";
 	
+	$("input[name=price]").val($("#showpayprice").text());
+	
 	$("form").append(html);
 	
-//	$("input[name=price]").val($("#allprice").text());
 	$("form")[0].submit();
 }
 /**

@@ -22,7 +22,7 @@
 	<input type="hidden" name="createtime" value="${endtime }" />
 	<input type="hidden" name="numberofpeople" value="${order.numberofpeople }" />
 	<input type="hidden" name="waiter" value="${order.waiter }" />
-	桌号:${order.diningTableName }<br />
+	桌号:${order.diningTableName }<br /> 
 	服务员${order.waiter}<br />
 	时间${endtime}<br />
 	<hr style="height:10px;border:none;border-top:10px groove skyblue;" />
@@ -59,26 +59,26 @@
 	<c:forEach items="${order.orderdetailList }" var="orderdetail">
 		<c:if test="${orderdetail.echelon==0 }">
 			<tr>
-			<td>${orderdetail.dishName}</td><td>${orderdetail.dishNumber}</td><td>${orderdetail.price}</td>
+			<td>${orderdetail.dishName}</td><td>${orderdetail.dishnumber}</td><td>${orderdetail.price}</td>
 			</tr>
 		</c:if>
 	</c:forEach>
 	</table>
 	<hr style="height:10px;border:none;border-top:10px groove skyblue;" />
 	折扣<input type="text" name="discountamountPercent" onchange="CalculatingDiscount(this)">折
-	<span id="discountamountValue"></span>元
+	<span id="discountamountValue"></span>元<br>
 	<input type="hidden" name="discountamount"/>
-	优惠券<input type="text" name="couponamount" onchange="changeAllprice()">元
+	优惠券<input type="text" name="couponamount" onchange="changeAllprice()">元<br>
 <%-- 	总价：
 	
 	<span id="allprice">${order.price}</span>
 	元	 --%>
 	<input type="hidden" name="price" value="${order.price}">
 	应付：
-	<span id="showpayprice">${order.price}</span>
+	<span id="showpayprice">${order.price}</span> <br>
 	
-	<input type="button" name="payment"  value="payment" onclick="pay('true')"/>
-	<input type="button" name="writtenPermission" value="writtenPermission" onclick="pay('false')"/>
+	<input type="button" name="payment"  value="payment" onclick="pay('true')"/><br>
+	<input type="button" name="writtenPermission" value="writtenPermission" onclick="pay('false')"/><br>
 	<input type="button" name="cancel"  value="cancel" onclick="back()"/>
 </form>
 </body>

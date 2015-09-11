@@ -633,52 +633,52 @@ public class orderExample {
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountEqualTo(Long value) {
+        public Criteria andDiscountamountEqualTo(BigDecimal value) {
             addCriterion("DiscountAmount =", value, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountNotEqualTo(Long value) {
+        public Criteria andDiscountamountNotEqualTo(BigDecimal value) {
             addCriterion("DiscountAmount <>", value, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountGreaterThan(Long value) {
+        public Criteria andDiscountamountGreaterThan(BigDecimal value) {
             addCriterion("DiscountAmount >", value, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountGreaterThanOrEqualTo(Long value) {
+        public Criteria andDiscountamountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("DiscountAmount >=", value, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountLessThan(Long value) {
+        public Criteria andDiscountamountLessThan(BigDecimal value) {
             addCriterion("DiscountAmount <", value, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountLessThanOrEqualTo(Long value) {
+        public Criteria andDiscountamountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("DiscountAmount <=", value, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountIn(List<Long> values) {
+        public Criteria andDiscountamountIn(List<BigDecimal> values) {
             addCriterion("DiscountAmount in", values, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountNotIn(List<Long> values) {
+        public Criteria andDiscountamountNotIn(List<BigDecimal> values) {
             addCriterion("DiscountAmount not in", values, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountBetween(Long value1, Long value2) {
+        public Criteria andDiscountamountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("DiscountAmount between", value1, value2, "discountamount");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountamountNotBetween(Long value1, Long value2) {
+        public Criteria andDiscountamountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("DiscountAmount not between", value1, value2, "discountamount");
             return (Criteria) this;
         }
@@ -693,52 +693,52 @@ public class orderExample {
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountEqualTo(Long value) {
+        public Criteria andCouponamountEqualTo(BigDecimal value) {
             addCriterion("CouponAmount =", value, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountNotEqualTo(Long value) {
+        public Criteria andCouponamountNotEqualTo(BigDecimal value) {
             addCriterion("CouponAmount <>", value, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountGreaterThan(Long value) {
+        public Criteria andCouponamountGreaterThan(BigDecimal value) {
             addCriterion("CouponAmount >", value, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountGreaterThanOrEqualTo(Long value) {
+        public Criteria andCouponamountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("CouponAmount >=", value, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountLessThan(Long value) {
+        public Criteria andCouponamountLessThan(BigDecimal value) {
             addCriterion("CouponAmount <", value, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountLessThanOrEqualTo(Long value) {
+        public Criteria andCouponamountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("CouponAmount <=", value, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountIn(List<Long> values) {
+        public Criteria andCouponamountIn(List<BigDecimal> values) {
             addCriterion("CouponAmount in", values, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountNotIn(List<Long> values) {
+        public Criteria andCouponamountNotIn(List<BigDecimal> values) {
             addCriterion("CouponAmount not in", values, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountBetween(Long value1, Long value2) {
+        public Criteria andCouponamountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("CouponAmount between", value1, value2, "couponamount");
             return (Criteria) this;
         }
 
-        public Criteria andCouponamountNotBetween(Long value1, Long value2) {
+        public Criteria andCouponamountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("CouponAmount not between", value1, value2, "couponamount");
             return (Criteria) this;
         }

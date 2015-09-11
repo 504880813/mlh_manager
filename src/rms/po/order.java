@@ -20,9 +20,9 @@ public class order {
 
     private Integer numberofpeople;
 
-    private Long discountamount;
+    private BigDecimal discountamount;
 
-    private Long couponamount;
+    private BigDecimal couponamount;
 
     private Byte servingstatus;
 
@@ -90,19 +90,19 @@ public class order {
         this.numberofpeople = numberofpeople;
     }
 
-    public Long getDiscountamount() {
+    public BigDecimal getDiscountamount() {
         return discountamount;
     }
 
-    public void setDiscountamount(Long discountamount) {
+    public void setDiscountamount(BigDecimal discountamount) {
         this.discountamount = discountamount;
     }
 
-    public Long getCouponamount() {
+    public BigDecimal getCouponamount() {
         return couponamount;
     }
 
-    public void setCouponamount(Long couponamount) {
+    public void setCouponamount(BigDecimal couponamount) {
         this.couponamount = couponamount;
     }
 
