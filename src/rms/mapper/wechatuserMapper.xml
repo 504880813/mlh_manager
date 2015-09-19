@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.wechatuserMapper" >
+  <resultMap id="BaseResultMap" type="rms.po.wechatuser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="appsecret" property="appsecret" jdbcType="VARCHAR" />
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+    <result column="page_access_token" property="pageAccessToken" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="rms.po.wechatuserWithBLOBs" extends="BaseResultMap" >
+    <result column="access_token_expires_time" property="accessTokenExpiresTime" jdbcType="LONGVARCHAR" />
+    <result column="page_access_token_expires_time" property="pageAccessTokenExpiresTime" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, appid, appsecret, access_token, page_access_token
+  </sql>
+  <sql id="Blob_Column_List" >
+    access_token_expires_time, page_access_token_expires_time
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="rms.po.wechatuserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from w_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.wechatuserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from w_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from w_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from w_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="rms.po.wechatuserExample" >
+    delete from w_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="rms.po.wechatuserWithBLOBs" >
+    insert into w_user (id, appid, appsecret, 
+      access_token, page_access_token, access_token_expires_time, 
+      page_access_token_expires_time)
+    values (#{id,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, 
+      #{accessToken,jdbcType=VARCHAR}, #{pageAccessToken,jdbcType=VARCHAR}, #{accessTokenExpiresTime,jdbcType=LONGVARCHAR}, 
+      #{pageAccessTokenExpiresTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="rms.po.wechatuserWithBLOBs" >
+    insert into w_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appid != null" >
+        appid,
+      </if>
+      <if test="appsecret != null" >
+        appsecret,
+      </if>
+      <if test="accessToken != null" >
+        access_token,
+      </if>
+      <if test="pageAccessToken != null" >
+        page_access_token,
+      </if>
+      <if test="accessTokenExpiresTime != null" >
+        access_token_expires_time,
+      </if>
+      <if test="pageAccessTokenExpiresTime != null" >
+        page_access_token_expires_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="pageAccessToken != null" >
+        #{pageAccessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenExpiresTime != null" >
+        #{accessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pageAccessTokenExpiresTime != null" >
+        #{pageAccessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="rms.po.wechatuserExample" resultType="java.lang.Integer" >
+    select count(*) from w_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update w_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null" >
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appsecret != null" >
+        appsecret = #{record.appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessToken != null" >
+        access_token = #{record.accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageAccessToken != null" >
+        page_access_token = #{record.pageAccessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessTokenExpiresTime != null" >
+        access_token_expires_time = #{record.accessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pageAccessTokenExpiresTime != null" >
+        page_access_token_expires_time = #{record.pageAccessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update w_user
+    set id = #{record.id,jdbcType=INTEGER},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      appsecret = #{record.appsecret,jdbcType=VARCHAR},
+      access_token = #{record.accessToken,jdbcType=VARCHAR},
+      page_access_token = #{record.pageAccessToken,jdbcType=VARCHAR},
+      access_token_expires_time = #{record.accessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      page_access_token_expires_time = #{record.pageAccessTokenExpiresTime,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update w_user
+    set id = #{record.id,jdbcType=INTEGER},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      appsecret = #{record.appsecret,jdbcType=VARCHAR},
+      access_token = #{record.accessToken,jdbcType=VARCHAR},
+      page_access_token = #{record.pageAccessToken,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="rms.po.wechatuserWithBLOBs" >
+    update w_user
+    <set >
+      <if test="appid != null" >
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        appsecret = #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="pageAccessToken != null" >
+        page_access_token = #{pageAccessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTokenExpiresTime != null" >
+        access_token_expires_time = #{accessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pageAccessTokenExpiresTime != null" >
+        page_access_token_expires_time = #{pageAccessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="rms.po.wechatuserWithBLOBs" >
+    update w_user
+    set appid = #{appid,jdbcType=VARCHAR},
+      appsecret = #{appsecret,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      page_access_token = #{pageAccessToken,jdbcType=VARCHAR},
+      access_token_expires_time = #{accessTokenExpiresTime,jdbcType=LONGVARCHAR},
+      page_access_token_expires_time = #{pageAccessTokenExpiresTime,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rms.po.wechatuser" >
+    update w_user
+    set appid = #{appid,jdbcType=VARCHAR},
+      appsecret = #{appsecret,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      page_access_token = #{pageAccessToken,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
