@@ -16,5 +16,9 @@
 <a href="${pageContext.request.contextPath }/diningTable/getAllDiningTableoforder.action">订单流程</a>
 
 <a href="${pageContext.request.contextPath }/order/getAllOrderofNotCheckout.action">收银界面</a>
+
+<form action="${pageContext.request.contextPath }/wechat/MessageReceiver.action" method="post">
+	<input type="submit" value="submit" />
+</form>
 </body>
 </html>

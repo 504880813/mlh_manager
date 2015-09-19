@@ -23,6 +23,10 @@
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
 		</init-param>
+		<init-param> 
+            <param-name>forceEncoding</param-name> 
+            <param-value>true</param-value> 
+        </init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -42,6 +46,24 @@
 		<servlet-name>SpringMvc</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
+	
+	  
+  <servlet>
+    <servlet-name>wechat</servlet-name>
+    <servlet-class>com.wechat.servlet.WechatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>wechat</servlet-name>
+    <url-pattern>/wechat.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>wechat_js</servlet-name>
+    <servlet-class>com.wechat.servlet.Wechat_js_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>wechat_js</servlet-name>
+    <url-pattern>/wechat_js.do</url-pattern>
+  </servlet-mapping>
 	
 	  <!-- <servlet>
 		<servlet-name>SpringMvc_Restful</servlet-name>
