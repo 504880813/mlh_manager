@@ -3,11 +3,12 @@ package rms.wechat.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import rms.wechat.untils.HttpUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import rms.wechat.adapter.Wechat_js_RequestAdapter;
 /**
  * 
 * @ClassName: WechatServlet 
@@ -16,10 +17,32 @@ import rms.wechat.untils.HttpUtils;
 * @date 2015年8月11日 下午4:22:05 
 *
  */
-public class Wechat_js_Servlet extends HttpServlet {
+public class Wechat_js_Servlet extends AutowiredHttpServlet {
 
     private static final long serialVersionUID = 1L;
-
+    @Autowired
+    private Wechat_js_RequestAdapter adapter; 
+    
+    
+    /**   
+     * <p>   
+     * 在Servlet中注入对象的步骤:   
+     * 1.取得ServletContext   
+     * 2.利用Spring的工具类WebApplicationContextUtils得到WebApplicationContext   
+     * 3.WebApplicationContext就是一个BeanFactory,其中就有一个getBean方法   
+     * 4.有了这个方法就可像平常一样为所欲为了,哈哈!   
+     * </p>   
+     */    
+//    @Override    
+//    public void init() throws ServletException {             
+//        super.init();     
+//                     
+//        ServletContext servletContext = this.getServletContext();     
+//                     
+//        WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);    
+//                     
+//        adapter = (Wechat_js_RequestAdapter)ctx.getBean("wechat_js_RequestAdapter");    
+//    }  
     /**
      * The doGet method of the servlet. <br>
      * 
@@ -36,21 +59,11 @@ public class Wechat_js_Servlet extends HttpServlet {
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
-	//用于获取网页acc 的密钥
-	String code=request.getParameter("code");
-	
-	try {
-	    String openid=HttpUtils.getPageACCESS_TOKEN(code);
-	    request.setAttribute("openid", openid);
-		
-	    request.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(request, response);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	
-	
+	//获取要进行的下一步操作
+	String method=request.getParameter("method");
+	//将请求分发给不同的处理器处理
+	adapter.distributeRequest(method, request, response);
     }
-
     /**
      * The doPost method of the servlet. <br>
      * 

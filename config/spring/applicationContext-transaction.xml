@@ -31,5 +31,6 @@
 	
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice" pointcut="execution(* rms.service.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* rms.wechat.service.*.*(..))"/>
 	</aop:config>
 </beans>

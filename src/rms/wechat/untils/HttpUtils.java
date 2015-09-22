@@ -13,6 +13,7 @@ import rms.wechat.entity.Access_Token_Request;
 import rms.wechat.entity.PageAccess_Token;
 import rms.wechat.entity.TemplateData;
 import rms.wechat.entity.TemplateMessage;
+import rms.wechat.entity.jsapi_ticket;
 
 import com.alibaba.fastjson.JSON;
 
@@ -127,6 +128,27 @@ public class HttpUtils {
 	PageAccess_Token object=JSON.parseObject(reponseMessage, PageAccess_Token.class);
 	return object.getOpenid();
     }
+    
+    /**
+     * 
+    * @Title: getJsApiTicket 
+    * @Description: 获取 jsapi 调用凭据
+    * @param @param access_token
+    * @param @return
+    * @param @throws Exception    
+    * @return jsapi_ticket    
+    * @throws
+     */
+    public static jsapi_ticket getJsApiTicket(String access_token) throws Exception {
+	String url="https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi";
+	String reponseMessage=sendHttpRequestofurl(url,"");
+	jsapi_ticket reponseObject=JSON.parseObject(reponseMessage, jsapi_ticket.class);
+	if("0".equals(reponseObject.getErrcode())) {
+	    return reponseObject;
+	}
+	return null;
+    }
+    
 
     /**
      * 

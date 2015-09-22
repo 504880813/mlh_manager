@@ -374,6 +374,146 @@ public class wechatuserExample {
             return (Criteria) this;
         }
 
+        public Criteria andAccessTokenExpiresTimeIsNull() {
+            addCriterion("access_token_expires_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeIsNotNull() {
+            addCriterion("access_token_expires_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeEqualTo(String value) {
+            addCriterion("access_token_expires_time =", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeNotEqualTo(String value) {
+            addCriterion("access_token_expires_time <>", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeGreaterThan(String value) {
+            addCriterion("access_token_expires_time >", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("access_token_expires_time >=", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeLessThan(String value) {
+            addCriterion("access_token_expires_time <", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeLessThanOrEqualTo(String value) {
+            addCriterion("access_token_expires_time <=", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeLike(String value) {
+            addCriterion("access_token_expires_time like", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeNotLike(String value) {
+            addCriterion("access_token_expires_time not like", value, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeIn(List<String> values) {
+            addCriterion("access_token_expires_time in", values, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeNotIn(List<String> values) {
+            addCriterion("access_token_expires_time not in", values, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeBetween(String value1, String value2) {
+            addCriterion("access_token_expires_time between", value1, value2, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresTimeNotBetween(String value1, String value2) {
+            addCriterion("access_token_expires_time not between", value1, value2, "accessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeIsNull() {
+            addCriterion("access_token_expires_last_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeIsNotNull() {
+            addCriterion("access_token_expires_last_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeEqualTo(String value) {
+            addCriterion("access_token_expires_last_time =", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeNotEqualTo(String value) {
+            addCriterion("access_token_expires_last_time <>", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeGreaterThan(String value) {
+            addCriterion("access_token_expires_last_time >", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("access_token_expires_last_time >=", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeLessThan(String value) {
+            addCriterion("access_token_expires_last_time <", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeLessThanOrEqualTo(String value) {
+            addCriterion("access_token_expires_last_time <=", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeLike(String value) {
+            addCriterion("access_token_expires_last_time like", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeNotLike(String value) {
+            addCriterion("access_token_expires_last_time not like", value, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeIn(List<String> values) {
+            addCriterion("access_token_expires_last_time in", values, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeNotIn(List<String> values) {
+            addCriterion("access_token_expires_last_time not in", values, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeBetween(String value1, String value2) {
+            addCriterion("access_token_expires_last_time between", value1, value2, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccessTokenExpiresLastTimeNotBetween(String value1, String value2) {
+            addCriterion("access_token_expires_last_time not between", value1, value2, "accessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
         public Criteria andPageAccessTokenIsNull() {
             addCriterion("page_access_token is null");
             return (Criteria) this;
@@ -441,6 +581,356 @@ public class wechatuserExample {
 
         public Criteria andPageAccessTokenNotBetween(String value1, String value2) {
             addCriterion("page_access_token not between", value1, value2, "pageAccessToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeIsNull() {
+            addCriterion("page_access_token_expires_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeIsNotNull() {
+            addCriterion("page_access_token_expires_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeEqualTo(String value) {
+            addCriterion("page_access_token_expires_time =", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeNotEqualTo(String value) {
+            addCriterion("page_access_token_expires_time <>", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeGreaterThan(String value) {
+            addCriterion("page_access_token_expires_time >", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("page_access_token_expires_time >=", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeLessThan(String value) {
+            addCriterion("page_access_token_expires_time <", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeLessThanOrEqualTo(String value) {
+            addCriterion("page_access_token_expires_time <=", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeLike(String value) {
+            addCriterion("page_access_token_expires_time like", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeNotLike(String value) {
+            addCriterion("page_access_token_expires_time not like", value, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeIn(List<String> values) {
+            addCriterion("page_access_token_expires_time in", values, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeNotIn(List<String> values) {
+            addCriterion("page_access_token_expires_time not in", values, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeBetween(String value1, String value2) {
+            addCriterion("page_access_token_expires_time between", value1, value2, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresTimeNotBetween(String value1, String value2) {
+            addCriterion("page_access_token_expires_time not between", value1, value2, "pageAccessTokenExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeIsNull() {
+            addCriterion("page_access_token_expires_last_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeIsNotNull() {
+            addCriterion("page_access_token_expires_last_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeEqualTo(String value) {
+            addCriterion("page_access_token_expires_last_time =", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeNotEqualTo(String value) {
+            addCriterion("page_access_token_expires_last_time <>", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeGreaterThan(String value) {
+            addCriterion("page_access_token_expires_last_time >", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("page_access_token_expires_last_time >=", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeLessThan(String value) {
+            addCriterion("page_access_token_expires_last_time <", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeLessThanOrEqualTo(String value) {
+            addCriterion("page_access_token_expires_last_time <=", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeLike(String value) {
+            addCriterion("page_access_token_expires_last_time like", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeNotLike(String value) {
+            addCriterion("page_access_token_expires_last_time not like", value, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeIn(List<String> values) {
+            addCriterion("page_access_token_expires_last_time in", values, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeNotIn(List<String> values) {
+            addCriterion("page_access_token_expires_last_time not in", values, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeBetween(String value1, String value2) {
+            addCriterion("page_access_token_expires_last_time between", value1, value2, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageAccessTokenExpiresLastTimeNotBetween(String value1, String value2) {
+            addCriterion("page_access_token_expires_last_time not between", value1, value2, "pageAccessTokenExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketIsNull() {
+            addCriterion("jsapi_ticket is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketIsNotNull() {
+            addCriterion("jsapi_ticket is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketEqualTo(String value) {
+            addCriterion("jsapi_ticket =", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketNotEqualTo(String value) {
+            addCriterion("jsapi_ticket <>", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketGreaterThan(String value) {
+            addCriterion("jsapi_ticket >", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketGreaterThanOrEqualTo(String value) {
+            addCriterion("jsapi_ticket >=", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketLessThan(String value) {
+            addCriterion("jsapi_ticket <", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketLessThanOrEqualTo(String value) {
+            addCriterion("jsapi_ticket <=", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketLike(String value) {
+            addCriterion("jsapi_ticket like", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketNotLike(String value) {
+            addCriterion("jsapi_ticket not like", value, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketIn(List<String> values) {
+            addCriterion("jsapi_ticket in", values, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketNotIn(List<String> values) {
+            addCriterion("jsapi_ticket not in", values, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketBetween(String value1, String value2) {
+            addCriterion("jsapi_ticket between", value1, value2, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketNotBetween(String value1, String value2) {
+            addCriterion("jsapi_ticket not between", value1, value2, "jsapiTicket");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeIsNull() {
+            addCriterion("jsapi_ticket_expires_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeIsNotNull() {
+            addCriterion("jsapi_ticket_expires_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_time =", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeNotEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_time <>", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeGreaterThan(String value) {
+            addCriterion("jsapi_ticket_expires_time >", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_time >=", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeLessThan(String value) {
+            addCriterion("jsapi_ticket_expires_time <", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeLessThanOrEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_time <=", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeLike(String value) {
+            addCriterion("jsapi_ticket_expires_time like", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeNotLike(String value) {
+            addCriterion("jsapi_ticket_expires_time not like", value, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeIn(List<String> values) {
+            addCriterion("jsapi_ticket_expires_time in", values, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeNotIn(List<String> values) {
+            addCriterion("jsapi_ticket_expires_time not in", values, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeBetween(String value1, String value2) {
+            addCriterion("jsapi_ticket_expires_time between", value1, value2, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresTimeNotBetween(String value1, String value2) {
+            addCriterion("jsapi_ticket_expires_time not between", value1, value2, "jsapiTicketExpiresTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeIsNull() {
+            addCriterion("jsapi_ticket_expires_last_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeIsNotNull() {
+            addCriterion("jsapi_ticket_expires_last_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_last_time =", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeNotEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_last_time <>", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeGreaterThan(String value) {
+            addCriterion("jsapi_ticket_expires_last_time >", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_last_time >=", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeLessThan(String value) {
+            addCriterion("jsapi_ticket_expires_last_time <", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeLessThanOrEqualTo(String value) {
+            addCriterion("jsapi_ticket_expires_last_time <=", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeLike(String value) {
+            addCriterion("jsapi_ticket_expires_last_time like", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeNotLike(String value) {
+            addCriterion("jsapi_ticket_expires_last_time not like", value, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeIn(List<String> values) {
+            addCriterion("jsapi_ticket_expires_last_time in", values, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeNotIn(List<String> values) {
+            addCriterion("jsapi_ticket_expires_last_time not in", values, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeBetween(String value1, String value2) {
+            addCriterion("jsapi_ticket_expires_last_time between", value1, value2, "jsapiTicketExpiresLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsapiTicketExpiresLastTimeNotBetween(String value1, String value2) {
+            addCriterion("jsapi_ticket_expires_last_time not between", value1, value2, "jsapiTicketExpiresLastTime");
             return (Criteria) this;
         }
     }

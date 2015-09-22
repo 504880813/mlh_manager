@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.cardMapper" >
+  <resultMap id="BaseResultMap" type="rms.po.card" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cardId" property="cardid" jdbcType="VARCHAR" />
+    <result column="belongs_cardid" property="belongsCardid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="wechat_openId" property="wechatOpenid" jdbcType="VARCHAR" />
+    <result column="isavailable" property="isavailable" jdbcType="BIT" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="all_integral" property="allIntegral" jdbcType="INTEGER" />
+    <result column="month_integral" property="monthIntegral" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cardId, belongs_cardid, username, phone, wechat_openId, isavailable, money, all_integral, 
+    month_integral
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.cardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="rms.po.cardExample" >
+    delete from s_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="rms.po.card" >
+    insert into s_card (id, cardId, belongs_cardid, 
+      username, phone, wechat_openId, 
+      isavailable, money, all_integral, 
+      month_integral)
+    values (#{id,jdbcType=INTEGER}, #{cardid,jdbcType=VARCHAR}, #{belongsCardid,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{wechatOpenid,jdbcType=VARCHAR}, 
+      #{isavailable,jdbcType=BIT}, #{money,jdbcType=DECIMAL}, #{allIntegral,jdbcType=INTEGER}, 
+      #{monthIntegral,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="rms.po.card" >
+    insert into s_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cardid != null" >
+        cardId,
+      </if>
+      <if test="belongsCardid != null" >
+        belongs_cardid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="wechatOpenid != null" >
+        wechat_openId,
+      </if>
+      <if test="isavailable != null" >
+        isavailable,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="allIntegral != null" >
+        all_integral,
+      </if>
+      <if test="monthIntegral != null" >
+        month_integral,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null" >
+        #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="belongsCardid != null" >
+        #{belongsCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatOpenid != null" >
+        #{wechatOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="isavailable != null" >
+        #{isavailable,jdbcType=BIT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="allIntegral != null" >
+        #{allIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="monthIntegral != null" >
+        #{monthIntegral,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="rms.po.cardExample" resultType="java.lang.Integer" >
+    select count(*) from s_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_card
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardid != null" >
+        cardId = #{record.cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongsCardid != null" >
+        belongs_cardid = #{record.belongsCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatOpenid != null" >
+        wechat_openId = #{record.wechatOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isavailable != null" >
+        isavailable = #{record.isavailable,jdbcType=BIT},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.allIntegral != null" >
+        all_integral = #{record.allIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthIntegral != null" >
+        month_integral = #{record.monthIntegral,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_card
+    set id = #{record.id,jdbcType=INTEGER},
+      cardId = #{record.cardid,jdbcType=VARCHAR},
+      belongs_cardid = #{record.belongsCardid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      wechat_openId = #{record.wechatOpenid,jdbcType=VARCHAR},
+      isavailable = #{record.isavailable,jdbcType=BIT},
+      money = #{record.money,jdbcType=DECIMAL},
+      all_integral = #{record.allIntegral,jdbcType=INTEGER},
+      month_integral = #{record.monthIntegral,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="rms.po.card" >
+    update s_card
+    <set >
+      <if test="cardid != null" >
+        cardId = #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="belongsCardid != null" >
+        belongs_cardid = #{belongsCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatOpenid != null" >
+        wechat_openId = #{wechatOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="isavailable != null" >
+        isavailable = #{isavailable,jdbcType=BIT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="allIntegral != null" >
+        all_integral = #{allIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="monthIntegral != null" >
+        month_integral = #{monthIntegral,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rms.po.card" >
+    update s_card
+    set cardId = #{cardid,jdbcType=VARCHAR},
+      belongs_cardid = #{belongsCardid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      wechat_openId = #{wechatOpenid,jdbcType=VARCHAR},
+      isavailable = #{isavailable,jdbcType=BIT},
+      money = #{money,jdbcType=DECIMAL},
+      all_integral = #{allIntegral,jdbcType=INTEGER},
+      month_integral = #{monthIntegral,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

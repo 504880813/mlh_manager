@@ -50,7 +50,7 @@
 	  
   <servlet>
     <servlet-name>wechat</servlet-name>
-    <servlet-class>com.wechat.servlet.WechatServlet</servlet-class>
+    <servlet-class>rms.wechat.servlet.WechatServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>wechat</servlet-name>
@@ -58,7 +58,7 @@
   </servlet-mapping>
     <servlet>
     <servlet-name>wechat_js</servlet-name>
-    <servlet-class>com.wechat.servlet.Wechat_js_Servlet</servlet-class>
+    <servlet-class>rms.wechat.servlet.Wechat_js_Servlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>wechat_js</servlet-name>
