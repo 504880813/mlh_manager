@@ -24,71 +24,53 @@ import com.alibaba.fastjson.JSON;
  */
 public class HttpUtils {
 
-    /**
-     *  主机路径
-     */
-    private  static String host;
-    /**
-     * 公众号id
-     */
-    private static String appid;
-    /**
-     * 公众号secret
-     */
-    private static String appsecret;
-    /**
+/*    *//**
      *  发送模板消息路径
-     */
+     *//*
     private  static String sendTemplateMessage;
-    /**
+    *//**
      * 获取二维码地址
-     */
+     *//*
     private static String GETtwocode;
-    /**
-     * 通信密钥
-     */
-    private static String ACCESS_TOKEN;
-    /**
+    *//**
      * 获取网页通信密钥的地址
-     */
+     *//*
     private static String GETPageACCESS_TOKEN;
-    /**
+    *//**
      * 获取普通客户端调用密钥
-     */
+     *//*
     private static String GETACCESS_TKOKEN;
 
-    /**
+    *//**
      * 初始化路径数据
-     */
+//     *//*
     static{
 	try {
 	    Properties props = new Properties();
 	    InputStream in = HttpUtils.class.getResourceAsStream("/httpconfig.properties");
 	    props.load(in);
-	    host=props.getProperty("host");
 	    sendTemplateMessage=props.getProperty("sendTemplateMessage");
 	    GETtwocode=props.getProperty("GETtwocode");
-	    appid=props.getProperty("appid");
-	    appsecret=props.getProperty("appsecret");
 	    GETPageACCESS_TOKEN=props.getProperty("GETPageACCESS_TOKEN");
 	    GETACCESS_TKOKEN=props.getProperty("GETACCESS_TKOKEN");
 //	    ACCESS_TOKEN=props.getProperty("access_token");
 	} catch (Exception e) {
 	    throw new RuntimeException("Http初始化路径出错");
 	}
-    }
+    }*/
     /**
      * 
     * @Title: GETACCESS_TKOKEN 
     * @Description: 获取客户端接口调用凭证
     * @param @param RequestObject
+    * @param @param wechaturl
     * @param @return
     * @param @throws Exception    
     * @return Access_Token    
     * @throws
      */
-    public static Access_Token GETACCESS_TKOKEN(Access_Token_Request RequestObject) throws Exception {
-  	String url= GETACCESS_TKOKEN.replaceAll("\\$APPID", RequestObject.getAppid()).replaceAll("\\$APPSECRET", RequestObject.getAppsecret());
+    public static Access_Token GETACCESS_TKOKEN(Access_Token_Request RequestObject,String wechaturl) throws Exception {
+  	String url= wechaturl.replaceAll("\\$APPID", RequestObject.getAppid()).replaceAll("\\$APPSECRET", RequestObject.getAppsecret());
   	String Responsejesonmessage=sendHttpRequestofurl(url, "");
   	return JSON.parseObject(Responsejesonmessage, Access_Token.class);
       }
@@ -98,12 +80,14 @@ public class HttpUtils {
      * 
      * @Title: sendTempMessage 
      * @Description: 发送模板消息 
-     * @param @param pageCount    
+     * @param @param messgeobject  
+     * @param @param ACCESS_TOKEN 
+     * @param @param wechaturl 
      * @return void    
      * @throws
      */
-    public static void  sendTemplateMessage(TemplateMessage messgeobject) throws Exception {
-	String url= sendTemplateMessage.replaceAll("\\$ACCESS_TOKEN", ACCESS_TOKEN);
+    public static void  sendTemplateMessage(TemplateMessage messgeobject,String ACCESS_TOKEN,String wechaturl) throws Exception {
+	String url= wechaturl.replaceAll("\\$ACCESS_TOKEN", ACCESS_TOKEN);
 	String jsonmessage=JSON.toJSONString(messgeobject);
 	System.out.println(jsonmessage);
 	sendHttpRequestofurl(url, jsonmessage);
@@ -113,12 +97,15 @@ public class HttpUtils {
      * @Title: getPageACCESS_TOKEN 
      * @Description: 获取网页接口调用凭证
      * @param @param code
+     * @param @param appid
+     * @param @param appsecret
+     * @param @param wechaturl
      * @param @throws Exception    
      * @return void    
      * @throws
      */
-    public static String getPageACCESS_TOKEN(String code) throws Exception{
-	String url=GETPageACCESS_TOKEN
+    public static String getPageACCESS_TOKEN(String code,String appid,String appsecret,String wechaturl) throws Exception{
+	String url=wechaturl
 		.replaceAll("\\$APPID", appid)
 		.replaceAll("\\$SECRET", appsecret)
 		.replaceAll("\\$CODE", code);
@@ -134,13 +121,14 @@ public class HttpUtils {
     * @Title: getJsApiTicket 
     * @Description: 获取 jsapi 调用凭据
     * @param @param access_token
-    * @param @return
+    * @param @return wechaturl
     * @param @throws Exception    
     * @return jsapi_ticket    
     * @throws
      */
-    public static jsapi_ticket getJsApiTicket(String access_token) throws Exception {
-	String url="https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi";
+    public static jsapi_ticket getJsApiTicket(String access_token,String wechaturl) throws Exception {
+	String url=wechaturl.replaceAll("\\$ACCESS_TOKEN", access_token);
+//	String url="https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi";
 	String reponseMessage=sendHttpRequestofurl(url,"");
 	jsapi_ticket reponseObject=JSON.parseObject(reponseMessage, jsapi_ticket.class);
 	if("0".equals(reponseObject.getErrcode())) {
@@ -155,13 +143,15 @@ public class HttpUtils {
      * @Title: getTwoCodeMessage 
      * @Description: 获取二维码
      * @param @param message
+     * @param @param ACCESS_TOKEN
      * @param @throws Exception    
      * @return void    
      * @throws
      */
-    public static void getTwoCodeMessage(String message) throws Exception {
-	String url=GETtwocode.replaceAll("\\$ACCESS_TOKEN", ACCESS_TOKEN);
-	sendHttpRequestofurl(url, message);
+    public static void getTwoCodeMessage(String message,String ACCESS_TOKEN) throws Exception {
+//	String url=GETtwocode.replaceAll("\\$ACCESS_TOKEN", ACCESS_TOKEN);
+//	sendHttpRequestofurl(url, message);
+	//暂不使用
     }
 
     /**
@@ -210,7 +200,7 @@ public class HttpUtils {
     }
     public static void main(String[] args) {
 	try {
-	    ACCESS_TOKEN="MuKZurRDICfQ38wxm6Omed0OIsDx7IT95zTXcQevcJsjEIg8dfw3vSRmE5Ys9OrhUAXo95J4au_8ym-pNnrRzI0VyE3cOuiFdt86wRAs0xI";
+//	    ACCESS_TOKEN="MuKZurRDICfQ38wxm6Omed0OIsDx7IT95zTXcQevcJsjEIg8dfw3vSRmE5Ys9OrhUAXo95J4au_8ym-pNnrRzI0VyE3cOuiFdt86wRAs0xI";
 
 	    //发送模板消息
 //	    	StringBuffer message=new StringBuffer();
@@ -251,7 +241,7 @@ public class HttpUtils {
 		dataMap.put("price", price);
 		dataMap.put("date", date);
 		tm.setData(dataMap);
-		sendTemplateMessage(tm);
+//		sendTemplateMessage(tm);
 //		sendTempMessage(message.toString());
 
 //	    StringBuffer message=new StringBuffer();

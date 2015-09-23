@@ -17,8 +17,13 @@
 
 <a href="${pageContext.request.contextPath }/order/getAllOrderofNotCheckout.action">收银界面</a>
 
-<form action="${pageContext.request.contextPath }/wechat/MessageReceiver.action" method="post">
+<a href="${pageContext.request.contextPath }/wechatuser/getAllUser.action">微信公众号管理</a>
+
+<a href="${pageContext.request.contextPath }/wechatTemplate/getAllTemplate.action">微信消息模板管理</a>
+<a href="${pageContext.request.contextPath }/wechatInterface/getAllInterface.action">微信接口url管理</a>
+
+<%-- <form action="${pageContext.request.contextPath }/wechat/MessageReceiver.action" method="post">
 	<input type="submit" value="submit" />
-</form>
+</form> --%>
 </body>
 </html>

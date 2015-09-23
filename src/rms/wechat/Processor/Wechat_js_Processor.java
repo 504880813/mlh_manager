@@ -10,6 +10,7 @@ import rms.wechat.entity.Access_Token_Request;
 import rms.wechat.entity.WechatCheck;
 import rms.wechat.entity.jsapi_ticket;
 import rms.wechat.service.Wechat_js_service;
+import rms.wechat.service.wechatuserService;
 import rms.wechat.untils.HttpUtils;
 import rms.wechat.untils.PastUtil;
 
@@ -27,6 +28,8 @@ public class Wechat_js_Processor {
     
     @Resource
     private Wechat_js_service Wechat_js_service;
+    @Resource
+    private wechatuserService wechatuserService;
     /**
      * 
     * @Title: ToValidationMemberPage 
@@ -41,10 +44,8 @@ public class Wechat_js_Processor {
 	 try {
 	    //用于获取网页access_token 的密钥
 	    String code=request.getParameter("code");
-	    String openid;
-	    openid = HttpUtils.getPageACCESS_TOKEN(code);
 	    WechatCheck chenck=Wechat_js_service.getWechatCheckData(code,request.getRequestURL().toString()+"?"+request.getQueryString() );
-	    
+	    String openid = wechatuserService.getWechatOpenid(code);
 	    request.setAttribute("chenck", chenck);
 	    request.setAttribute("openid", openid);
 	    request.getRequestDispatcher("/WEB-INF/jsp/wechat/ValidationMemberPage.jsp").forward(request, response);

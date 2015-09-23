@@ -34,6 +34,7 @@ public interface Wechat_js_service {
     * @throws
      */
     public WechatCheck getWechatCheckData(String code,String url) throws Exception;
+  
     
     
 }
