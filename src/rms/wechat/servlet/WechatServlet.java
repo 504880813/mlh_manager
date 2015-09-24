@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import rms.wechat.adapter.WechatRequestAdapter;
 import rms.wechat.untils.CheckUtils;
 /**
@@ -21,10 +23,13 @@ import rms.wechat.untils.CheckUtils;
 * @date 2015年8月11日 下午4:22:05 
 *
  */
-public class WechatServlet extends HttpServlet {
+public class WechatServlet extends AutowiredHttpServlet{
 
     private static final long serialVersionUID = 1L;
     private static final String token = "sbs";
+    
+    @Autowired
+    private WechatRequestAdapter adapter;
 
     /**
      * The doGet method of the servlet. <br>
@@ -100,7 +105,7 @@ public class WechatServlet extends HttpServlet {
         //接收消息，处理消息接口
         System.out.println("getuserMessage="+sb.toString());
 //	request.get
-        WechatRequestAdapter adapter=new WechatRequestAdapter();
+//        WechatRequestAdapter adapter=new WechatRequestAdapter();
 //        
         String respMessage="";
 	try {
@@ -112,12 +117,14 @@ public class WechatServlet extends HttpServlet {
         System.out.println("responseuserMessage="+respMessage);
 	 // 调用核心业务类接收消息、处理消息
 //	String respMessage = CoreService.processRequest(request); 
-
-	 // 响应消息
-	PrintWriter out = response.getWriter(); 
-
-	out.write(respMessage);
-	out.close();
+        if(respMessage!=null && !respMessage.trim().equals("")) {
+            	// 响应消息
+        	PrintWriter out = response.getWriter(); 
+    
+        	out.write(respMessage);
+        	out.close();
+        }
+	
     }
 
 }

@@ -74,18 +74,24 @@ public class Wechat_js_Processor {
 	    String openid=request.getParameter("openid");
 	    String cardid=request.getParameter("cardid");
 	    
-	    String reponseCode=Wechat_js_service.BindingMember(cardid, openid);
+	    String responseCode=Wechat_js_service.BindingMember(cardid, openid);
 
-	    if("1".equals(reponseCode)) {
+	    if("1".equals(responseCode)) {
 		request.setAttribute("message", "没有这个卡号");
+	    }else if("2".equals(responseCode)){
+		request.setAttribute("message", "该卡号已被绑定");
 	    }else {
 		request.setAttribute("message", "绑定成功");
 	    }
 	    	request.getRequestDispatcher("/WEB-INF/jsp/wechat/message.jsp").forward(request, response);
 	} catch (Exception e) {
-	    e.printStackTrace();
 	    try {
-		request.setAttribute("message", "未知错误，绑定失败");
+		if(e.getMessage()==null) {
+		    e.printStackTrace();
+		    request.setAttribute("message", "未知错误，绑定失败");
+		}else {
+		    request.setAttribute("message", e.getMessage());
+		}
 		request.getRequestDispatcher("/WEB-INF/jsp/wechat/message.jsp").forward(request, response);
 	    } catch (Exception e1) {
 		e1.printStackTrace();

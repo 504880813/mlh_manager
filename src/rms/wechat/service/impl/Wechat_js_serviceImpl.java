@@ -12,6 +12,7 @@ import rms.po.card;
 import rms.po.cardExample;
 import rms.po.wechatuser;
 import rms.po.wechatuserExample;
+import rms.service.cardService;
 import rms.wechat.entity.Access_Token;
 import rms.wechat.entity.Access_Token_Request;
 import rms.wechat.entity.WechatCheck;
@@ -32,7 +33,7 @@ import rms.wechat.untils.PastUtil;
 public class Wechat_js_serviceImpl implements Wechat_js_service{
     
     @Resource
-    private cardMapper cardMapper;
+    private cardService cardService;
     @Resource
     private wechatuserMapper wecahtuMapper;
     @Resource
@@ -45,7 +46,7 @@ public class Wechat_js_serviceImpl implements Wechat_js_service{
     * <p>Description:绑定会员 </p> 
     * @param cardid
     * @param openid
-    * @return  正常返回 0  没有这个卡号返回1 未知错误，返回-1
+    * @return  正常返回 0  没有这个卡号返回1 改卡号已被绑定返回2  未知错误，返回-1
     * @throws Exception 
     * @see rms.wechat.service.Wechat_js_service#BindingMember(java.lang.String, java.lang.String)
      */
@@ -55,15 +56,18 @@ public class Wechat_js_serviceImpl implements Wechat_js_service{
 	cardExample example=new cardExample();
 	example.createCriteria().andCardidEqualTo(cardid);
 	
-	List<card> cards=cardMapper.selectByExample(example);
+	card card=cardService.findcardBycardid(cardid);
 	
-	if(cards==null || cards.size()==0) {
+	if(card==null) {
 	    return "1";
 	}
-	card c=cards.get(0);
-	c.setWechatOpenid(openid);
+	if(card.getWechatOpenid()!=null&&!card.getWechatOpenid().trim().equals("")) {
+	    return "2";
+	}
 	
-	cardMapper.updateByPrimaryKey(c);
+	card.setWechatOpenid(openid);
+	
+	cardService.updatecard(card);
 	
 	return "0";
     }

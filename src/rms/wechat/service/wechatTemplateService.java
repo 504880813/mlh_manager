@@ -1,8 +1,11 @@
 package rms.wechat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import rms.po.wechatTemplate;
+import rms.wechat.entity.TemplateData;
+import rms.wechat.entity.TemplateMessage;
 
 
 /**
@@ -65,4 +68,27 @@ public interface wechatTemplateService {
          * @throws
           */
          public  void deletewechatTemplatebyId(Integer id) throws Exception;
+         
+         
+         /**
+          * 
+         * @Title: sendTemplateMessageTouser 
+         * @Description: 发送模板消息
+         * @param @param message
+         * @param @throws Exception    
+         * @return void    
+         * @throws
+          */
+         public void sendTemplateMessageTouser(TemplateMessage message) throws Exception;
+         /**
+          * 
+         * @Title: findWechatTemplateBytemplateid 
+         * @Description: 根据模板id查询模板消息
+         * @param @param templateId
+         * @param @return
+         * @param @throws Exception    
+         * @return wechatTemplate    
+         * @throws
+          */
+	public wechatTemplate findWechatTemplateBytemplateid(String templateId) throws Exception;
 }

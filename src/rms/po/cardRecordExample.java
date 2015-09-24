@@ -1,8 +1,8 @@
 package rms.po;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class cardRecordExample {
@@ -104,32 +104,6 @@ public class cardRecordExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -272,52 +246,52 @@ public class cardRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andExpenseEqualTo(Long value) {
+        public Criteria andExpenseEqualTo(BigDecimal value) {
             addCriterion("expense =", value, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNotEqualTo(Long value) {
+        public Criteria andExpenseNotEqualTo(BigDecimal value) {
             addCriterion("expense <>", value, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseGreaterThan(Long value) {
+        public Criteria andExpenseGreaterThan(BigDecimal value) {
             addCriterion("expense >", value, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseGreaterThanOrEqualTo(Long value) {
+        public Criteria andExpenseGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("expense >=", value, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseLessThan(Long value) {
+        public Criteria andExpenseLessThan(BigDecimal value) {
             addCriterion("expense <", value, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseLessThanOrEqualTo(Long value) {
+        public Criteria andExpenseLessThanOrEqualTo(BigDecimal value) {
             addCriterion("expense <=", value, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseIn(List<Long> values) {
+        public Criteria andExpenseIn(List<BigDecimal> values) {
             addCriterion("expense in", values, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNotIn(List<Long> values) {
+        public Criteria andExpenseNotIn(List<BigDecimal> values) {
             addCriterion("expense not in", values, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseBetween(Long value1, Long value2) {
+        public Criteria andExpenseBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("expense between", value1, value2, "expense");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNotBetween(Long value1, Long value2) {
+        public Criteria andExpenseNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("expense not between", value1, value2, "expense");
             return (Criteria) this;
         }
@@ -333,52 +307,52 @@ public class cardRecordExample {
         }
 
         public Criteria andTimeEqualTo(Date value) {
-            addCriterionForJDBCDate("time =", value, "time");
+            addCriterion("time =", value, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("time <>", value, "time");
+            addCriterion("time <>", value, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("time >", value, "time");
+            addCriterion("time >", value, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("time >=", value, "time");
+            addCriterion("time >=", value, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeLessThan(Date value) {
-            addCriterionForJDBCDate("time <", value, "time");
+            addCriterion("time <", value, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("time <=", value, "time");
+            addCriterion("time <=", value, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeIn(List<Date> values) {
-            addCriterionForJDBCDate("time in", values, "time");
+            addCriterion("time in", values, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("time not in", values, "time");
+            addCriterion("time not in", values, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("time between", value1, value2, "time");
+            addCriterion("time between", value1, value2, "time");
             return (Criteria) this;
         }
 
         public Criteria andTimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("time not between", value1, value2, "time");
+            addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
     }

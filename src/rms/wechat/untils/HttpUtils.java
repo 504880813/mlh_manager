@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -200,47 +202,22 @@ public class HttpUtils {
     }
     public static void main(String[] args) {
 	try {
-//	    ACCESS_TOKEN="MuKZurRDICfQ38wxm6Omed0OIsDx7IT95zTXcQevcJsjEIg8dfw3vSRmE5Ys9OrhUAXo95J4au_8ym-pNnrRzI0VyE3cOuiFdt86wRAs0xI";
-
-	    //发送模板消息
-//	    	StringBuffer message=new StringBuffer();
-//		message.append("{");
-//		message.append("\"touser\":");
-////		message.append("\"ocsPftyqH4oHOtdXP8UZoBEyirmg\",");
-//		message.append("\"ocsPft5Ly1aVTcZ5CgUMAVPrqOJA\",");
-//		message.append("\"template_id\":");
-//		message.append("\"_lUqhg3B8DAjlueOPUXWc3Er-H-nISm-YvABmeuKn5Y\",");
-//		message.append("\"url\":\"http://weixin.qq.com/download\"");
-//		message.append(",");
-//		message.append("\"topcolor\":\"#FF0000\",");
-//		message.append("\"data\":{");
-//		message.append("\"price\":{");
-//		message.append("\"value\":\"12312元\",");
-//		message.append("\"color\":\"#173177\"");
-//		message.append("},");
-//		message.append("\"date\":{");
-//		message.append("\"value\":\"囧\",");
-//		message.append("\"color\":\"#173177\"");
-//		message.append("}");
-//		message.append("}");
-//		message.append("}");
-		
-		TemplateMessage tm=new TemplateMessage();
-		tm.setTouser("ocsPft5Ly1aVTcZ5CgUMAVPrqOJA");
-		tm.setTemplate_id("_lUqhg3B8DAjlueOPUXWc3Er-H-nISm-YvABmeuKn5Y");
-		tm.setTopcolor("#FF0000");
-		tm.setUrl("http://weixin.qq.com/download");
-		Map<String,TemplateData> dataMap=new HashMap<>();
-		TemplateData price=new TemplateData();
-		price.setColor("#173177");
-		price.setValue("12312元");
-		TemplateData date=new TemplateData();
-		date.setColor("#173177");
-		date.setValue("囧");
-		
-		dataMap.put("price", price);
-		dataMap.put("date", date);
-		tm.setData(dataMap);
+//		TemplateMessage tm=new TemplateMessage();
+//		tm.setTouser("ocsPft5Ly1aVTcZ5CgUMAVPrqOJA");
+//		tm.setTemplate_id("_lUqhg3B8DAjlueOPUXWc3Er-H-nISm-YvABmeuKn5Y");
+//		tm.setTopcolor("#FF0000");
+//		tm.setUrl("http://weixin.qq.com/download");
+//		Map<String,TemplateData> dataMap=new HashMap<>();
+//		TemplateData price=new TemplateData();
+//		price.setColor("#173177");
+//		price.setValue("12312元");
+//		TemplateData date=new TemplateData();
+//		date.setColor("#173177");
+//		date.setValue("囧");
+//		
+//		dataMap.put("price", price);
+//		dataMap.put("date", date);
+//		tm.setData(dataMap);
 //		sendTemplateMessage(tm);
 //		sendTempMessage(message.toString());
 
@@ -252,6 +229,10 @@ public class HttpUtils {
 	    //	https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
 //		System.out.println(message);
 //		System.out.println(JSON.toJSONString(tm));
+	    
+	    Date time=new Date(System.currentTimeMillis()-1000);
+	    SimpleDateFormat sdf=new SimpleDateFormat("yy-MM-dd hh:mm:ss");
+	    System.out.println(sdf.format(time));
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}

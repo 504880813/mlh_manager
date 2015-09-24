@@ -1,5 +1,6 @@
 package rms.po;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class cardRecord {
@@ -7,7 +8,7 @@ public class cardRecord {
 
     private String cardId;
 
-    private Long expense;
+    private BigDecimal expense;
 
     private Date time;
 
@@ -27,11 +28,11 @@ public class cardRecord {
         this.cardId = cardId == null ? null : cardId.trim();
     }
 
-    public Long getExpense() {
+    public BigDecimal getExpense() {
         return expense;
     }
 
-    public void setExpense(Long expense) {
+    public void setExpense(BigDecimal expense) {
         this.expense = expense;
     }
 

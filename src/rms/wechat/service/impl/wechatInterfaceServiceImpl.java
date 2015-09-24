@@ -88,7 +88,7 @@ public class wechatInterfaceServiceImpl implements wechatInterfaceService {
 	    throws Exception {
 	//确保name唯一
 	wechatInterface dbwechatInterface=findWechatInterfaceByName(wechatinterface.getName());
-	if(dbwechatInterface==null) {
+	if(dbwechatInterface==null||dbwechatInterface.getId()==wechatinterface.getId()) {
 	    wechatInterfaceMapper.updateByPrimaryKey(wechatinterface);
 	}else {
 	    throw new CustomException("该名称已经存在，不能重复添加");

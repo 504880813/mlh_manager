@@ -48,6 +48,7 @@ public class WechatTemplateHandler {
 	
 	return mav;
     }
+ 
     /**
      * 
     * @Title: addwechatTemplate 

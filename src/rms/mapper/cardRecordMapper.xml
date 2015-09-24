@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="card_id" property="cardId" jdbcType="VARCHAR" />
     <result column="expense" property="expense" jdbcType="DECIMAL" />
-    <result column="time" property="time" jdbcType="DATE" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -102,7 +102,7 @@
     insert into s_card_record (id, card_id, expense, 
       time)
     values (#{id,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, #{expense,jdbcType=DECIMAL}, 
-      #{time,jdbcType=DATE})
+      #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="rms.po.cardRecord" >
     insert into s_card_record
@@ -131,7 +131,7 @@
         #{expense,jdbcType=DECIMAL},
       </if>
       <if test="time != null" >
-        #{time,jdbcType=DATE},
+        #{time,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -154,7 +154,7 @@
         expense = #{record.expense,jdbcType=DECIMAL},
       </if>
       <if test="record.time != null" >
-        time = #{record.time,jdbcType=DATE},
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -166,7 +166,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       card_id = #{record.cardId,jdbcType=VARCHAR},
       expense = #{record.expense,jdbcType=DECIMAL},
-      time = #{record.time,jdbcType=DATE}
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -181,7 +181,7 @@
         expense = #{expense,jdbcType=DECIMAL},
       </if>
       <if test="time != null" >
-        time = #{time,jdbcType=DATE},
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -190,7 +190,7 @@
     update s_card_record
     set card_id = #{cardId,jdbcType=VARCHAR},
       expense = #{expense,jdbcType=DECIMAL},
-      time = #{time,jdbcType=DATE}
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

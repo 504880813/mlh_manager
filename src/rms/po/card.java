@@ -1,5 +1,7 @@
 package rms.po;
 
+import java.math.BigDecimal;
+
 public class card {
     private Integer id;
 
@@ -15,7 +17,7 @@ public class card {
 
     private Boolean isavailable;
 
-    private Long money;
+    private BigDecimal money;
 
     private Integer allIntegral;
 
@@ -77,11 +79,11 @@ public class card {
         this.isavailable = isavailable;
     }
 
-    public Long getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 

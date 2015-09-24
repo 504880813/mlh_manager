@@ -17,6 +17,10 @@
 
 <a href="${pageContext.request.contextPath }/order/getAllOrderofNotCheckout.action">收银界面</a>
 
+<a href="${pageContext.request.contextPath }/card/getAllcard.action">会员卡相关</a>
+<br/>
+<hr>
+微信相关 :<br>
 <a href="${pageContext.request.contextPath }/wechatuser/getAllUser.action">微信公众号管理</a>
 
 <a href="${pageContext.request.contextPath }/wechatTemplate/getAllTemplate.action">微信消息模板管理</a>
