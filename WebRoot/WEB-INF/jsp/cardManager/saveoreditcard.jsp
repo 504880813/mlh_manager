@@ -20,12 +20,16 @@
 	<input type="hidden" name="wechatOpenid" value="${card.wechatOpenid}" />
 	<input type="hidden" name="allIntegral" value="${card.allIntegral}" />
 	<input type="hidden" name="monthIntegral" value="${card.monthIntegral}" />
-	卡号<input type="text" name="cardid" value="${card.cardid }" />
-	主卡号<input type="text" name="belongsCardid" value="${card.belongsCardid}" />
-	用户名<input type="text" name="username" value="${card.username}" />
-	电话<input type="text" name="phone" value="${card.phone}" />
-	开通金额<input type="text" name="money" value="${card.money}" />
+	
+	
+	<input type="radio" onclick="showInputdiv('true','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.id!=null}')"/>主卡 
+	<input type="radio" onclick="showInputdiv('false','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.id!=null}')"/>副卡 
+	
+	
+	<div id="cardMessage"></div>
 	<input type="submit" value="submit"/>
 </form>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/card/saveoredit.js"></script>
 </html>

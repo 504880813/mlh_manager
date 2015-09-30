@@ -1,9 +1,8 @@
 package rms.controller;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -11,11 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import rms.controller.exception.CustomException;
 import rms.po.card;
 import rms.po.cardRecord;
 import rms.po.wechatTemplate;
 import rms.service.cardService;
-import rms.wechat.entity.TemplateData;
 import rms.wechat.entity.TemplateMessage;
 import rms.wechat.service.wechatTemplateService;
 /**
@@ -253,11 +252,74 @@ public class cardHandler {
 	List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid);
 	
 	ModelAndView mav=new ModelAndView();
-	mav.addObject("cardRecords", cardRecords);
-	mav.setViewName("cardManager/cardRecordList");
+	if(cardRecords==null) {
+	    mav.addObject("message", "该卡号不存在");
+	    mav.setViewName("error");
+	}else {
+	    mav.addObject("cardRecords", cardRecords);
+	    mav.setViewName("cardManager/cardRecordList");
+	}
 	return mav;
     }
     
+    
+    /**
+     * 
+    * @Title: getMemberCardId 
+    * @Description: 跳转到获取会员卡号页面
+    * @param @return
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+    @RequestMapping("getMemberCardId")
+    public String getMemberCardId() throws Exception{
+	return "cardManager/getMembercardId";
+    }
+    
+    
+    /**
+     * 
+    * @Title: PayPage 
+    * @Description: 跳转到缴费界面 
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("PayPage")
+    public ModelAndView PayPage(String cardid) throws Exception{
+	//查询数据库中记录
+	card card=cardService.findcardBycardid(cardid);
+	if(card==null) {
+	    throw new CustomException("该会员卡已过期");
+	}
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("card", card);
+	mav.setViewName("cardManager/paypage");
+	return mav;
+    }
+    /**
+     * 
+    * @Title: PayPageSubMit 
+    * @Description: 处理缴费页面提交请求
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("PayPageSubMit")
+    public ModelAndView PayPageSubMit(cardRecord cardRecord) throws Exception{
+	
+	cardRecord.setTime(new Date());
+	
+	cardService.pay(cardRecord);
+	
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("message","计费成功");
+	mav.setViewName("message");
+	return mav;
+    }
     
     
 }

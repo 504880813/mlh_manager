@@ -136,4 +136,24 @@ public interface cardService {
 	* @throws
 	 */
 	public card findcardBycardid(String cardid) throws Exception;
+	/**
+	 * 
+	* @Title: BindingMemberCard 
+	* @Description: 绑定会员卡
+	* @param @param card
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void BindingMemberCard(card card) throws Exception;
+	/**
+	 * 
+	* @Title: pay 
+	* @Description: 完成支付相关的流程操作
+	* @param @param cardRecord
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void pay(cardRecord cardRecord) throws Exception;
 }

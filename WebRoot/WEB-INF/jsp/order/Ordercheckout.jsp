@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/images/favicon.ico" type="image/x-icon" />
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/order/checkout.js"></script>
 <title>结账界面</title>
@@ -65,6 +66,7 @@
 	</c:forEach>
 	</table>
 	<hr style="height:10px;border:none;border-top:10px groove skyblue;" />
+	
 	折扣<input type="text" name="discountamountPercent" onchange="CalculatingDiscount(this)">折
 	<span id="discountamountValue"></span>元<br>
 	<input type="hidden" name="discountamount"/>

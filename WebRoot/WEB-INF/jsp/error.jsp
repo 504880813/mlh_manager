@@ -7,6 +7,17 @@
 <title>错误页面</title>
 </head>
 <body>
-${message }
+<span id="message" style="display:none">${message}</span>
+<span id="rootPath" style="display:none">${pageContext.request.contextPath }</span>
 </body>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/js/jDialog/jDialog.css" type="text/css">
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.drag.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.mask.js" ></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.dialog.js" ></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/message.js"></script>
+
 </html>

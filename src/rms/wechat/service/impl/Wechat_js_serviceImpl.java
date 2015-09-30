@@ -67,7 +67,7 @@ public class Wechat_js_serviceImpl implements Wechat_js_service{
 	
 	card.setWechatOpenid(openid);
 	
-	cardService.updatecard(card);
+	cardService.BindingMemberCard(card);
 	
 	return "0";
     }

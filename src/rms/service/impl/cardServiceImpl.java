@@ -75,9 +75,10 @@ public class cardServiceImpl implements cardService {
     @Override
     public List<cardRecord> findAllRecordsBycardid(String cardid) throws Exception {
 	card card=findcardBycardid(cardid);
-	
+	if(card==null) {
+	    return null;
+	}
 	List<cardRecord> cardRecords=null;
-	
 	//主卡
 	if(card.getBelongsCardid()==null||card.getBelongsCardid().trim().equals("")) {
 	    //查询附属子卡
@@ -110,6 +111,15 @@ public class cardServiceImpl implements cardService {
      */
     @Override
     public void savecard(card card) throws Exception {
+	    boolean isexist=maincardisexist(card);
+	    if(!isexist) {
+		throw new CustomException("该主卡号不存在");
+	    }
+	    //判断数据库中是否存在在卡号
+	    card dbc=findcardBycardid(card.getCardid());
+	    if(dbc!=null) {
+		throw new CustomException("卡号已存在");
+	    }
 	    cardMapper.insertSelective(card);
     }
     /*
@@ -122,12 +132,30 @@ public class cardServiceImpl implements cardService {
      */
     @Override
     public void updatecard(card card) throws Exception {
+	    boolean isexist=maincardisexist(card);
+	    if(!isexist) {
+		throw new CustomException("该主卡号不存在");
+	    }
+
+	    cardMapper.updateByPrimaryKey(card);
+    }
+    
+    /*
+     * (非 Javadoc) 
+    * <p>Title: BindingMemberCard</p> 
+    * <p>Description: 绑定会员卡</p> 
+    * @param card
+    * @throws Exception 
+    * @see rms.service.cardService#BindingMemberCard(rms.po.card)
+     */
+    @Override
+    public void BindingMemberCard(card card) throws Exception {
 	    //一个微信号只能绑定一张卡
 	    if(card.getWechatOpenid()!=null&&!card.getWechatOpenid().trim().equals("")) {
-		card c=findcardBywechatOpneid(card.getWechatOpenid());
-		if(c!=null) {
-		    throw new CustomException("一个微信号只能绑定一张卡");
-		}
+		   card c=findcardBywechatOpneid(card.getWechatOpenid());
+		   	if(c!=null) {
+			    throw new CustomException("一个微信号只能绑定一张卡");
+			}
 	    }
 	    cardMapper.updateByPrimaryKey(card);
     }
@@ -160,7 +188,7 @@ public class cardServiceImpl implements cardService {
 	//改变到想切换的状态
 	c.setIsavailable(isavailable);
 	//更新状态
-	updatecard(c);
+	cardMapper.updateByPrimaryKey(c);
     }
     /*
      * (非 Javadoc) 
@@ -180,7 +208,7 @@ public class cardServiceImpl implements cardService {
 	dbmoney=dbmoney.add(RechargeMoney);
 	c.setMoney(dbmoney);
 	//更新数据
-	updatecard(c);
+	cardMapper.updateByPrimaryKey(c);
     }
     
     /*
@@ -237,6 +265,76 @@ public class cardServiceImpl implements cardService {
 	}
 	return cards.get(0);
     }
-  
+    /**
+     * 
+    * @Title: maincardisexist 
+    * @Description: 根据传入的卡片判断是主卡还是副卡，如果是副卡，查看主卡号是否存在
+    * @param @param c
+    * @param @return
+    * @param @throws Exception    
+    * @return boolean    
+    * @throws
+     */
+    private boolean maincardisexist(card c) throws Exception{
+	if(c==null) { return false; }
+	if(c.getBelongsCardid()==null) { return true; }
+	card mainc=findcardBycardid(c.getBelongsCardid());
+	return mainc==null?false:true;
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: pay</p> 
+    * <p>Description: 支付相关操作</p> 
+    * @param cardRecord
+    * @throws Exception 
+    * @see rms.service.cardService#pay(rms.po.cardRecord)
+     */
+    @Override
+    public void pay(cardRecord cardRecord) throws Exception {
+	//判断当前计算的卡的类型
+	boolean ismain=true;
+	
+	//先查询数据库中卡信息
+	card TheCard=findcardBycardid(cardRecord.getCardId());
+	if(TheCard==null) {
+	    throw new CustomException("该会员卡已过期");
+	}
+	//得到主卡
+	card card=null;
+	if(TheCard.getBelongsCardid()==null||TheCard.getBelongsCardid().equals("")) {
+	    card=TheCard;
+	}else {
+	    //副卡
+	    card=findcardBycardid(TheCard.getBelongsCardid());
+	    ismain=false;
+	}
+	//-1 小于
+	//0 等于
+	//1 大于
+	int resultCode=cardRecord.getExpense().compareTo(card.getMoney());
+	if(ismain) {
+	    BigDecimal nowMoney=null;
+	    if((resultCode==-1||resultCode==0)) {
+	    	//计算现在的余额
+		nowMoney=card.getMoney().subtract(cardRecord.getExpense());
+	    }else {
+		nowMoney=BigDecimal.valueOf(0);  
+	    }
+	    card.setMoney(nowMoney);
+	}
+	if(card.getIsavailable()) {
+	 //计算现在的月积分
+	 Integer nowMonthIntegral=card.getMonthIntegral()+cardRecord.getExpense().intValue();
+	 //计算现在的总积分
+	 Integer nowAllIntegral=card.getAllIntegral()+cardRecord.getExpense().intValue();
+	 card.setMonthIntegral(nowMonthIntegral);
+	 card.setAllIntegral(nowAllIntegral);
+	 }
+	 //更新会员卡数据
+	 cardMapper.updateByPrimaryKey(card);
+	 
+	 //插入消费记录
+	 cardRecordMapper.insertSelective(cardRecord);
+    }
 
 }

@@ -8,6 +8,8 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath }/card/addcard.action">添加会员卡</a><br />
+<a href="${pageContext.request.contextPath }/card/getMemberCardId.action">会员卡缴费</a>
+
 <form action="${pageContext.request.contextPath }/card/selectAllRecordsBycardid.action" method="post">
 <input type="text" name="cardid" /><br/>
 <input type="submit" value="查询" />
