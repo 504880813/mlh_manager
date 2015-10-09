@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import rms.po.card;
+import rms.po.cardLevel;
 import rms.po.cardRecord;
 import rms.wechat.entity.TemplateMessage;
 
@@ -156,4 +157,68 @@ public interface cardService {
 	* @throws
 	 */
 	public void pay(cardRecord cardRecord) throws Exception;
+	/**
+	 * 
+	* @Title: getAllcardLevel 
+	* @Description: 获取所有的会员卡等级
+	* @param @return
+	* @param @throws Exception    
+	* @return List<cardLevel>    
+	* @throws
+	 */
+	public List<cardLevel> getAllcardLevel() throws Exception;
+	
+	/**
+	 * 
+	* @Title: findcardLevelByid 
+	* @Description: 根据id查询会员卡等级信息
+	* @param @param id
+	* @param @return
+	* @param @throws Exception    
+	* @return cardLevel    
+	* @throws
+	 */
+        public  cardLevel findcardLevelByid(Integer id)  throws Exception;
+	/**
+	 * 
+	* @Title: addcardLevel 
+	* @Description: 添加新的会员等级 
+	* @param @param level
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void addcardLevel(cardLevel level) throws Exception;
+	/**
+	 * 
+	* @Title: editcardLevel 
+	* @Description: 修改会员等级信息
+	* @param @param id
+	* @param @param level
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void editcardLevel(Integer id,cardLevel level) throws Exception;
+	/**
+	 * 
+	* @Title: deletecardLevelByid 
+	* @Description: 删除会员信息根据id
+	* @param @param id
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void deletecardLevelByid(Integer id) throws Exception;
+	/**
+	 * 
+	* @Title: findcardLevelBycardLevel 
+	* @Description: 根据会员卡等级，查询等级信息 
+	* @param @param level
+	* @param @return
+	* @param @throws Exception    
+	* @return rms.po.cardLevel    
+	* @throws
+	 */
+	public cardLevel findcardLevelBycardLevel(String level) throws Exception;
 }

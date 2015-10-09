@@ -9,10 +9,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import rms.controller.exception.CustomException;
+import rms.mapper.cardLevelMapper;
 import rms.mapper.cardMapper;
 import rms.mapper.cardRecordMapper;
 import rms.po.card;
 import rms.po.cardExample;
+import rms.po.cardLevel;
+import rms.po.cardLevelExample;
 import rms.po.cardRecord;
 import rms.po.cardRecordExample;
 import rms.po.wechatTemplate;
@@ -34,6 +37,8 @@ public class cardServiceImpl implements cardService {
     private cardMapper cardMapper;
     @Resource
     private cardRecordMapper cardRecordMapper;
+    @Resource
+    private cardLevelMapper cardLevelMapper;
     @Resource
     private wechatTemplateService wechatTemplateService;
     /*
@@ -336,5 +341,126 @@ public class cardServiceImpl implements cardService {
 	 //插入消费记录
 	 cardRecordMapper.insertSelective(cardRecord);
     }
-
+    
+    
+    /**
+     * card_level 相关
+     */
+    /*
+     * (非 Javadoc) 
+    * <p>Title: getAllcardLevel</p> 
+    * <p>Description:得到所有的会员卡等级</p> 
+    * @return
+    * @throws Exception 
+    * @see rms.service.cardService#getAllcardLevel()
+     */
+    @Override
+    public List<cardLevel> getAllcardLevel() throws Exception {
+	cardLevelExample example=new cardLevelExample();
+	example.createCriteria().andIdIsNotNull();
+	return cardLevelMapper.selectByExample(example);
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: findcardLevelByid</p> 
+    * <p>Description:根据id查询会员卡信息</p> 
+    * @param id
+    * @return
+    * @throws Exception 
+    * @see rms.service.cardService#findcardLevelByid(java.lang.Integer)
+     */
+    @Override
+    public cardLevel findcardLevelByid(Integer id) throws Exception {
+	cardLevelExample example=new cardLevelExample();
+	example.createCriteria().andIdEqualTo(id);
+	List<cardLevel> cardLevels=cardLevelMapper.selectByExample(example);
+	return cardLevels==null?null:cardLevels.get(0);
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: addcardLevel</p> 
+    * <p>Description:添加新的会员等级</p> 
+    * @param level
+    * @throws Exception 
+    * @see rms.service.cardService#addcardLevel(rms.po.cardLevel)
+     */
+    @Override
+    public void addcardLevel(cardLevel level) throws Exception {
+	//根据会员卡名称查询是否已经含有
+	if(cardLevelisExit(level,true)) {
+	    throw new CustomException("该会员卡类型已经存在");
+	}
+	//保存
+	cardLevelMapper.insert(level);
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: editcardLevel</p> 
+    * <p>Description:更新会员卡信息</p> 
+    * @param id
+    * @param level
+    * @throws Exception 
+    * @see rms.service.cardService#editcardLevel(java.lang.Integer, rms.po.cardLevel)
+     */
+    @Override
+    public void editcardLevel(Integer id,cardLevel level) throws Exception {
+	//根据会员卡名称查询是否已经含有
+	if(cardLevelisExit(level,false)) {
+	    throw new CustomException("该会员卡类型已经存在");
+	}
+	level.setId(id);
+	cardLevelMapper.updateByPrimaryKey(level);
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: deletecardLevelByid</p> 
+    * <p>Description:根据会员卡等级信息id删除等级信息</p> 
+    * @param id
+    * @throws Exception 
+    * @see rms.service.cardService#deletecardLevelByid(java.lang.Integer)
+     */
+    @Override
+    public void deletecardLevelByid(Integer id) throws Exception {
+	cardLevelMapper.deleteByPrimaryKey(id);
+    }
+    /**
+     * 
+    * @Title: cardLevelisExit 
+    * @Description: 判断是否存在 
+    * @param @param cardLevel
+    * @param @return
+    * @param @throws Exception    
+    * @return boolean    
+    * @throws
+     */
+    public boolean cardLevelisExit(cardLevel cardLevel,boolean isadd) throws Exception{
+	cardLevelExample example=new cardLevelExample();
+	if(isadd) {
+	    example.createCriteria().andCardlevelEqualTo(cardLevel.getCardlevel());
+	}else {
+	    example.createCriteria().andCardlevelEqualTo(cardLevel.getCardlevel()).andIdNotEqualTo(cardLevel.getId());
+	}
+	List<cardLevel> dbcardLevels=cardLevelMapper.selectByExample(example);
+	if(dbcardLevels!=null && dbcardLevels.size()!=0) {
+	    return true;
+	}else {
+	    return false;
+	}
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: findcardLevelBycardLevel</p> 
+    * <p>Description: 根据会员卡等级，查询等级信息 </p> 
+    * @param level
+    * @return
+    * @throws Exception 
+    * @see rms.service.cardService#findcardLevelBycardLevel(java.lang.String)
+     */
+    @Override
+    public cardLevel findcardLevelBycardLevel(String level) throws Exception {
+	cardLevelExample example=new cardLevelExample();
+	example.createCriteria().andCardlevelEqualTo(level);
+	List<cardLevel> cardLevels=cardLevelMapper.selectByExample(example);
+	return cardLevels==null?null:cardLevels.get(0);
+    }
 }

@@ -48,6 +48,22 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,isedit){
 	html+="开通金额<input type='text' name='money' ";
 	html+=money==''?'':"value= "+money;
 	html+=" />";
+	
+	//获取卡片分类并添加入主卡选项
+	
+	var cardlevelSpan=$("#levelSpan").text().trim();
+	alert("cardlevelSpan---->"+cardlevelSpan);
+	
+	var cardlevelSpans= new Array(); //定义一数组 
+	cardlevelSpans=cardlevelSpan.split(",");
+	
+	for(var i=0;i<cardlevelSpans.length;i++){
+		html+="<input type='radio' name='level' ";
+		html+="value= "+cardlevelSpans[i].trim();
+		html+=" />";
+		html+=cardlevelSpans[i].trim();
+	}
+	
 	messagediv.append(html);
 }
 /**
@@ -81,5 +97,7 @@ function addVicecardInput(cardid,belongsCardid,username,phone,money,isedit){
 	html+="电话<input type='text' name='phone' ";
 	html+=phone==''?'':"value= "+phone;
 	html+=" />";
+	
+	//等级为副卡 副卡默认维护
 	messagediv.append(html);
 }

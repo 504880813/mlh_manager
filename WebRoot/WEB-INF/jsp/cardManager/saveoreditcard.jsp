@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加或修改消息模板</title>
+<title>添加或修改会员卡信息</title>
 </head>
 <body>
-消息模板信息：
+会员卡信息：
 <c:if test="${errors!=null }">
 <c:forEach items="${errors}" var="error">
 	${error.defaultMessage }<br/>
@@ -21,6 +21,16 @@
 	<input type="hidden" name="allIntegral" value="${card.allIntegral}" />
 	<input type="hidden" name="monthIntegral" value="${card.monthIntegral}" />
 	
+	<span style="display:none" id="levelSpan">
+		<c:forEach items="${levels }" var="level" varStatus="status">
+			<c:if test="${!status.last}">
+				${level.cardlevel },
+			</c:if>
+			<c:if test="${status.last}">
+				${level.cardlevel }
+			</c:if>
+		</c:forEach>
+	</span>
 	
 	<input type="radio" onclick="showInputdiv('true','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.id!=null}')"/>主卡 
 	<input type="radio" onclick="showInputdiv('false','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.id!=null}')"/>副卡 

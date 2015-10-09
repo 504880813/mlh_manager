@@ -9,10 +9,12 @@
 <body>
 <br />
 <form id="paypageForm" action="${pageContext.request.contextPath}/card/PayPageSubMit.action" method="post">
-	卡号<input type="text" name="cardId" value="${card.cardid }"/>
-	消费金额<input type="text" name="expense" onchange="expenseChange()"/>
-	会员卡余额<span id="cardMoney">${card.money }</span>
-	应付款现金<span id="otherMoney">0元</span>
+	卡号<input type="text" name="cardId" value="${card.cardid }"/><br/>
+	折扣<span id="nowDiscount">${cardLevel.discount }</span>
+	消费金额<input type="text" name="Nowexpense" onchange="CalculatingDiscount()"/><br/>
+	折后金额<input type="text" name="expense" readonly="readonly"/><br/>
+	会员卡余额<span id="cardMoney">${card.money }</span><br/>
+	应付款现金<span id="otherMoney">0元</span><br/>
 	<input type="button" value="submit" onclick="submitPage(this)"/>
 </form>
 </body>

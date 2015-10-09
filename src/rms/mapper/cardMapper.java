@@ -25,6 +25,6 @@ public interface cardMapper {
     int updateByExample(@Param("record") card record, @Param("example") cardExample example);
 
     int updateByPrimaryKeySelective(card record);
-    
+
     int updateByPrimaryKey(card record);
 }

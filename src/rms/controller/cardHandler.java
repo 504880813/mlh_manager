@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rms.controller.exception.CustomException;
 import rms.po.card;
+import rms.po.cardLevel;
 import rms.po.cardRecord;
 import rms.po.wechatTemplate;
 import rms.service.cardService;
@@ -49,7 +50,6 @@ public class cardHandler {
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("cards", cards);
 	mav.setViewName("cardManager/cardList");
-	
 	return mav;
     }
     /**
@@ -58,12 +58,16 @@ public class cardHandler {
     * @Description: 为添加会员卡准备数据
     * @param @return
     * @param @throws Exception    
-    * @return String    
+    * @return ModelAndView    
     * @throws
      */
     @RequestMapping("addcard")
-    public String addcard() throws Exception{
-	return "cardManager/saveoreditcard";
+    public ModelAndView addcard() throws Exception{
+	List<cardLevel> levels=cardService.getAllcardLevel();
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("levels", levels);
+	mav.setViewName("cardManager/saveoreditcard");
+	return mav;
     }
     /**
      * 
@@ -78,8 +82,10 @@ public class cardHandler {
     @RequestMapping("editcard")
     public ModelAndView editcard(Integer id) throws Exception{
 	card card=cardService.findcardByid(id);
+	List<cardLevel> levels=cardService.getAllcardLevel();
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("card", card);
+	mav.addObject("levels", levels);
 	mav.setViewName("cardManager/saveoreditcard");
 	return mav;
     }
@@ -292,10 +298,12 @@ public class cardHandler {
 	//查询数据库中记录
 	card card=cardService.findcardBycardid(cardid);
 	if(card==null) {
-	    throw new CustomException("该会员卡已过期");
+	    throw new CustomException("该会员卡已失效");
 	}
+	cardLevel cardLevel=cardService.findcardLevelBycardLevel(card.getLevel());
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("card", card);
+	mav.addObject("cardLevel", cardLevel);
 	mav.setViewName("cardManager/paypage");
 	return mav;
     }
@@ -319,6 +327,104 @@ public class cardHandler {
 	mav.addObject("message","计费成功");
 	mav.setViewName("message");
 	return mav;
+    }
+    
+    /**
+     * card_Level 相关请求
+     */
+    /**
+     * 
+    * @Title: getAllcardLevel 
+    * @Description: 得到所有的会员卡等级信息
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("getAllcardLevel")
+    public ModelAndView getAllcardLevel() throws Exception{
+	List<cardLevel> cardLevels=cardService.getAllcardLevel();
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("cardLevels", cardLevels);
+	mav.setViewName("cardManager/cardLevelList");
+	return mav;
+    } 
+    /**
+     * 
+    * @Title: addcardLevel 
+    * @Description: 为添加会员卡等级信息准备数据
+    * @param @return
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+    @RequestMapping("addcardLevel")
+    public String addcardLevel() throws Exception{
+	return "cardManager/saveoreditcardLevel";
+    }
+    /**
+     * 
+    * @Title: editcardLevel 
+    * @Description:为修改会员卡等级信息准备数据 
+    * @param @param id
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("editcardLevel")
+    public ModelAndView editcardLevel(Integer id) throws Exception{
+	cardLevel cardLevel=cardService.findcardLevelByid(id);
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("cardLevel", cardLevel);
+	mav.setViewName("cardManager/saveoreditcardLevel");
+	return mav;
+    }
+    /**
+     * 
+    * @Title: addcardLevelSubmit 
+    * @Description: 添加会员卡等级信息 
+    * @param @param cardLevel
+    * @param @return
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+    @RequestMapping("addcardLevelSubmit")
+    public String addcardLevelSubmit(cardLevel cardLevel) throws Exception{
+	cardService.addcardLevel(cardLevel);
+	return "redirect:getAllcardLevelaction";
+    }
+    /**
+     * 
+    * @Title: editcardLevelSubmit 
+    * @Description: 修改会员卡等级信息
+    * @param @param id
+    * @param @param cardLevel
+    * @param @return
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+    @RequestMapping("editcardLevelSubmit")
+    public String editcardLevelSubmit(Integer id,cardLevel cardLevel) throws Exception{
+	cardService.editcardLevel(id, cardLevel);
+	return "redirect:getAllcardLevel.action";
+    }
+    /**
+     * 
+    * @Title: deletecardLevel 
+    * @Description:根据id删除会员卡等级信息
+    * @param @param id
+    * @param @return
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+    @RequestMapping("deletecardLevel")
+    public String deletecardLevel(Integer id) throws Exception{
+	cardService.deletecardLevelByid(id);
+	return "redirect:getAllcardLevel.action";
     }
     
     

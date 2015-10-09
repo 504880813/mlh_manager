@@ -23,6 +23,8 @@ public class card {
 
     private Integer monthIntegral;
 
+    private String level;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +103,13 @@ public class card {
 
     public void setMonthIntegral(Integer monthIntegral) {
         this.monthIntegral = monthIntegral;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 }

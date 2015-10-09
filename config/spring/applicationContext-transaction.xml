@@ -20,10 +20,15 @@
 		<tx:attributes>
 			<tx:method name="add*" propagation="REQUIRED"/>
 			<tx:method name="save*" propagation="REQUIRED"/>
-			<tx:method name="update*" propagation="REQUIRED"/>
 			<tx:method name="insert*" propagation="REQUIRED"/>
+			
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="edit*" propagation="REQUIRED"/>
 			<tx:method name="change*" propagation="REQUIRED"/>
+			
 			<tx:method name="delete*" propagation="REQUIRED"/>
+			
+			
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
 			<tx:method name="query*" propagation="SUPPORTS" read-only="true"/>

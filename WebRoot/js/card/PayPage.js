@@ -9,7 +9,7 @@
  * 消费金额改变时，计算要付的现金
  */
 function expenseChange(){
-	//获取当前消费金额
+	//获取当前折后金额
 	var expenseValue=$("input[name=expense]").val();
 	//获取会员卡余额
 	var cardMoneyValue=$("#cardMoney").text();
@@ -24,6 +24,26 @@ function expenseChange(){
 		$("#otherMoney").text(currentMoeny);
 	}
 }
+
+function CalculatingDiscount(){
+	//获取当前消费金额
+	var NowexpenseValue=$("input[name=Nowexpense]").val();
+	//获取折扣
+	var discountText=$("#nowDiscount").text().trim();
+	
+	//计算折后金额
+	
+	var discount=discountText*0.1;
+	
+	var money=NowexpenseValue*discount;
+	
+	//赋值折后金额
+	$("input[name=expense]").val(money);
+	
+	//计算是否需要现金
+	expenseChange();
+}
+
 /**
  * 提交页面
  * @param submitButton

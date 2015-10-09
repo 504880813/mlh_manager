@@ -8,7 +8,8 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath }/card/addcard.action">添加会员卡</a><br />
-<a href="${pageContext.request.contextPath }/card/getMemberCardId.action">会员卡缴费</a>
+<a href="${pageContext.request.contextPath }/card/getAllcardLevel.action">会员卡等级信息</a><br />
+<a href="${pageContext.request.contextPath }/card/getMemberCardId.action">会员卡缴费</a><br />
 
 <form action="${pageContext.request.contextPath }/card/selectAllRecordsBycardid.action" method="post">
 <input type="text" name="cardid" /><br/>
@@ -19,6 +20,7 @@
 <tr>
 	<td>卡号</td>
 	<td>主卡号</td>
+	<td>会员卡等级</td>
 	<td>用户名</td>
 	<td>电话号码</td>
 	<td>微信是否关联</td>
@@ -32,6 +34,7 @@
 <tr>	
 	<td>${card.cardid}</td>
 	<td>${card.belongsCardid==null?'是主卡':card.belongsCardid}</td>
+	<td>${card.level=='-1'?'副卡':card.level}</td>
 	<td>${card.username}</td>
 	<td>${card.phone}</td>
 	<td>${card.wechatOpenid==null||card.wechatOpenid==""?'没关联':'关联'}</td>
