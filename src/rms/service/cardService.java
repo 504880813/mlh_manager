@@ -148,15 +148,16 @@ public interface cardService {
 	 */
 	public void BindingMemberCard(card card) throws Exception;
 	/**
+	 * @return 
 	 * 
 	* @Title: pay 
 	* @Description: 完成支付相关的流程操作
 	* @param @param cardRecord
 	* @param @throws Exception    
-	* @return void    
+	* @return card    
 	* @throws
 	 */
-	public void pay(cardRecord cardRecord) throws Exception;
+	public card pay(cardRecord cardRecord) throws Exception;
 	/**
 	 * 
 	* @Title: getAllcardLevel 

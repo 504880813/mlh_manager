@@ -3,6 +3,7 @@ package rms.service;
 import java.util.List;
 
 import rms.po.CustomOrder;
+import rms.po.cardRecord;
 /**
  * 
 * @ClassName: OrderService 
@@ -125,4 +126,17 @@ public interface OrderService {
 	* @throws
 	 */
 	public void checkoutByorderid(CustomOrder customorder, Integer id) throws Exception;
+	/**
+	 * 
+	* @Title: MembercheckoutByorderid 
+	* @Description: 会员结账
+	* @param @param customorder
+	* @param @param id
+	* @param @param cardRecord
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void MembercheckoutByorderid(CustomOrder customorder,
+		Integer id, cardRecord cardRecord) throws Exception;
 }

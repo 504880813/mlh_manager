@@ -2,7 +2,9 @@ package rms.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,6 +22,8 @@ import rms.po.cardRecord;
 import rms.po.cardRecordExample;
 import rms.po.wechatTemplate;
 import rms.service.cardService;
+import rms.wechat.Enumeration.wechatTemplateidKey;
+import rms.wechat.entity.TemplateData;
 import rms.wechat.entity.TemplateMessage;
 import rms.wechat.service.wechatTemplateService;
 /**
@@ -226,7 +230,6 @@ public class cardServiceImpl implements cardService {
      */
     @Override
     public void sendTemplateTocard(TemplateMessage message) throws Exception {
-	
 	//查询模板具体信息
 	wechatTemplate template=wechatTemplateService.findWechatTemplateBytemplateid(message.getTemplate_id());
 	message.setTopcolor(template.getTopcolor());
@@ -295,7 +298,7 @@ public class cardServiceImpl implements cardService {
     * @see rms.service.cardService#pay(rms.po.cardRecord)
      */
     @Override
-    public void pay(cardRecord cardRecord) throws Exception {
+    public card pay(cardRecord cardRecord) throws Exception {
 	//判断当前计算的卡的类型
 	boolean ismain=true;
 	
@@ -337,9 +340,10 @@ public class cardServiceImpl implements cardService {
 	 }
 	 //更新会员卡数据
 	 cardMapper.updateByPrimaryKey(card);
-	 
 	 //插入消费记录
 	 cardRecordMapper.insertSelective(cardRecord);
+	 //返回最新的卡片信息
+	 return card;
     }
     
     

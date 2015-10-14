@@ -1,13 +1,18 @@
 package rms.service.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import rms.controller.exception.CustomException;
 import rms.mapper.CustomdishMapper;
 import rms.mapper.CustommaterialsMapper;
 import rms.mapper.CustomorderMapper;
@@ -20,6 +25,8 @@ import rms.po.CustomOrder;
 import rms.po.Customdish;
 import rms.po.Custommaterials;
 import rms.po.Customorderdetail;
+import rms.po.card;
+import rms.po.cardRecord;
 import rms.po.diningTable;
 import rms.po.dish;
 import rms.po.order;
@@ -28,6 +35,10 @@ import rms.service.DiningTableService;
 import rms.service.DishService;
 import rms.service.MaterialsService;
 import rms.service.OrderService;
+import rms.service.cardService;
+import rms.wechat.Enumeration.wechatTemplateidKey;
+import rms.wechat.entity.TemplateData;
+import rms.wechat.entity.TemplateMessage;
 
 /**
  * 
@@ -50,6 +61,8 @@ public class OrderServiceImpl implements OrderService {
     private DishService dishService;
     @Resource
     private MaterialsService materialsService;
+    @Resource
+    private cardService cardService;
 
     /**
      * dao_mapper
@@ -486,11 +499,12 @@ public class OrderServiceImpl implements OrderService {
 	order.setrDiningtableId(newdiningtableid);
 	// 更新订单餐桌
 	orderMapper.updateByPrimaryKeySelective(order);
-
+	
     }
 
     /*
-     * (非 Javadoc) <p>Title: checkoutByorderid</p> <p>Description:根据订单id结账 </p>
+     * (非 Javadoc) <p>Title: checkoutByorderid</p> 
+     * <p>Description:根据订单id结账 </p>
      * 
      * @param customorder
      * 
@@ -513,6 +527,40 @@ public class OrderServiceImpl implements OrderService {
 		true);
 	// TODO 打印小票
 
+    }
+    
+    /*
+     * (非 Javadoc) 
+    * <p>Title: MembercheckoutByorderid</p> 
+    * <p>Description:会员结账</p> 
+    * @param customorder
+    * @param id
+    * @param cardRecord
+    * @throws Exception 
+    * @see rms.service.OrderService#MembercheckoutByorderid(rms.po.CustomOrder, java.lang.Integer, rms.po.cardRecord)
+     */
+    @Override
+    public void MembercheckoutByorderid(CustomOrder customorder, Integer id,
+	    cardRecord cardRecord) throws Exception {
+	//先处理会员卡
+	card card=cardService.pay(cardRecord);
+	//然后处理订单
+	checkoutByorderid(customorder, id);
+	
+	if(card.getWechatOpenid()==null||card.getWechatOpenid().trim().equals("")) {
+	    throw new CustomException("没有关联微信号，故未发送消费消息");
+	}
+	 //构建模板消息
+	 Map<String,TemplateData> data=new HashMap<String, TemplateData>();
+	 data.put("price", new TemplateData(String.valueOf(cardRecord.getExpense()), "#173177"));
+	 data.put("date", new TemplateData(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()), "#173177"));
+	 //构建模板实体
+	 TemplateMessage message=new TemplateMessage();
+	 message.setTemplate_id(wechatTemplateidKey.Instant_Consumption_Message.value);
+	 message.setTouser(card.getWechatOpenid());
+	 message.setData(data);
+	 //发送模板消息
+	 cardService.sendTemplateTocard(message);
     }
 
     /*
