@@ -8,10 +8,14 @@
  * @param money
  * @param isedit
  */
-function showInputdiv(ismain,cardid,belongsCardid,username,phone,money,isedit){
+function showInputdiv(ismain,cardid,belongsCardid,username,phone,money,cardLevel,isedit){
+	
+	if(cardManagerisconnect==false){
+		timeFlagid=setInterval(ConnectUsb,2000);
+	}
 	//主卡
 	if("true"==ismain){
-		addMaincardInput(cardid,belongsCardid,username,phone,money,isedit);
+		addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,isedit);
 	}
 	//副卡
 	if("false"==ismain){
@@ -25,14 +29,29 @@ function showInputdiv(ismain,cardid,belongsCardid,username,phone,money,isedit){
  * @param username
  * @param phone
  * @param money
+ * @param cardLevel
  * @param isedit
  */
-function addMaincardInput(cardid,belongsCardid,username,phone,money,isedit){
+function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,isedit){
 	//将原数据节点移除
 	var messagediv=$("#cardMessage");
 //	messagediv.children().remove();
 	messagediv.empty();
 	var html="";
+	if(cardManagerisconnect==false){
+		html+="<span id='message'>";
+		html+="正在连接刷卡器";
+		html+="</span> <br /> ";
+	}else{
+		html+="<span id='message'>";
+		html+="读卡器接入成功";
+		html+="</span> ";
+		html+="<input type=";
+		html+="button id=";
+		html+="checkcard  value=";
+		html+="读卡  onclick=";
+		html+="checkCard() /> <br /> ";
+	}
 	html+="卡号<input type='text' name='cardid'";
 	html+=cardid==''?'':"value= "+cardid;
 	if(isedit=="true"){
@@ -52,16 +71,27 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,isedit){
 	//获取卡片分类并添加入主卡选项
 	
 	var cardlevelSpan=$("#levelSpan").text().trim();
-	alert("cardlevelSpan---->"+cardlevelSpan);
+//	alert("cardlevelSpan---->"+cardlevelSpan);
 	
 	var cardlevelSpans= new Array(); //定义一数组 
 	cardlevelSpans=cardlevelSpan.split(",");
 	
 	for(var i=0;i<cardlevelSpans.length;i++){
-		html+="<input type='radio' name='level' ";
-		html+="value= "+cardlevelSpans[i].trim();
-		html+=" />";
-		html+=cardlevelSpans[i].trim();
+		if(cardlevelSpans[i].trim()==-1){
+			continue;
+		}
+		if(cardlevelSpans[i].trim()==cardLevel){
+			html+="<input type='radio' name='level' ";
+			html+="value= "+cardlevelSpans[i].trim();
+			html+=" checked />";
+			html+=cardlevelSpans[i].trim();
+		}else{
+			html+="<input type='radio' name='level' ";
+			html+="value= "+cardlevelSpans[i].trim();
+			html+=" />";
+			html+=cardlevelSpans[i].trim();
+		}
+		
 	}
 	
 	messagediv.append(html);
@@ -79,6 +109,20 @@ function addVicecardInput(cardid,belongsCardid,username,phone,money,isedit){
 	var messagediv=$("#cardMessage");
 	messagediv.empty();
 	var html="";
+	if(cardManagerisconnect==false){
+		html+="<span id='message'>";
+		html+="正在连接刷卡器";
+		html+="</span> <br /> ";
+	}else{
+		html+="<span id='message'>";
+		html+="读卡器接入成功";
+		html+="</span> ";
+		html+="<input type=";
+		html+="button id=";
+		html+="checkcard  value=";
+		html+="读卡  onclick=";
+		html+="checkCard() /> <br /> ";
+	}
 	html+="卡号<input type='text' name='cardid' ";
 	html+=cardid==''?'':"value= "+cardid;
 	if(isedit=="true"){

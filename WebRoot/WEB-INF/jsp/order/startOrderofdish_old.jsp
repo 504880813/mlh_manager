@@ -33,7 +33,17 @@
 				<td>操作</td>
 			</tr>
 		</table>
-		总价:<span id="allprice"></span>元 
+		<table>
+			<tr id="setMeal">
+				<td>套餐号</td>
+				<td>套餐名称</td>
+				<td>套餐单价</td>
+				<td>数量(份)</td>
+				<td>价格(元)</td>
+				<td>操作</td>
+			</tr>
+		</table>
+		总价:<span id="allprice"></span>元
 		<input type="submit" name="submit"  style="display:none"/>
 	</div>
 </form>	
@@ -50,19 +60,15 @@
 				<td>菜品号</td>
 				<td>菜品名称</td>
 				<td>菜品价格</td>
-				<td colspan="2">操作</td>
+				<td>操作</td>
 			</tr>
 			<c:forEach items="${dishs }" var="dish">
 			<tr>
 				<td>${dish.id }</td>
 				<td class="dishName">${dish.name }</td>
 				<td>${dish.price }</td>
-				<td colspan="2">
-				<input type="button" value="add" onclick="adddishToorderOfsetMeal('${dish.id }','${dish.name}','${dish.price }',this,'${pageContext.request.contextPath}')">
-				<form action="${pageContext.request.contextPath}/dish/findDishdetails.action" method="post">
-					<input type="hidden" name="id" value="${dish.id }" />
-					<input type="submit" value="查看详情">
-				</form>
+				<td>
+				<input type="button" value="add" onclick="adddishToorderOfsetMeal('${dish.id }','${dish.name}','${dish.price }',this,'${dish.sub_customdish!=null }','${pageContext.request.contextPath}')">
 				</td>
 			</tr>
 			</c:forEach>

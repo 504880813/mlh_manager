@@ -11,13 +11,19 @@ var orderdishsId= new Array();
  * @param name
  * @param price
  * @param self
-
+ * @param issetMeal
  */
-function adddishToorderOfsetMeal(id,name,price,self,Rootpath){
+function adddishToorderOfsetMeal(id,name,price,self,issetMeal,Rootpath){
+	//判断是套餐还是单菜
+	if(issetMeal=='true'){
+		adddishToorder(id,name,price,self,"true");
 //		finddishBysetMealId(Rootpath,id);
+	}else{
 //		if(!ArrayContain(orderdishsId,id)){
-		adddishToorder(id,name,price,self);
+		adddishToorder(id,name,price,self,"false");
+//		}
 		changePriceBydishId(id,1);
+	}
 }
 
 
@@ -27,7 +33,7 @@ function adddishToorderOfsetMeal(id,name,price,self,Rootpath){
  * @param name
  * @param price
  */
-function adddishToorder(id,name,price,self){
+function adddishToorder(id,name,price,self,issetMeal){
 	
 	orderdishsId.push(id);
 	var jqs=$(self);
@@ -82,11 +88,16 @@ function adddishToorder(id,name,price,self){
 	html+=",'" +id;
 	html+="','" +name;
 	html+="','" +price;
+	html+="','" +issetMeal;
 	html+="')>";
 	html+="</td>";
 	html+="</tr>";
 //	alert(html);
-	$("#orderdishs table:first").append(html);
+	if(issetMeal=="true"){
+		$("#orderdishs table:last").append(html);
+	}else{
+		$("#orderdishs table:first").append(html);
+	}
 	
 	$("input[name=submit]").show();
 	
@@ -95,11 +106,11 @@ function adddishToorder(id,name,price,self){
 /**
  * 删除指定元素,将删除的元素添加到菜单列表
  */
-function deletethisself(self,id,name,price){
+function deletethisself(self,id,name,price,issetMeal){
 	//alert(self);
 	var jqs=$(self);
 	jqs.parent().parent().remove();
-	adddishsofhtml(id,name,price);
+	adddishsofhtml(id,name,price,issetMeal);
 	for(var i=0;i<orderdishsId.length;i++){
 		if(orderdishsId[i]==id){
 			Arrayremove(orderdishsId,i);
@@ -239,7 +250,7 @@ function changePriceBydishId(id,quantity){
 /**
  * 向菜品模块的添加html
  */
-function adddishsofhtml(id,name,price){
+function adddishsofhtml(id,name,price,issetMeal){
 	var html="<tr>";
 	html+="<td>";
 	html+=id;
@@ -257,7 +268,8 @@ function adddishsofhtml(id,name,price){
 	html+="('" +id;
 	html+="','" +name;
 	html+="','" +price;
-	html+="',this"; 
+	html+="',this,"; 
+	html+=issetMeal
 	html+=")>";
 	html+="</td>";
 	html+="</tr>";

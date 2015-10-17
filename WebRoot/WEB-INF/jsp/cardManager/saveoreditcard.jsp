@@ -7,6 +7,11 @@
 <title>添加或修改会员卡信息</title>
 </head>
 <body>
+<br />
+<!-- 读卡器设置 start-->
+<object classid="clsid:8B5A1D0B-4142-4EE1-B247-56DFD7C1CACA" id="obj_ie" width="0" height="0" align="left" ></object>
+<embed id="obj_firefox_chrome" type="application/mozilla-npruntime-scriptable-plugin" width=0 height=0 ><br>
+<!-- 读卡器设置 end-->
 会员卡信息：
 <c:if test="${errors!=null }">
 <c:forEach items="${errors}" var="error">
@@ -32,7 +37,7 @@
 		</c:forEach>
 	</span>
 	
-	<input type="radio" onclick="showInputdiv('true','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.id!=null}')"/>主卡 
+	<input type="radio" onclick="showInputdiv('true','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.level }','${card.id!=null}')"/>主卡 
 	<input type="radio" onclick="showInputdiv('false','${card.cardid }','${card.belongsCardid}','${card.username}','${card.phone}','${card.money}','${card.id!=null}')"/>副卡 
 	
 	
@@ -41,5 +46,11 @@
 </form>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/card/Card_reader_operation.js"></script> 
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/card/saveoreditofsetUpCard.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/card/saveoredit.js"></script>
+
 </html>

@@ -123,8 +123,6 @@ function CalculatingDiscount(){
 */
 function submitPage(){
 	
-	alert("123");
-	
 	var message="\n";
 	
 	message+="需要缴纳现金";

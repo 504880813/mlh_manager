@@ -46,6 +46,7 @@
 <tr>
 	<td>操作</td>
 	<td>
+		<input type="button" value="cancel" onclick="javascript:history.back(-1);" />
 	</td>
 </tr>
 </table>
