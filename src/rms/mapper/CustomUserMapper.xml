@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.CustomUserMapper" >
+  	<sql id="userTableName">c_user</sql>
+  	<sql id="user_role_link_TableName">c_user_role_link</sql>
+  	
+  	<insert id="insertUserofPrimaryKey" parameterType="CustomUser" >
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into <include refid="userTableName"></include>
+	 <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="superadmin != null" >
+        superadmin
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="superadmin != null" >
+        #{superadmin,jdbcType=BOOLEAN}
+      </if>
+    </trim>
+	</insert>
+	
+	
+	<insert id="insert_User_Role_Link_Message" parameterType="user_role_link" >
+		insert into <include refid="user_role_link_TableName"></include>
+	 <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        user_id,
+      </if>
+      <if test="roleid != null" >
+        role_id
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+        <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER}
+      </if>
+    </trim>
+	</insert>
+	
+	<select id="selectUser_Role_LinkByUserId" parameterType="Integer" resultType="user_role_link">
+		select user_id userid,role_id roleid from <include refid="user_role_link_TableName"></include> where user_id= #{id,jdbcType=INTEGER}
+	</select>
+	
+	
+	<delete id="deleteUser_Role_LinkByUserId" parameterType="Integer">
+		delete from <include refid="user_role_link_TableName"></include> where user_id= #{id,jdbcType=INTEGER}
+	</delete>
+	
+  	
+</mapper>

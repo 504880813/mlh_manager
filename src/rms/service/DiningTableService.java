@@ -58,23 +58,23 @@ public interface DiningTableService {
 	public void deleteDiningTableByID(Integer id) throws Exception;
 	/**
 	 * 
-	* @Title: fingAllDiningTable 
+	* @Title: findAllDiningTable 
 	* @Description: 查询所有餐桌信息
 	* @param @return
 	* @param @throws Exception    设定文件 
 	* @return List<CustomdiningTable>    返回类型 
 	* @throws
 	 */
-	public List<CustomdiningTable> fingAllDiningTable() throws Exception;
+	public List<CustomdiningTable> findAllDiningTable() throws Exception;
 	/**
 	 * 
-	* @Title: fingDiningTableDefultImage 
+	* @Title: findDiningTableDefultImage 
 	* @Description: 查询餐桌默认图片
 	* @param @throws Exception    设定文件 
 	* @return void    返回类型 
 	* @throws
 	 */
-	public CustomdiningTable fingDiningTableDefultImage() throws Exception;
+	public CustomdiningTable findDiningTableDefultImage() throws Exception;
 	/**
 	 * 
 	* @Title: findDiningTableById 

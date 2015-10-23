@@ -47,7 +47,7 @@ public class DiningTableHandler {
 	public ModelAndView getAllDiningTableofManager() throws Exception {
 
 		List<CustomdiningTable> diningTables = diningTableService
-				.fingAllDiningTable();
+				.findAllDiningTable();
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("diningTables", diningTables);
@@ -69,7 +69,7 @@ public class DiningTableHandler {
 	public ModelAndView getAllDiningTableoforder() throws Exception {
 
 		List<CustomdiningTable> diningTables = diningTableService
-				.fingAllDiningTable();
+				.findAllDiningTable();
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("diningTables", diningTables);
@@ -90,7 +90,7 @@ public class DiningTableHandler {
 	public String addDiningTable(Model model) throws Exception {
 
 		CustomdiningTable customdiningTable = diningTableService
-				.fingDiningTableDefultImage();
+				.findDiningTableDefultImage();
 		model.addAttribute("customdiningTableImage", customdiningTable);
 		// return "redirect:";
 		return "diningTable/saveOrEditdiningTable";
@@ -141,7 +141,7 @@ public class DiningTableHandler {
 		CustomdiningTable customdiningTable=diningTableService.findDiningTableById(id);
 		
 		CustomdiningTable customdiningTableImage = diningTableService
-				.fingDiningTableDefultImage();
+				.findDiningTableDefultImage();
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("customdiningTableImage", customdiningTableImage);

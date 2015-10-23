@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rms.mapper.rightMapper" >
+  <resultMap id="BaseResultMap" type="rms.po.right" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Url" property="url" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="Pos" property="pos" jdbcType="INTEGER" />
+    <result column="common" property="common" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, Name, Url, Description, code, Pos, common
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.rightExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_right
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_right
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_right
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="rms.po.rightExample" >
+    delete from c_right
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="rms.po.right" >
+    insert into c_right (id, Name, Url, 
+      Description, code, Pos, 
+      common)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{code,jdbcType=BIGINT}, #{pos,jdbcType=INTEGER}, 
+      #{common,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="rms.po.right" >
+    insert into c_right
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="url != null" >
+        Url,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="pos != null" >
+        Pos,
+      </if>
+      <if test="common != null" >
+        common,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=BIGINT},
+      </if>
+      <if test="pos != null" >
+        #{pos,jdbcType=INTEGER},
+      </if>
+      <if test="common != null" >
+        #{common,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="rms.po.rightExample" resultType="java.lang.Integer" >
+    select count(*) from c_right
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_right
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        Url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=BIGINT},
+      </if>
+      <if test="record.pos != null" >
+        Pos = #{record.pos,jdbcType=INTEGER},
+      </if>
+      <if test="record.common != null" >
+        common = #{record.common,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_right
+    set id = #{record.id,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Url = #{record.url,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=BIGINT},
+      Pos = #{record.pos,jdbcType=INTEGER},
+      common = #{record.common,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="rms.po.right" >
+    update c_right
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        Url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=BIGINT},
+      </if>
+      <if test="pos != null" >
+        Pos = #{pos,jdbcType=INTEGER},
+      </if>
+      <if test="common != null" >
+        common = #{common,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rms.po.right" >
+    update c_right
+    set Name = #{name,jdbcType=VARCHAR},
+      Url = #{url,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      code = #{code,jdbcType=BIGINT},
+      Pos = #{pos,jdbcType=INTEGER},
+      common = #{common,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

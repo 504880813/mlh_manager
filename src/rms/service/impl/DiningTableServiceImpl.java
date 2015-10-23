@@ -89,7 +89,7 @@ public class DiningTableServiceImpl implements DiningTableService {
 	* @see rms.service.impl.DiningTableService#fingAllDiningTable()
 	 */
 	@Override
-	public List<CustomdiningTable> fingAllDiningTable() throws Exception {
+	public List<CustomdiningTable> findAllDiningTable() throws Exception {
 		return CustomdiningTablemMapper.findAlldiningTable();
 	}
 	/*
@@ -101,7 +101,7 @@ public class DiningTableServiceImpl implements DiningTableService {
 	* @see rms.service.impl.DiningTableService#fingDiningTableDefultImage()
 	 */
 	@Override
-	public CustomdiningTable fingDiningTableDefultImage() throws Exception {
+	public CustomdiningTable findDiningTableDefultImage() throws Exception {
 		return CustomdiningTablemMapper.findDefultImage();
 	}
 	/*

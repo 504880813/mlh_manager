@@ -550,8 +550,10 @@ public class OrderServiceImpl implements OrderService {
 	if(card.getWechatOpenid()==null||card.getWechatOpenid().trim().equals("")) {
 	    throw new CustomException("没有关联微信号，故未发送消费消息");
 	}
+	
 	 //构建模板消息
 	 Map<String,TemplateData> data=new HashMap<String, TemplateData>();
+	 
 	 data.put("price", new TemplateData(String.valueOf(cardRecord.getExpense()), "#173177"));
 	 data.put("date", new TemplateData(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()), "#173177"));
 	 //构建模板实体

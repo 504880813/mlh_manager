@@ -367,7 +367,7 @@ public class OrderHandler {
 	    throws Exception {
 
 	List<CustomdiningTable> diningTables = diningTableService
-		.fingAllDiningTable();
+		.findAllDiningTable();
 	ModelAndView mav = new ModelAndView();
 	// 包括明细数据
 	mav.addObject("orderid", orderid);

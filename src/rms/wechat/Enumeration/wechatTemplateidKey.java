@@ -11,7 +11,11 @@ public enum wechatTemplateidKey {
     /**
      * 发送即时消费消息模板id
      */
-    Instant_Consumption_Message("_lUqhg3B8DAjlueOPUXWc3Er-H-nISm-YvABmeuKn5Y");
+    Instant_Consumption_Message("HiOP-ab8jgFci3mYTuZXXFnm0m8AtJCkEbxiTLtSCyE"),
+    /**
+     * 验证码信息模板id
+     */
+    Verification_Code_Message("--E4jmjuEBjIAJveGunDw_X6kn8gsZWAoJlzGxki_8M");
     /**
      * 方便获取数据
      */
