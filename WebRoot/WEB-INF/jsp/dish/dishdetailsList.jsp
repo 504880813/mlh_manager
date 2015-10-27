@@ -46,9 +46,10 @@
 <tr>
 	<td>操作</td>
 	<td>
-		<input type="button" value="cancel" onclick="javascript:history.back(-1);" />
+		<input type="button" value="cancel" onclick="backOrColse()" />
 	</td>
 </tr>
 </table>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/dish/dishdetailsList.js"></script>
 </html>

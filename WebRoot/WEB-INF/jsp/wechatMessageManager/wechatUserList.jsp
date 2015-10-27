@@ -7,7 +7,7 @@
 <title>微信公众号列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/wechatuser/addwechatuser.action">添加公众号</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/wechatuser/addwechatuser.action">添加公众号</random:Right_A><br />
 公众号列表：
 <table width="100%" border=1>
 <tr>
@@ -20,8 +20,8 @@
 	<td>${wechatUser.appid}</td>
 	<td>${wechatUser.appsecret}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/wechatuser/editWechatuser.action?id=${wechatUser.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/wechatuser/deleteWechatuser.action?id=${wechatUser.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/wechatuser/editWechatuser.action?id=${wechatUser.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/wechatuser/deleteWechatuser.action?id=${wechatUser.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

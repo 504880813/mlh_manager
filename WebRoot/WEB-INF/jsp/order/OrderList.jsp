@@ -33,11 +33,11 @@
 	</td>
 	<td>${order.price}</td>
 	<td>
-		<a href="${pageContext.request.contextPath }/order/Checkoutofdiningtableid.action?diningtableid=${order.rDiningtableId}">普通结账</a>
-		<a href="${pageContext.request.contextPath }/order/CheckoutofMember.action?diningtableid=${order.rDiningtableId}">会员结账</a>
-		<a href="${pageContext.request.contextPath }/order/editOrderofdiningtableid.action?diningtableid=${order.rDiningtableId}">修改菜单</a>
-		<a href="${pageContext.request.contextPath }/order/changeOrderdiningtableofdiningtableid.action?orderid=${order.id}">修改餐桌订单</a>
-		<a href="${pageContext.request.contextPath }/order/edit"></a>
+		<random:Right_A uri="${pageContext.request.contextPath }/order/Checkoutofdiningtableid.action?diningtableid=${order.rDiningtableId}">普通结账</random:Right_A>
+		<random:Right_A uri="${pageContext.request.contextPath }/order/CheckoutofMember.action?diningtableid=${order.rDiningtableId}">会员结账</random:Right_A>
+		<random:Right_A uri="${pageContext.request.contextPath }/order/editOrderofdiningtableid.action?diningtableid=${order.rDiningtableId}">修改菜单</random:Right_A>
+		<random:Right_A uri="${pageContext.request.contextPath }/order/changeOrderdiningtableofdiningtableid.action?orderid=${order.id}">修改餐桌订单</random:Right_A>
+		<%-- <random:Right_A uri="${pageContext.request.contextPath }/order/edit"></random:Right_A> --%>
 	</td>
 </tr>
 </c:forEach>

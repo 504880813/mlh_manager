@@ -1,11 +1,17 @@
 package rms.wechat.Processor;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
+import rms.po.card;
+import rms.po.cardRecord;
+import rms.service.cardService;
 import rms.wechat.entity.Access_Token_Request;
 import rms.wechat.entity.WechatCheck;
 import rms.wechat.entity.jsapi_ticket;
@@ -30,6 +36,8 @@ public class Wechat_js_Processor {
     private Wechat_js_service Wechat_js_service;
     @Resource
     private wechatuserService wechatuserService;
+    @Resource
+    private cardService cardService;
     /**
      * 
     * @Title: ToValidationMemberPage 
@@ -59,6 +67,49 @@ public class Wechat_js_Processor {
 	    }
 	   }
     }
+    
+    /**
+     * 
+    * @Title: ToshowAdvertisingAndMoney 
+    * @Description: 处理广告和余额显示页面跳转 
+    * @param @param request
+    * @param @param response    
+    * @return void    
+    * @throws
+     */
+    public void ToshowAdvertisingAndMoney(HttpServletRequest request,
+	    HttpServletResponse response) {
+	try {
+	    //用于获取网页access_token 的密钥
+	    String code=request.getParameter("code");
+	    WechatCheck chenck=Wechat_js_service.getWechatCheckData(code,request.getRequestURL().toString()+"?"+request.getQueryString() );
+	    String openid = wechatuserService.getWechatOpenid(code);
+	    
+	    String id=request.getParameter("id");
+	    
+	    List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(id);
+            card card=cardService.findcardByid(Integer.parseInt(id));
+            cardRecords=cardRecords.subList(cardRecords.size()-10, cardRecords.size());
+            
+            request.setAttribute("card",card);
+            request.setAttribute("cardRecords", cardRecords);
+	    request.setAttribute("chenck", chenck);
+	    request.setAttribute("openid", openid);
+	    
+	    request.getRequestDispatcher("/WEB-INF/jsp/cardManager/showAdvertisingAndMoney.jsp").forward(request, response);
+	    } catch (Exception e) {
+		e.printStackTrace();
+	     try {
+		request.setAttribute("message", "未知错误，无法访问绑定页面");
+		request.getRequestDispatcher("/WEB-INF/jsp/wechat/message.jsp").forward(request, response);
+	     } catch(Exception e1) {
+		e.printStackTrace();
+	    }
+	   }
+	
+    }
+    
+    
     /**
      * 
     * @Title: BindingMember 
@@ -99,6 +150,7 @@ public class Wechat_js_Processor {
 	}
 	
     }
+
 
 /*    //单例
     private static Wechat_js_Processor pricessor;

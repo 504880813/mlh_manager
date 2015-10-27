@@ -58,12 +58,13 @@
 				<td class="dishName">${dish.name }</td>
 				<td>${dish.price }</td>
 				<td colspan="2">
-				<input type="button" value="add" onclick="adddishToorderOfsetMeal('${dish.id }','${dish.name}','${dish.price }',this,'${pageContext.request.contextPath}')">
-				<form action="${pageContext.request.contextPath}/dish/findDishdetails.action" method="post">
+				<input type="button" value="add" onclick="adddishToorderOfsetMeal('${dish.id }','${dish.name}','${dish.price }',this,'${pageContext.request.contextPath}','${dish.rcategoryid }')">
+				<input type="button" value="查看详情" onclick="OpenDishDetails('${pageContext.request.contextPath}/dish/findDishdetails.action',${dish.id })">
+<%-- 				<form action="${pageContext.request.contextPath}/dish/findDishdetails.action" method="post">
 					<input type="hidden" name="id" value="${dish.id }" />
 					<input type="submit" value="查看详情">
 				</form>
-				</td>
+ --%>				</td>
 			</tr>
 			</c:forEach>
 		</table>

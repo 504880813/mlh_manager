@@ -7,7 +7,7 @@
 <title>本地微信接口列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/wechatInterface/addwechatInterface.action">添加本地微信接口</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/wechatInterface/addwechatInterface.action">添加本地微信接口</random:Right_A><br />
 本地微信接口列表：
 <table width="100%" border=1>
 <tr>
@@ -22,8 +22,8 @@
 	<td>${wechatInterface.url}</td>
 	<td>${wechatInterface.description}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/wechatInterface/editWechatInterface.action?id=${wechatInterface.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/wechatInterface/deleteWechatInterface.action?id=${wechatInterface.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/wechatInterface/editWechatInterface.action?id=${wechatInterface.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/wechatInterface/deleteWechatInterface.action?id=${wechatInterface.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

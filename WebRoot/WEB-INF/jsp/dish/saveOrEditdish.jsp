@@ -52,7 +52,7 @@
 	<div name="Dishes" id="Dishes" style="display:none">
 		<c:forEach items="${Dishes}" var="Dish">
 				<input type="checkbox" name="auxiliaryDish" id="auxiliaryDish" class="auxiliaryDish" value="${Dish.id }" >${Dish.name }
-				<input type="text" name="subDishQuantity" id="subDishQuantity" >份 <br/>
+				<input type="text" name="subDishQuantity" id="subDishQuantity" class="subDishQuantity" >份 <br/>
 		</c:forEach>
 	</div>
 	<input type="submit" value="submit"/>

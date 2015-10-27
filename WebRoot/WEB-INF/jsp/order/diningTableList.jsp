@@ -30,10 +30,10 @@
 	<td>
 	<c:if test="${diningTable.isfree}">
 	<c:if test="${orderid==null }">
-	<a href="${pageContext.request.contextPath }/order/startOrder.action?diningTableId=${diningTable.id}&&diningTableSeatnumber=${diningTable.seatnumber}">开台</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/order/startOrder.action?diningTableId=${diningTable.id}&&diningTableSeatnumber=${diningTable.seatnumber}">开台</random:Right_A>
 	</c:if>
 	<c:if test="${orderid!=null }">
-	<a href="${pageContext.request.contextPath }/order/changeOrderdiningtableofdiningtableidSubmit.action?orderid=${orderid}&&newdiningtableid=${diningTable.id}">改变餐桌</a>	
+	<random:Right_A uri="${pageContext.request.contextPath }/order/changeOrderdiningtableofdiningtableidSubmit.action?orderid=${orderid}&&newdiningtableid=${diningTable.id}">改变餐桌</random:Right_A>	
 	</c:if>
 	</c:if>
 	</td>

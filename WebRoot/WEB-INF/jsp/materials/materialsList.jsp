@@ -7,7 +7,7 @@
 <title>原料列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/materials/addmaterials.action">添加原料</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/materials/addmaterials.action">添加原料</random:Right_A><br />
 原料列表：
 <table width="100%" border=1>
 <tr>
@@ -22,8 +22,8 @@
 	<td>${material.name}</td>
 	<td>${material.surplus}${material.unit }</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/materials/editmaterials.action?id=${material.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/materials/deletematerials.action?id=${material.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/materials/editmaterials.action?id=${material.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/materials/deletematerials.action?id=${material.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

@@ -10,3 +10,5 @@
 欢迎 ${ sessionScope.OnlineUser.username }
 <a href="${pageContext.request.contextPath }/user/logout.action">注销</a>
 </c:if>
+<random:Right_A uri="${pageContext.request.contextPath }/index.jsp">主页</random:Right_A><br />
+<hr />

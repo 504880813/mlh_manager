@@ -7,7 +7,7 @@
 <title>分类列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/category/addCategory.action">添加分类</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/category/addCategory.action">添加分类</random:Right_A><br />
 分类列表：
 <table width="100%" border=1>
 <tr>
@@ -20,8 +20,8 @@
 	<td>${category.id}</td>
 	<td>${category.name}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/category/editCategory.action?id=${category.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/category/deleteCategory.action?id=${category.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/category/editCategory.action?id=${category.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/category/deleteCategory.action?id=${category.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

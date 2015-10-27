@@ -7,7 +7,7 @@
 <title>角色列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/role/addrole.action">添加角色</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/role/addrole.action">添加角色</random:Right_A><br />
 <c:if test="${roles==null || roles.size()<=0 }">目前您没有任何角色!</c:if >
 <c:if test="${roles!=null && roles.size()>0}">
 角色列表：
@@ -26,8 +26,8 @@
 	<td>${role.value}</td>
 	<td>${role.description}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/role/editrole.action?id=${role.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/role/deleterole.action?id=${role.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/role/editrole.action?id=${role.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/role/deleterole.action?id=${role.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

@@ -7,7 +7,7 @@
 <title>菜品图片列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/dish/addDishImage.action?id=${dish.id}">添加图片</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/dish/addDishImage.action?id=${dish.id}">添加图片</random:Right_A><br />
 菜品图片列表：
 <table width="100%" border=1>
 <tr>
@@ -18,7 +18,7 @@
 <tr>	
 	<td><img src="${dishImage.imagepath}"></td>
 	<td>
-	<a href="${pageContext.request.contextPath }/dish/deleteDishImage.action?dishid=${dish.id }&&imageid=${dishImage.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/dish/deleteDishImage.action?dishid=${dish.id }&&imageid=${dishImage.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

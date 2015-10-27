@@ -1,6 +1,7 @@
 package rms.wechat.untils;
 
 import java.security.MessageDigest;
+import java.util.Random;
 
 /**
  * 
@@ -32,4 +33,35 @@ public class DataUtils {
 		}
 		return null ;
 	}
+	
+	/**
+	 * 
+	* @Title: GenerationValidationCode 
+	* @Description: 随机生成验证码并返回
+	* @param @return    
+	* @return String    
+	* @throws
+	 */
+	public static String GenerationValidationCode(int length,int range) {
+	    StringBuilder sb=new StringBuilder();
+	    for(int i=0;i<length;i++) {
+		Random r=new Random();
+		sb.append(r.nextInt(range));
+	    }
+	    if(sb.length()==4) {
+		return sb.toString();
+	    }else {
+		return GenerationValidationCode(length,range);
+	    }
+	}
+	
+	
+	/*public static void main(String[] args) {
+	    int k=0;
+	    for(int i=0;i<100;i++) {
+		String temp=GenerationValidationCode(4,10);
+		System.out.println(temp);
+	    }
+//	    System.out.println(k);
+	}*/
 }

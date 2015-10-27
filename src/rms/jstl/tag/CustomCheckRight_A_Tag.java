@@ -76,7 +76,12 @@ public class CustomCheckRight_A_Tag extends SimpleTagSupport {
       * @throws ServletException 
       */
      public static boolean hasRight(String url ,HttpServletRequest request) throws ServletException, IOException {
- 	HttpSession s = request.getSession();
+ 	
+	// 处理?参数
+	if (url.contains("?")) {
+	    url = url.substring(0, url.indexOf("?"));
+	}
+	HttpSession s = request.getSession();
  	ServletContext sc = s.getServletContext();
  	Map<String, right> map = (Map<String, right>) sc
  		.getAttribute("all_rights_map");

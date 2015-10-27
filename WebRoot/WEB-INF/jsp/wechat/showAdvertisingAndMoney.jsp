@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,46 +14,29 @@
 	    background:#e9fbff;
 	    background-image: url("${pageContext.request.contextPath }/images/background.jpg");
 	}
-	#container{
-	 /*    position:relative;
-	    margin:0 auto;
-	    padding:0px;
-	    width:700px;
-	    text-align:center; */
-	    width:0;
-	    height:0;
-	    position:fixed;
-	    left:50%;
-	    rigth:50%;
-	    top:50%;
-	    bottom:50%;
-	}
-	#bindform{
-		width:600px;
-		height:220px;
-		margin-left:-300px;
-		margin-top:-110px;
-	}
-	#cardidText{
-		background: white;
-	}
 </style>
-<title>绑定清一色会员</title>
+<title>余额以及消费记录</title>
 </head>
 <body>
-	<div id="container">
-	<form id="bindform">
-	<input type="hidden" id="openid" name="openid" value="${openid }"><br />
-	<span id="cardidText">会员号</span>
-	<input type="text" id="cardid" name="cardid"/>
-	<br />
-	<input type="button" id="submit_validation" value="绑定" />
-	<input type="button" id="close" value="退出" />
-	</form>
-	</div>
+	<div id="first"></div>
+	<div id="sec"></div>
+	当前余额:${card.money }<br/>
+	最近10次消费记录:<br>
+	<table width="100%" border=1>
+	<tr>
+		<td>卡号</td>
+		<td>消费金额</td>
+		<td>消费时间</td>
+	</tr>
+	<c:forEach items="${cardRecords}" var="cardRecord">
+	<tr>	
+		<td>${cardRecord.cardId}</td>
+		<td>${cardRecord.expense}</td>
+		<td><fmt:formatDate value="${cardRecord.time}" type="both"/></td>
+	</tr>
+	</c:forEach>
+	</table>	
 </body>
-
-
 
 <script type="text/javascript">
 	var basepath="${pageContext.request.contextPath }";
@@ -64,5 +49,5 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/AccessTemlate.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/ValidationMemberPage.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/showAdvertisingAndMoney.js"></script>
 </html>

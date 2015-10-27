@@ -66,6 +66,9 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+=" />";
 	html+="开通金额<input type='text' name='money' ";
 	html+=money==''?'':"value= "+money;
+	if(isedit=="true"){
+		html+="  readonly=readonly";
+	}
 	html+=" />";
 	
 	//获取卡片分类并添加入主卡选项

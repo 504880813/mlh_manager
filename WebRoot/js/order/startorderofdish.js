@@ -5,18 +5,21 @@
 
 var orderdishsId= new Array();
 
+//当前类型id 如果是查询所有，则为-1
+var currentFindTypeId=-1;
+
 /**
  * 
- * @param id
+ * @param id 过时
  * @param name
  * @param price
  * @param self
 
  */
-function adddishToorderOfsetMeal(id,name,price,self,Rootpath){
+function adddishToorderOfsetMeal(id,name,price,self,Rootpath,TypeId){
 //		finddishBysetMealId(Rootpath,id);
 //		if(!ArrayContain(orderdishsId,id)){
-		adddishToorder(id,name,price,self);
+		adddishToorder(id,name,price,self,Rootpath,TypeId);
 		changePriceBydishId(id,1);
 }
 
@@ -27,7 +30,7 @@ function adddishToorderOfsetMeal(id,name,price,self,Rootpath){
  * @param name
  * @param price
  */
-function adddishToorder(id,name,price,self){
+function adddishToorder(id,name,price,self,Rootpath,TypeId){
 	
 	orderdishsId.push(id);
 	var jqs=$(self);
@@ -82,6 +85,8 @@ function adddishToorder(id,name,price,self){
 	html+=",'" +id;
 	html+="','" +name;
 	html+="','" +price;
+	html+="','" +Rootpath;
+	html+="','" +TypeId;
 	html+="')>";
 	html+="</td>";
 	html+="</tr>";
@@ -95,11 +100,13 @@ function adddishToorder(id,name,price,self){
 /**
  * 删除指定元素,将删除的元素添加到菜单列表
  */
-function deletethisself(self,id,name,price){
+function deletethisself(self,id,name,price,RootPath,TypeId){
 	//alert(self);
 	var jqs=$(self);
 	jqs.parent().parent().remove();
-	adddishsofhtml(id,name,price);
+	if(TypeId==currentFindTypeId || currentFindTypeId==-1){
+		adddishsofhtml(id,name,price,RootPath,TypeId);
+	}
 	for(var i=0;i<orderdishsId.length;i++){
 		if(orderdishsId[i]==id){
 			Arrayremove(orderdishsId,i);
@@ -124,7 +131,8 @@ function finddishBycategory(Rootpath,id){
 		data: 'categoryId='+id, 
 		success: function(json){//如果调用成功 
 //			alert("succes");
-			adddishsfromAJaxBycategory(json);
+			currentFindTypeId=id;
+			adddishsfromAJaxBycategory(json,Rootpath,id);
 		},
 		error : function(data) {  
 			$("#categorydishs table:first").append("请求失败");
@@ -141,7 +149,8 @@ function finddishs(Rootpath){
 		url : Rootpath+"/dish/findAllDishRetrunJson.action", 
 		dataType:'json', 
 		success: function(json){//如果调用成功 
-			adddishsfromAJaxBycategory(json);
+			currentFindTypeId=-1;
+			adddishsfromAJaxBycategory(json,Rootpath,-1);
 		},
 		error : function(data) {  
 			$("#categorydishs table:first").append("请求失败");
@@ -149,44 +158,48 @@ function finddishs(Rootpath){
 	}); 
 }
 /**
- * 根据套餐id查询套餐下的单菜，并返回json数组
+ * 根据套餐id查询套餐下的单菜，并返回json数组 （过时）
  * @param Rootpath
  * @param id
  */
-function finddishBysetMealId(Rootpath,id){
+/*function finddishBysetMealId(Rootpath,id){
 	$.ajax({ //一个Ajax过程 
 		type: "post", //以post方式与后台沟通 
 		url : Rootpath+"/dish/finddishBysetMealIdRetrunJson.action", 
 		dataType:'json', 
 		data: 'setMealId='+id, 
 		success: function(json){//如果调用成功 
-//			alert("succes");
-//			alert(json.sub_customdish[1].sub_customdish_quantity);
-			 adddishsfromAJaxBysetMeal(json);
+			 adddishsfromAJaxBysetMeal(json,Rootpath);
 		},
 		error : function(data) {  
-			$("#categorydishs table:first").append("请求失败");
+			$("#categorydishs table:first").html("请求失败");
 		}  
 	}); 
-}
+}*/
 /**
  * 将查询到的菜品信息，放入菜品模块页面中
  * 
  */
-function adddishsfromAJaxBycategory(json){
+function adddishsfromAJaxBycategory(json,Rootpath,TypeId){
 	$.each(json, function(key, val) { 
 		var id=val.id;
 	   	var name=val.name;
 	    var price=val.price;
 	    if(!ArrayContain(orderdishsId,id)){
-	    	adddishsofhtml(id,name,price);
+	    	if(TypeId==-1){
+	    		var categoryid=val.rcategoryid;
+	    		adddishsofhtml(id,name,price,Rootpath,categoryid);
+	    	}else{
+	    		adddishsofhtml(id,name,price,Rootpath,TypeId);
+	    	}
+	    	
 	    }
 	});
 }
 /**
- * 根据分类添加菜品
+ * 根据分类添加菜品 (过时)
  */
-function adddishsfromAJaxBysetMeal(json){
+/*function adddishsfromAJaxBysetMeal(json,Rootpath){
 	$.each(json.sub_customdish,function(key, val){
 		var id=json.sub_customdish[key].id;
 		var name=json.sub_customdish[key].name;
@@ -194,11 +207,11 @@ function adddishsfromAJaxBysetMeal(json){
 		var quantity=json.sub_customdish[key].sub_customdish_quantity;
 		
 		if(!ArrayContain(orderdishsId,id)){
-			adddishsofhtml(id,name,price,"true");
+			adddishsofhtml(id,name,price,Rootpath);
 		}
 		  changePriceBydishId(id,quantity);
 	});
-}
+}*/
 /**
  * 相应菜品数量变化时事件
  * @param source
@@ -239,7 +252,7 @@ function changePriceBydishId(id,quantity){
 /**
  * 向菜品模块的添加html
  */
-function adddishsofhtml(id,name,price){
+function adddishsofhtml(id,name,price,RootPath,TypeId){
 	var html="<tr>";
 	html+="<td>";
 	html+=id;
@@ -251,16 +264,30 @@ function adddishsofhtml(id,name,price){
 	html+=price;
 	html+="</td>";
 //	<td>操作</td>
-	html+="<td>";
+	html+="<td colspan='2'>";
 	html+="<input type='button' value='add' onclick=";
 	html+="adddishToorder";
 	html+="('" +id;
 	html+="','" +name;
 	html+="','" +price;
-	html+="',this"; 
-	html+=")>";
+	html+="',this,'"; 
+	html+=RootPath;
+	html+="','";
+	html+=TypeId;
+	html+="')>";
+	
+	var url=RootPath+"/dish/findDishdetails.action";
+	
+	html+="<input type='button' value='查看详情' onclick=";
+	html+="OpenDishDetails";
+	html+="('"+url;
+	html+="','"+id;
+	html+="') >";
+	
+	
 	html+="</td>";
 	html+="</tr>";
+	
 	$("#categorydishs table:first").append(html);
 }
 
@@ -302,6 +329,33 @@ function ArrayContain(array,context){
 		}
 	}
 	return false;
+}
+
+function OpenDishDetails(url,id){
+	var keys=new Array();
+	var values=new Array();
+	keys[0]="id";
+	values[0]=id;
+	
+	openWindowWithPost(url, "testOpen", keys, values);
+
+}
+function openWindowWithPost(url, name, keys, values) {
+    var newWindow = window.open(url, name);
+    if (!newWindow){
+        return false;
+    }
+    
+    var html = "";
+    html += "<html><head></head><body><form id='formid' method='post' action='"    + url + "'>";
+    if (keys && values && (keys.length == values.length)){
+        for ( var i = 0; i < keys.length; i++){
+            html += "<input type='hidden' name='" + keys[i] + "' value='" + values[i] + "'/>";
+        }
+    }
+    html += "</form><script type='text/javascript'>document.getElementById(\"formid\").submit()</script></body></html>";
+    newWindow.document.write(html);
+    return newWindow;
 }
 
 

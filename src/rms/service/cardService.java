@@ -3,6 +3,7 @@ package rms.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import rms.po.CustomUser;
 import rms.po.card;
 import rms.po.cardLevel;
 import rms.po.cardRecord;
@@ -222,4 +223,30 @@ public interface cardService {
 	* @throws
 	 */
 	public cardLevel findcardLevelBycardLevel(String level) throws Exception;
+	/**
+	 * 
+	* @Title: ReapplyCard 
+	* @Description: 准备更换卡号数据
+	* @param @param id
+	* @param @param user
+	* @param @throws Exception    
+	* @return String    
+	* @throws
+	 */
+	public String ReapplyCard(String id, CustomUser user) throws Exception;
+	/**
+	 * 
+	* @Title: ReapplyCard 
+	* @Description: 更换卡号
+	* @param @param oldid
+	* @param @param newid
+	* @param @param user
+	* @param @param SessionvalidationCode
+	* @param @param PagevalidationCode
+	* @param @throws Exception    
+	* @return void    
+	* @throws
+	 */
+	public void ReapplyCard(String oldid, String newid, CustomUser user,
+		String SessionvalidationCode,String PagevalidationCode) throws Exception;
 }

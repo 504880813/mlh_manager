@@ -1,5 +1,11 @@
 package rms.wechat.service;
 
+import java.util.List;
+
+import org.springframework.web.servlet.ModelAndView;
+
+import rms.po.card;
+import rms.po.cardRecord;
 import rms.wechat.entity.WechatCheck;
 
 /**
@@ -34,7 +40,5 @@ public interface Wechat_js_service {
     * @throws
      */
     public WechatCheck getWechatCheckData(String code,String url) throws Exception;
-  
-    
     
 }

@@ -43,5 +43,8 @@ public class Wechat_js_RequestAdapter {
         if("ValidationMember".equals(method)) {
             processor.BindingMember(request,response);
         }
+        if("showAdvertisingAndMoney".equals(method)) {
+            processor.ToshowAdvertisingAndMoney(request,response);
+        }
     }
 }

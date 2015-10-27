@@ -7,7 +7,7 @@
 <title>消息模板列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/wechatTemplate/addwechatTemplate.action">添加消息模板</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/wechatTemplate/addwechatTemplate.action">添加消息模板</random:Right_A><br />
 消息模板列表：
 <table width="100%" border=1>
 <tr>
@@ -24,8 +24,8 @@
 	<td>${wechatTemplate.url}</td>
 	<td>${wechatTemplate.topcolor}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/wechatTemplate/editWechatTemplate.action?id=${wechatTemplate.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/wechatTemplate/deleteWechatTemplate.action?id=${wechatTemplate.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/wechatTemplate/editWechatTemplate.action?id=${wechatTemplate.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/wechatTemplate/deleteWechatTemplate.action?id=${wechatTemplate.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

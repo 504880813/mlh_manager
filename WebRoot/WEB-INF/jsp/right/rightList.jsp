@@ -7,7 +7,7 @@
 <title>权限列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/right/addright.action">添加权限</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/right/addright.action">添加权限</random:Right_A><br />
 <c:if test="${rights==null || rights.size()<=0 }">目前您没有任何权限!</c:if >
 <c:if test="${rights!=null && rights.size()>0}">
 权限列表：
@@ -32,8 +32,8 @@
 	<td>${right.pos}</td>
 	<td>${right.common==true?'是':'否'}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/right/editright.action?id=${right.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/right/deleteright.action?id=${right.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/right/editright.action?id=${right.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/right/deleteright.action?id=${right.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

@@ -51,6 +51,17 @@ public interface UserService {
     public CustomUser findUserById(Integer id) throws Exception;
     /**
      * 
+    * @Title: findUserNmaeIsExist 
+    * @Description: 查询用户名是否存在
+    * @param @param username
+    * @param @return
+    * @param @throws Exception    
+    * @return boolean    
+    * @throws
+     */
+    public boolean findUserNmaeIsExist(String username) throws Exception;
+    /**
+     * 
     * @Title: deleteUserByID 
     * @Description: 根据用户id删除用户 以及关联关系
     * @param @param id

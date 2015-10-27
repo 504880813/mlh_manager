@@ -5,11 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
 import rms.mapper.cardMapper;
 import rms.mapper.wechatuserMapper;
 import rms.po.card;
 import rms.po.cardExample;
+import rms.po.cardRecord;
 import rms.po.wechatuser;
 import rms.po.wechatuserExample;
 import rms.service.cardService;
@@ -97,5 +99,6 @@ public class Wechat_js_serviceImpl implements Wechat_js_service{
 	    chenck.setAppid(user.getAppid());
 	    return chenck;
     }
+
    
 }

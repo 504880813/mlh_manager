@@ -7,8 +7,8 @@
 <title>餐桌列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/diningTable/addDiningTable.action">添加餐桌</a><br />
-<a href="${pageContext.request.contextPath }/diningTable/changeImage.action">改变桌面背景</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/diningTable/addDiningTable.action">添加餐桌</random:Right_A><br />
+<random:Right_A uri="${pageContext.request.contextPath }/diningTable/changeImage.action">改变桌面背景</random:Right_A><br />
 餐桌列表：
 <table width="100%" border=1>
 <tr>
@@ -30,11 +30,11 @@
 	<td>${diningTable.seatnumber}</td>
 	<td>${diningTable.isfree}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/diningTable/editDiningTable.action?id=${diningTable.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/diningTable/deleteDiningTable.action?id=${diningTable.id}">删除</a>
-	<%-- <a href="${pageContext.request.contextPath }/diningTable/changeDiningTableState.action?id=${diningTable.id}&&currtstate=${diningTable.isfree}">改变状态</a> --%>
+	<random:Right_A uri="${pageContext.request.contextPath }/diningTable/editDiningTable.action?id=${diningTable.id}">修改</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/diningTable/deleteDiningTable.action?id=${diningTable.id}">删除</random:Right_A>
+	<%-- <random:Right_A uri="${pageContext.request.contextPath }/diningTable/changeDiningTableState.action?id=${diningTable.id}&&currtstate=${diningTable.isfree}">改变状态</random:Right_A> --%>
 	<%-- <c:if test="${diningTable.isfree }">
-	<a href="${pageContext.request.contextPath }/order/startOrder.action?diningTableId=${diningTable.id}&&diningTableSeatnumber=${diningTable.seatnumber}">开台</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/order/startOrder.action?diningTableId=${diningTable.id}&&diningTableSeatnumber=${diningTable.seatnumber}">开台</random:Right_A>
 	</c:if> --%>
 	</td>
 </tr>

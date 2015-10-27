@@ -210,15 +210,12 @@ public class DiningTableHandler {
 	 * 
 	* @Title: changeImage 
 	* @Description: 
-	* @param @param freeimageFile
-	* @param @param busyimageFile
-	* @param @return
 	* @param @throws Exception    设定文件 
 	* @return String    返回类型 
 	* @throws
 	 */
 	@RequestMapping("changeImage")
-	public String changeImage(MultipartFile freeimageFile, MultipartFile busyimageFile)  throws Exception{
+	public String changeImage()  throws Exception{
 		return "diningTable/changeImage";
 	}
 	

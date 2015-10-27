@@ -14,7 +14,7 @@
 	}
 </script>
 <body>
-<a href="${pageContext.request.contextPath }/dish/addDish.action">添加菜品</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/dish/addDish.action">添加菜品</random:Right_A><br />
 分类查询菜品:
 <form action="${pageContext.request.contextPath }/dish/findDishsByType.action" method="post" id="typeForm">
 <select name="categoryId" onchange="selectDishByType()" id="type" >
@@ -38,10 +38,10 @@
 	<td>${dish.name}</td>
 	<td>${dish.price}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/dish/findDishdetails.action?id=${dish.id}">查看详情</a>
-	<a href="${pageContext.request.contextPath }/dish/getAllImageOfdish.action?id=${dish.id}">图片集</a>
-	<a href="${pageContext.request.contextPath }/dish/editDish.action?id=${dish.id}">修改基础信息</a>
-	<a href="${pageContext.request.contextPath }/dish/deleteDish.action?id=${dish.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/dish/findDishdetails.action?id=${dish.id}">查看详情</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/dish/getAllImageOfdish.action?id=${dish.id}">图片集</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/dish/editDish.action?id=${dish.id}">修改基础信息</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/dish/deleteDish.action?id=${dish.id}">删除</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

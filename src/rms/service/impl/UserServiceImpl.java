@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import rms.controller.exception.CustomException;
 import rms.mapper.CustomUserMapper;
 import rms.mapper.rightMapper;
 import rms.mapper.roleMapper;
@@ -71,6 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveOrUpdateUser(CustomUser User,Integer[] ownRoleIds) throws Exception {
 	
+	//查询是否有效
+	if(findUserNmaeIsExist(User.getUsername())) {
+	    throw new CustomException("该用户名已存在");
+	}
+	
 	//将密码进行md5加密
 	String TempPassword=DataUtils.md5(User.getPassword());
 	User.setPassword(TempPassword);
@@ -87,8 +93,6 @@ public class UserServiceImpl implements UserService {
 	    
 	    //先根据用户id 删除关联
 	    customUserMapper.deleteUser_Role_LinkByUserId(User.getId());
-	    
-	    
 	}
 	
 	 //保存关联信息
@@ -138,6 +142,33 @@ public class UserServiceImpl implements UserService {
 	
 	return cUser;
     }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: findUserNmaeIsExist</p> 
+    * <p>Description:查询用户名是否存在</p> 
+    * @param username
+    * @return
+    * @throws Exception 
+    * @see rms.service.UserService#findUserNmaeIsExist(java.lang.String)
+     */
+    @Override
+    public boolean findUserNmaeIsExist(String username) throws Exception {
+	if(username==null||username.trim().equals("")) return true;
+	
+	userExample example=new userExample();
+	example.createCriteria().andUsernameEqualTo(username.trim());
+	
+	List<user> users=UserMapper.selectByExample(example);
+	
+	if(users!=null&&users.size()>0) {
+	    return true;
+	}
+	
+	return false;
+    }
+    
+    
+    
     /*
      * (非 Javadoc) 
     * <p>Title: deleteUserByID</p> 

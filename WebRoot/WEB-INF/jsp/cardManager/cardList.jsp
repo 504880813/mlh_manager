@@ -7,9 +7,9 @@
 <title>会员卡列表</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/card/addcard.action">添加会员卡</a><br />
-<a href="${pageContext.request.contextPath }/card/getAllcardLevel.action">会员卡等级信息</a><br />
-<a href="${pageContext.request.contextPath }/card/getMemberCardId.action">会员卡缴费</a><br />
+<random:Right_A uri="${pageContext.request.contextPath }/card/addcard.action">添加会员卡</random:Right_A><br />
+<random:Right_A uri="${pageContext.request.contextPath }/card/getAllcardLevel.action">会员卡等级信息</random:Right_A><br />
+<random:Right_A uri="${pageContext.request.contextPath }/card/getMemberCardId.action">会员卡缴费</random:Right_A><br />
 
 <form action="${pageContext.request.contextPath }/card/selectAllRecordsBycardid.action" method="post">
 <input type="text" name="cardid" /><br/>
@@ -43,13 +43,14 @@
 	<td>${card.allIntegral}</td>
 	<td>${card.monthIntegral}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/card/editcard.action?id=${card.id}">修改</a>
-	<a href="${pageContext.request.contextPath }/card/deletecard.action?id=${card.id}">删除</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/editcard.action?id=${card.id}">修改基础信息</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/deletecard.action?id=${card.id}">删除</random:Right_A>
 	<c:if test="${card.wechatOpenid!=null&&card.wechatOpenid!=''}">
-	<a href="${pageContext.request.contextPath }/card/getAllTemplateTosend.action?useropenid=${card.wechatOpenid}">发送模板消息</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/getAllTemplateTosend.action?useropenid=${card.wechatOpenid}">发送模板消息</random:Right_A>
 	</c:if>
-	<a href="${pageContext.request.contextPath }/card/changecardstatus.action?id=${card.id}&isavailable=${card.isavailable}">冻结/激活</a>
-	<a href="${pageContext.request.contextPath }/card/Rechargecard.action?id=${card.id}">充值</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/changecardstatus.action?id=${card.id}&isavailable=${card.isavailable}">冻结/激活</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/Rechargecard.action?id=${card.id}">充值</random:Right_A>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/ReapplyCard.action?id=${card.id }">补办会员卡</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

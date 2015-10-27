@@ -5,12 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import rms.controller.exception.CustomException;
+import rms.po.CustomUser;
 import rms.po.card;
 import rms.po.cardLevel;
 import rms.po.cardRecord;
@@ -326,6 +329,49 @@ public class cardHandler {
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("message","计费成功");
 	mav.setViewName("message");
+	return mav;
+    }
+    /**
+     * 
+    * @Title: ReapplyCard 
+    * @Description: 更换卡号页面
+    * @param @param id
+    * @param @param request
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("ReapplyCard")
+    public ModelAndView ReapplyCard(String id,HttpServletRequest request) throws Exception{
+	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
+	String ValidationCode=cardService.ReapplyCard(id, user);
+	request.getSession().setAttribute("ValidationCode", ValidationCode);
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("oldid", id);
+	mav.setViewName("cardManager/ReapplyCard");
+	return mav;
+    }
+    
+    /**
+     * 
+    * @Title: ReapplyCardSubMit
+    * @Description: 更换卡号
+    * @param @param id
+    * @param @param request
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("ReapplyCardSubMit")
+    public ModelAndView ReapplyCardSubMit(String oldid,String newid,HttpServletRequest request,String PagevalidationCode) throws Exception{
+	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
+	String  ValidationCode=(String) request.getSession().getAttribute("ValidationCode");
+	cardService.ReapplyCard(oldid,newid, user,ValidationCode,PagevalidationCode);
+	
+	ModelAndView mav=new ModelAndView();
+	mav.setViewName("redirect:getAllcard.action");
 	return mav;
     }
     

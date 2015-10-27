@@ -23,7 +23,7 @@
 	<td>${wechatTemplate.url}</td>
 	<td>${wechatTemplate.topcolor}</td>
 	<td>
-	<a href="${pageContext.request.contextPath }/card/sendTemplageMessage.action?openid=${openid}&templateId=${wechatTemplate.templateId}">发送</a>
+	<random:Right_A uri="${pageContext.request.contextPath }/card/sendTemplageMessage.action?openid=${openid}&templateId=${wechatTemplate.templateId}">发送</random:Right_A>
 	</td>
 </tr>
 </c:forEach>

@@ -2,9 +2,8 @@ package rms.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -14,22 +13,26 @@ import rms.controller.exception.CustomException;
 import rms.mapper.cardLevelMapper;
 import rms.mapper.cardMapper;
 import rms.mapper.cardRecordMapper;
+import rms.po.CustomRole;
+import rms.po.CustomUser;
 import rms.po.card;
 import rms.po.cardExample;
 import rms.po.cardLevel;
 import rms.po.cardLevelExample;
 import rms.po.cardRecord;
 import rms.po.cardRecordExample;
+import rms.po.right;
 import rms.po.wechatTemplate;
+import rms.service.UserService;
 import rms.service.cardService;
 import rms.wechat.Enumeration.wechatTemplateidKey;
-import rms.wechat.entity.TemplateData;
 import rms.wechat.entity.TemplateMessage;
 import rms.wechat.service.wechatTemplateService;
+import rms.wechat.untils.DataUtils;
 /**
  * 
 * @ClassName: cardServiceImpl 
-* @Description: 微信本地接口crud逻辑操作
+* @Description: 会员卡相关逻辑操作
 * @author 邹家兴 
 * @date 2015年9月23日 下午11:17:15 
 *
@@ -45,6 +48,8 @@ public class cardServiceImpl implements cardService {
     private cardLevelMapper cardLevelMapper;
     @Resource
     private wechatTemplateService wechatTemplateService;
+    @Resource
+    private UserService userService;
     /*
      * (非 Javadoc) 
     * <p>Title: getAll</p> 
@@ -234,7 +239,6 @@ public class cardServiceImpl implements cardService {
 	wechatTemplate template=wechatTemplateService.findWechatTemplateBytemplateid(message.getTemplate_id());
 	message.setTopcolor(template.getTopcolor());
 	message.setUrl(template.getUrl());
-	
 	wechatTemplateService.sendTemplateMessageTouser(message);
     }
     /*
@@ -467,4 +471,105 @@ public class cardServiceImpl implements cardService {
 	List<cardLevel> cardLevels=cardLevelMapper.selectByExample(example);
 	return cardLevels==null?null:cardLevels.get(0);
     }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: ReapplyCard</p> 
+    * <p>Description:更换卡号 返回验证码</p> 
+    * @param id
+    * @param user
+    * @return String
+    * @throws Exception 
+    * @see rms.service.cardService#ReapplyCard(java.lang.String, rms.po.CustomUser)
+     */
+    @Override
+    public String ReapplyCard(String id, CustomUser user) throws Exception {
+	boolean isValidation=true;
+	if(!user.getSuperadmin()) {
+	CustomUser dbuser=userService.findUserById(user.getId());
+	Set<CustomRole> roles=dbuser.getRoles();
+	for(CustomRole role:roles) {
+	   Set<right> rights= role.getRights();
+	   for(right r:rights) {
+	       if("NotValidationCode".equals(r.getUrl())) {
+		   isValidation=false;
+	       }
+	   }
+	 }
+        }
+	if(isValidation) {
+	    card card=findcardBycardid(id);
+	    if(card!=null&&card.getWechatOpenid()!=null&&!card.getWechatOpenid().trim().equals("")) {
+		String ValidationCode=sendValidationCode(4,10,card.getWechatOpenid().trim());
+		return ValidationCode;
+	    }
+	}
+	return null;
+    }
+    /*
+     * (非 Javadoc) 
+    * <p>Title: ReapplyCard</p> 
+    * <p>Description:更新卡号</p> 
+    * @param oldid
+    * @param newid
+    * @param user
+    * @param validationCode
+    * @throws Exception 
+    * @see rms.service.cardService#ReapplyCard(java.lang.String, java.lang.String, rms.po.CustomUser, java.lang.String)
+     */
+    public void ReapplyCard(String oldid, String newid, CustomUser user,
+		String SessionvalidationCode,String PagevalidationCode) throws Exception {
+	boolean isValidation=true;
+	boolean isupdate=true;
+	if(!user.getSuperadmin()) {
+	    CustomUser dbuser=userService.findUserById(user.getId());
+		Set<CustomRole> roles=dbuser.getRoles();
+		for(CustomRole role:roles) {
+		   Set<right> rights= role.getRights();
+		   for(right r:rights) {
+		       if("NotValidationCode".equals(r.getUrl())) {
+			   isValidation=false;
+		       }
+		   }
+		}
+	    if(isValidation) {
+		    if(SessionvalidationCode==null||PagevalidationCode==null||!SessionvalidationCode.equals(PagevalidationCode)) {
+			isupdate=false;
+			throw new CustomException("验证码输入错误");
+		    }
+	    }
+	}
+	
+	if(isupdate) {
+	    card c=findcardBycardid(oldid);
+	    c.setId(Integer.parseInt(newid));
+	    
+	    updatecard(c);
+	}
+	
+    }
+    
+    
+    /**
+     * 
+    * @Title: sendValidationCode 
+    * @Description: 生成并发送验证码
+    * @param @param length
+    * @param @param range
+    * @param @param openid
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+    private String sendValidationCode(int length,int range,String openid) throws Exception{
+	String ValidationCode=DataUtils.GenerationValidationCode(length, range);
+	TemplateMessage message=new TemplateMessage();
+	message.setTemplate_id(openid);
+	wechatTemplate template=wechatTemplateService.findWechatTemplateBytemplateid(wechatTemplateidKey.Verification_Code_Message.value);
+	message.setTopcolor(template.getTopcolor());
+	message.setUrl(template.getUrl());
+	wechatTemplateService.sendTemplateMessageTouser(message);
+	return ValidationCode;
+    }
+    
+    
 }

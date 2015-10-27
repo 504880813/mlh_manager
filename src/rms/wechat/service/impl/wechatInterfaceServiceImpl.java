@@ -121,7 +121,7 @@ public class wechatInterfaceServiceImpl implements wechatInterfaceService {
 	wechatInterfaceExample example=new wechatInterfaceExample();
 	example.createCriteria().andNameEqualTo(name);
 	List<wechatInterface> wechatInterfaces=wechatInterfaceMapper.selectByExample(example);
-	if(wechatInterfaces!=null||wechatInterfaces.size()!=0) {
+	if(wechatInterfaces!=null && wechatInterfaces.size() > 0) {
 	    return wechatInterfaces.get(0);
 	}
 	return null;

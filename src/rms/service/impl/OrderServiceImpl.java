@@ -31,6 +31,7 @@ import rms.po.diningTable;
 import rms.po.dish;
 import rms.po.order;
 import rms.po.orderdetail;
+import rms.po.wechatTemplate;
 import rms.service.DiningTableService;
 import rms.service.DishService;
 import rms.service.MaterialsService;
@@ -39,6 +40,7 @@ import rms.service.cardService;
 import rms.wechat.Enumeration.wechatTemplateidKey;
 import rms.wechat.entity.TemplateData;
 import rms.wechat.entity.TemplateMessage;
+import rms.wechat.service.wechatTemplateService;
 
 /**
  * 
@@ -63,6 +65,8 @@ public class OrderServiceImpl implements OrderService {
     private MaterialsService materialsService;
     @Resource
     private cardService cardService;
+    @Resource
+    private wechatTemplateService wechatTemplateService;
 
     /**
      * dao_mapper
@@ -562,7 +566,14 @@ public class OrderServiceImpl implements OrderService {
 	 message.setTouser(card.getWechatOpenid());
 	 message.setData(data);
 	 //发送模板消息
-	 cardService.sendTemplateTocard(message);
+	 
+	 wechatTemplate template=wechatTemplateService.findWechatTemplateBytemplateid(wechatTemplateidKey.Instant_Consumption_Message.value);
+	 message.setTopcolor(template.getTopcolor());
+	 String url=template.getUrl();
+	 url=url.replaceAll("$id", card.getCardid());
+	 message.setUrl(url);
+	 
+	 wechatTemplateService.sendTemplateMessageTouser(message);
     }
 
     /*

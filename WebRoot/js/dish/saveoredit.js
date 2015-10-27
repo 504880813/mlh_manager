@@ -35,7 +35,7 @@
 		}
 		
 		var arryid=$(".auxiliaryDish");
-		var arryQuantity=$(".auxiliaryDish");
+		var arryQuantity=$(".subDishQuantity");
 		for(var k=0;k<arryid.length;k++){
 			for(var i=0;i<ids.length;i++){
 				if(arryid[k].value==ids[i]){
