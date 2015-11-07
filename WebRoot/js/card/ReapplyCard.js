@@ -29,7 +29,7 @@ function checkCard(){
 	if(cardId!=""){
 //			$("#message").text("卡片接入成功");
 //			alert(cardId);
-			$("input[name=newid]").val(cardId);
+			$("input[name=newcardid]").val(cardId);
 //			isexitCard=true;
 	}
 }

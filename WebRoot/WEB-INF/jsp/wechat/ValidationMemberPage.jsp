@@ -48,6 +48,15 @@
 	<input type="button" id="submit_validation" value="绑定" />
 	<input type="button" id="close" value="退出" />
 	</form>
+	
+<%-- 	<div style="background-color:white;">
+	${pageContext.request.contextPath }<br>
+	${chenck.appid}<br>
+	${chenck.timestamp}<br>
+	${chenck.nonceStr}<br>
+	${chenck.signature}<br>
+	${openid }<br>
+	</div> --%>
 	</div>
 </body>
 
@@ -61,7 +70,7 @@
 	var signature="${chenck.signature}";
 	var openid="${openid }";
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/AccessTemlate.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/ValidationMemberPage.js"></script>

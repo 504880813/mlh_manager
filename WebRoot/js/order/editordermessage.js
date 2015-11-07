@@ -269,6 +269,8 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 		}
 	}
 	
+	
+	
 	var html="<tr class='orderdish'>";
 	
 	if("true"==isadd){
@@ -292,7 +294,7 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 		//	html+="</td>";
 			
 			
-			html+="<td class='dishname'>";
+			html+="<td class='dishname' >";
 			html+=name;
 			html+="</td>";
 			
@@ -334,17 +336,6 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 			html+=name;
 			html+="</td>";
 			
-		//	
-		//	html+="<td>";
-		//	html+=price;
-		//	html+="</td>";
-			
-			/*<td>数量</td>*/
-//			html+="<td class='dishnumber'>";
-//			html+="<input type='text' value='1' name='retreatdishList[";
-//			html+=retreatdishsname.length-1;
-//			html+="].dishnumber' class='dishnumberInput' readonly=‘readonly’ />";
-//			html+="</td>";
 			html+="<td class='dishnumber'>";
 			html+="<input type='text' value='";
 			html+=dishnumber;
@@ -382,9 +373,9 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 	html+="</tr>";
 //	alert(html);
 	if(isadd=="true"){
-		$("#alldish").next().append(html);
+		$("#alldish").append(html);
 	}else{
-		$("#orderdish").next().append(html);
+		$("#orderdish").append(html);
 	}
 	
 //	changeprice(dishnameList, isadd);
@@ -441,7 +432,9 @@ function reducethisself(self,isadd){
 function changedishToList(id,name,price,isadd,self){
 	var jqs=$(self);
 	
-	var container=jqs.parent().parent().parent().parent().parent().next();
+	var container=jqs.parent().parent().parent().parent().parent();
+	
+/*	var container=$("#mainFrame");*/
 	
 	var dishnameList=container.find(".dishname");
 	
@@ -503,7 +496,7 @@ function changedishToList(id,name,price,isadd,self){
 	});
 	
 	//改变价格
-	changeprice(jqs.parent().parent().parent().parent().parent().next().find(".dishname"),isadd);
+	changeprice(jqs.parent().parent().parent().parent().parent().find(".dishname"),isadd);
 	//改变总价
 	changeAllprice();
 }

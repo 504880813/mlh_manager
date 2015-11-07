@@ -1,5 +1,6 @@
 package rms.po;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -222,6 +223,136 @@ public class materialsRecordExample {
 
         public Criteria andMaterialsIdNotBetween(Integer value1, Integer value2) {
             addCriterion("materials_id not between", value1, value2, "materialsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusIsNull() {
+            addCriterion("materials_surplus is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusIsNotNull() {
+            addCriterion("materials_surplus is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusEqualTo(BigDecimal value) {
+            addCriterion("materials_surplus =", value, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusNotEqualTo(BigDecimal value) {
+            addCriterion("materials_surplus <>", value, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusGreaterThan(BigDecimal value) {
+            addCriterion("materials_surplus >", value, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("materials_surplus >=", value, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusLessThan(BigDecimal value) {
+            addCriterion("materials_surplus <", value, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("materials_surplus <=", value, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusIn(List<BigDecimal> values) {
+            addCriterion("materials_surplus in", values, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusNotIn(List<BigDecimal> values) {
+            addCriterion("materials_surplus not in", values, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("materials_surplus between", value1, value2, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsSurplusNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("materials_surplus not between", value1, value2, "materialsSurplus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitIsNull() {
+            addCriterion("materials_unit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitIsNotNull() {
+            addCriterion("materials_unit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitEqualTo(String value) {
+            addCriterion("materials_unit =", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitNotEqualTo(String value) {
+            addCriterion("materials_unit <>", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitGreaterThan(String value) {
+            addCriterion("materials_unit >", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitGreaterThanOrEqualTo(String value) {
+            addCriterion("materials_unit >=", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitLessThan(String value) {
+            addCriterion("materials_unit <", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitLessThanOrEqualTo(String value) {
+            addCriterion("materials_unit <=", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitLike(String value) {
+            addCriterion("materials_unit like", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitNotLike(String value) {
+            addCriterion("materials_unit not like", value, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitIn(List<String> values) {
+            addCriterion("materials_unit in", values, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitNotIn(List<String> values) {
+            addCriterion("materials_unit not in", values, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitBetween(String value1, String value2) {
+            addCriterion("materials_unit between", value1, value2, "materialsUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsUnitNotBetween(String value1, String value2) {
+            addCriterion("materials_unit not between", value1, value2, "materialsUnit");
             return (Criteria) this;
         }
 

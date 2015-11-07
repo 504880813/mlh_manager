@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/order/startorderofdish.js"></script>
 <title>初始化订单菜品</title>
 </head>

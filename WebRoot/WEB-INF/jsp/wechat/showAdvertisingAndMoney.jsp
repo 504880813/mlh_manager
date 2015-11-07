@@ -12,14 +12,15 @@
 	    padding:0px;
 	    text-align:center; 
 	    background:#e9fbff;
-	    background-image: url("${pageContext.request.contextPath }/images/background.jpg");
+	   /*  background-image: url("${pageContext.request.contextPath }/images/background.jpg"); */
 	}
 </style>
 <title>余额以及消费记录</title>
 </head>
 <body>
-	<div id="first"></div>
-	<div id="sec"></div>
+	<c:forEach items="${wechatAdvertisementImages }" var="wechatAdvertisementImage">
+		<img alt="${wechatAdvertisementImage.name }" src="${wechatAdvertisementImage.path }" width="100%" height="400px">
+	</c:forEach>
 	当前余额:${card.money }<br/>
 	最近10次消费记录:<br>
 	<table width="100%" border=1>
@@ -46,7 +47,7 @@
 	var signature="${chenck.signature}";
 	var openid="${openid }";
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/AccessTemlate.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/showAdvertisingAndMoney.js"></script>

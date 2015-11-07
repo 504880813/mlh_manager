@@ -156,7 +156,7 @@ public class wechatuserServiceImpl implements wechatuserService {
 	    //预留三秒的耗时
 	    long current_time = System.currentTimeMillis()-3000;
 	    //获取到jsapi_ticket 
-	    if(jsapi_ticket!=null && jsapi_ticket_time_Str!=null) {
+	    if(jsapi_ticket!=null && jsapi_ticket_time_Str!=null && !jsapi_ticket.trim().equals("") && !jsapi_ticket_time_Str.trim().equals("")) {
 		jsapi_ticket_time=Long.parseLong(jsapi_ticket_time_Str);
 		long jsapi_ticket_last_time=Long.parseLong(user.getJsapiTicketExpiresLastTime());
 		//判断是否超时
@@ -164,6 +164,8 @@ public class wechatuserServiceImpl implements wechatuserService {
 		    //超时就重新获取jsapi_ticket 并存入数据库
 		    return getserverjsapi_ticket(access_token,user);
 		}else {
+		    //
+		    
 		    return jsapi_ticket;
 		}
 		
@@ -191,7 +193,7 @@ public class wechatuserServiceImpl implements wechatuserService {
 	    //预留三秒的耗时
 	    long current_time = System.currentTimeMillis()-3000;
 	    //获取到access_token
-	    if(access_token!=null && access_token_time_Str!=null) {
+	    if(access_token!=null && access_token_time_Str!=null && !access_token.trim().equals("") && !access_token_time_Str.trim().equals("")) {
 		access_token_time=Long.parseLong(access_token_time_Str);
 		long access_token_last_time=Long.parseLong(user.getAccessTokenExpiresLastTime());
 		//判断是否超时

@@ -61,6 +61,9 @@ public class Wechat_js_Servlet extends AutowiredHttpServlet {
 	    throws ServletException, IOException {
 	//获取要进行的下一步操作
 	String method=request.getParameter("method");
+	
+	String fromURL = request.getHeader("Referer"); 
+	String query=request.getQueryString();
 	//将请求分发给不同的处理器处理
 	adapter.distributeRequest(method, request, response);
     }

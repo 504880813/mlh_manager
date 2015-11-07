@@ -34,7 +34,9 @@ function adddishToorder(id,name,price,self,Rootpath,TypeId){
 	
 	orderdishsId.push(id);
 	var jqs=$(self);
+	
 	jqs.parent().parent().remove();
+	
 	var html="<tr>";
 	
 	html+="<input type='hidden' name=orderdetailList[";
@@ -91,7 +93,7 @@ function adddishToorder(id,name,price,self,Rootpath,TypeId){
 	html+="</td>";
 	html+="</tr>";
 //	alert(html);
-	$("#orderdishs table:first").append(html);
+	$("#orderdishs").append(html);
 	
 	$("input[name=submit]").show();
 	

@@ -1,5 +1,6 @@
 package rms.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,9 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rms.po.Custommaterials;
+import rms.po.materials;
+import rms.po.materialsRecord;
 import rms.service.MaterialsService;
 
 /**
@@ -143,8 +147,136 @@ public class MaterialsHandler {
 			model.addAttribute("errors", errors);
 			return "forward:editmaterials.action";
 		}
-		materialsService.updateMaterials(id, custommaterials);
+		materialsService.updateMaterials(id, custommaterials,null);
 		return "redirect:findAllmaterials.action";
 	}
+	
+	
+	/**
+	 * 进货相关
+	 */
+	/**
+	 * 
+	* @Title: Purchase 
+	* @Description: 跳转到进货页面
+	* @param @return
+	* @param @throws Exception    
+	* @return ModelAndView    
+	* @throws
+	 */
+	@RequestMapping("purchase")
+	public ModelAndView Purchase() throws Exception{
+	    
+	    ModelAndView mav=new ModelAndView();
+	    
+	    List<Custommaterials> custommaterialsList=materialsService.findAllMaterials();
+	    
+	    mav.addObject("custommaterialsList", custommaterialsList);
+	    
+	    mav.setViewName("materials/purchase");
+
+	    return mav;
+	}
+	/**
+	 * 
+	* @Title: PurchaseSubMit 
+	* @Description: 进货
+	* @param @return
+	* @param @throws Exception    
+	* @return String    
+	* @throws
+	 */
+	@RequestMapping("purchaseSubMit")
+	public String PurchaseSubMit(materials record) throws Exception{
+	    materialsService.saveMaterials(record);
+	    return "redirect:findAllmaterials.action";
+	}
+	
+	@RequestMapping("findmaterialsRecordPage")
+	public ModelAndView findmaterialsRecordPage() throws Exception{
+	    
+	    List<Custommaterials> custommaterialsList=materialsService.findAllMaterials();
+	    
+	    
+	    ModelAndView mav=new ModelAndView();
+	    
+	    mav.addObject("custommaterialsList", custommaterialsList);
+	    
+	    mav.setViewName("materials/materialsRecordList");
+	    
+	    return mav;
+	}
+	
+	
+	/**
+	 * 
+	* @Title: findmaterialsRecord 
+	* @Description: 查询原料的存取记录
+	* @param @param name
+	* @param @return
+	* @param @throws Exception    
+	* @return ModelAndView    
+	* @throws
+	 */
+	@RequestMapping("findmaterialsRecord")
+	public ModelAndView findmaterialsRecord(Integer id) throws Exception{
+	    List<materialsRecord> materialsRecords=materialsService.findMaterialsRecordByMaterialName(materialsService.findMaterialsById(id).getName());
+	    List<Custommaterials> materialsList=materialsService.findAllMaterials();
+	    ModelAndView mav=new ModelAndView();
+	    mav.addObject("materialsRecords", materialsRecords);
+	    mav.addObject("materialsList", materialsList);
+	    mav.setViewName("materials/materialsRecordList");
+	    return mav;
+	}
+	/**
+	 * 
+	* @Title: findmaterialsRecordofNameAndTime 
+	* @Description: 根据原料名称查询一段时间的存取记录 
+	* @param @param name
+	* @param @param startTime
+	* @param @param endTime
+	* @param @return
+	* @param @throws Exception    
+	* @return ModelAndView    
+	* @throws
+	 */
+	@RequestMapping("findmaterialsRecordofNameAndTime")
+	public ModelAndView findmaterialsRecordofNameAndTime(String name,Date startTime,Date endTime) throws Exception{
+	    
+	    
+	    List<materialsRecord> materialsRecords=materialsService.findMaterialsRecordByMaterialNameAndTime(name, startTime, endTime);
+	   
+	    List<Custommaterials> materialsList=materialsService.findAllMaterials();
+	    
+	    ModelAndView mav=new ModelAndView();
+	    
+	    mav.addObject("materialsRecords", materialsRecords);
+	    mav.addObject("materialsList", materialsList);
+	    
+	    mav.setViewName("materials/materialsRecordList");
+	    
+	    return mav;
+	}
+	
+	/**
+	 * 
+	* @Title: findmaterialsRecordofNameAndTimeofJson 
+	* @Description: 根据名称和时间来查询存取记录返回json
+	* @param @param name
+	* @param @param startTime
+	* @param @param endTime
+	* @param @throws Exception    
+	* @return List<materialsRecord>     
+	* @throws
+	 */
+	@RequestMapping("findmaterialsRecordofNameAndTimeofJson")
+	public @ResponseBody List<materialsRecord> findmaterialsRecordofNameAndTimeofJson(String name,Date startTime,Date endTime) throws Exception{
+	    
+	    List<materialsRecord> materialsRecords=materialsService.findMaterialsRecordByMaterialNameAndTime(name, startTime, endTime);
+	    
+	    return materialsRecords;
+	}
+	
+	
 
 }

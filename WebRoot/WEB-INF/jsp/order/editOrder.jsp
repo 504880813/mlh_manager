@@ -1,14 +1,184 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/JspbaseTemplate/header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>修改账单界面</title>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/order/editordermessage.js"></script>
+
 </head>
 <body>
+
+
+<%@ include file="/JspbaseTemplate/header.jsp" %>
+<%@ include file="/JspbaseTemplate/left.jsp" %>
+
+
+<div class="right" id="mainFrame">
+     
+<div class="right_cont">
+   
+   <div class="title_right"><strong>修改订单信息</strong></div>
+   <div style="width:900px; margin:auto">
+ <form id="editform" action="${pageContext.request.contextPath}/order/editorder.action" method="post">
+	<input type="hidden" name="id" value="${order.id }">
+	<input type="hidden" name="rDiningtableId" value="${order.rDiningtableId}"/>
+	<input type="hidden" name="createtime" value="${endtime }" />
+	<input type="hidden" name="numberofpeople" value="${order.numberofpeople }" />
+	<input type="hidden" name="waiter" value="${order.waiter }" />
+   <table  class="table table-bordered">
+     <tbody>
+     <tr>
+       <td width="10%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >桌号</td>
+       <td width="23%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >
+	       ${order.diningTableName }
+	   </td>
+	   <td width="10%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >服务员</td>
+       <td width="23%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >
+	       ${order.waiter}
+	   </td>
+	    <td width="10%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >时间</td>
+       <td width="23%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >
+	       ${endtime}
+	   </td>
+     </tr>
+     <tr>
+     	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">正常菜</td>
+     </tr>
+     <tr>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">菜品名</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >数量</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >单价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">总价</td>
+     </tr>
+     <c:forEach items="${order.orderdetailList }" var="orderdetail">
+		<c:if test="${orderdetail.echelon==1 }">
+			<tr class="orderdish">
+			<td class="dishname" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">${orderdetail.dishName}</td>
+			<td class="dishnumber" nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.dishnumber}</td>
+			<td class="price" nowrap="nowrap" align="right" bgcolor="#f1f1f1">
+			<c:forEach items="${dishList}" var="dish">
+				<c:if test="${dish.id==orderdetail.rdishid }">
+					${dish.price}
+				</c:if>
+			</c:forEach>
+			</td>
+			<td class="normaltotalprice" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">${orderdetail.price}</td>
+			<td style="display:none" nowrap="nowrap" align="right" bgcolor="#f1f1f1">
+				<input type="text"  class="dishid" value="${orderdetail.rdishid}">
+			</td>
+			</tr>
+		</c:if>
+	</c:forEach>
+	 <tr>
+     	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">
+     	加菜
+     	<input type="button" value="adddish" onclick="adddishofMessage('${pageContext.request.contextPath}')">
+     	<div id="alldish" style="display:none">
+		<table>
+			<tr>
+				<td>菜品名</td><td>价格</td><td>操作</td>
+			</tr>
+		</table>
+		</div>
+     	</td>
+     </tr>
+     <tr>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">菜品名</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >数量</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >单价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >总价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >操作</td>
+     </tr>
+     
+     	<c:forEach items="${order.orderdetailList }" var="orderdetail">
+		<c:if test="${orderdetail.echelon==2 }">
+			<tr class="orderdish">
+			<td class="dishname"  nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">${orderdetail.dishName}</td>
+			<td class="dishnumber"  nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.dishnumber}</td>
+			<td class="price"  nowrap="nowrap" align="right" bgcolor="#f1f1f1">
+				<c:forEach items="${dishList}" var="dish">
+					<c:if test="${dish.id==orderdetail.rdishid }">${dish.price}</c:if>
+				</c:forEach>
+			</td>
+			<td class="addtotalprice"  nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.price}</td>
+			</tr>
+		</c:if>
+		</c:forEach>
+      <tr>
+     	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">
+     		退菜
+     		<input type="button" value="Retreatdish" onclick="RetreatdishofMessage(this)">
+				<div id="orderdish" style="display:none">
+					<table>
+						<tr>
+							<td>菜品名</td><td>价格</td><td>操作</td>
+						</tr>
+					</table>
+				</div>
+     	</td>
+     </tr>
+     <tr>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">菜品名</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >数量</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >单价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >总价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >操作</td>
+     </tr>
+     <c:forEach items="${order.orderdetailList }" var="orderdetail">
+		<c:if test="${orderdetail.echelon==0 }">
+			<tr class="orderdish">
+			<td class="dishname" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">${orderdetail.dishName}</td>
+			<td class="dishnumber" nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.dishnumber}</td>
+			<td class="price" nowrap="nowrap" align="right" bgcolor="#f1f1f1">
+				<c:forEach items="${dishList}" var="dish">
+					<c:if test="${dish.id==orderdetail.rdishid }">
+						${dish.price}
+					</c:if>
+				</c:forEach>
+			</td>
+			<td class="reducetotalprice" nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.price}</td>
+			</tr>
+		</c:if>
+	</c:forEach>
+	<tr>
+		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">菜品总价</td>
+		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="4">
+			<span id="allprice">${order.price}</span>元
+			<input type="hidden" name="price" value="${order.price}" />
+		</td>
+	</tr>
+     
+   	</tbody>
+   </table>
+   <table class="margin-bottom-20 table  no-border">
+        <tbody><tr>
+     	<td class="text-center">
+     	<input value="确定" name="ok" class="btn btn-info" style="width:80px;" type="button" onclick="formsubmit()">
+     	</td>
+     	<td class="text-center">
+     	<input value="返回" name="cancel" class="btn btn-info" style="width:80px;" type="button" onclick="PageToUrl('${pageContext.request.contextPath}/order/getAllOrderofNotCheckout.action')">
+     	</td>
+     </tr>
+ 	</tbody>
+  </table>
+ 	<!-- <div id="cardMessage"></div> -->
+   </form>   
+   </div> 
+  </div>     
+</div>
+
+<%@ include file="/JspbaseTemplate/footer.jsp" %> 
+
+
+
+
+
+
+
+
+
+
+<%-- 
 订单详情：
 <c:if test="${errors!=null }">
 <c:forEach items="${errors}" var="error">
@@ -116,6 +286,7 @@
 	<input type="hidden" name="price" value="${order.price}" />
 	<input type="button" name="ok"  value="ok" onclick="formsubmit()"/>
 	<input type="button" name="cancel"  value="cancel" onclick="PageToUrl('${pageContext.request.contextPath}/order/getAllOrderofNotCheckout.action')"/>
-</form>
+</form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/order/editordermessage.js"></script>
 </html>

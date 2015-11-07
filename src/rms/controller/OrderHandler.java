@@ -4,15 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rms.controller.exception.CustomException;
 import rms.po.CustomOrder;
+import rms.po.CustomUser;
 import rms.po.Customcategory;
 import rms.po.CustomdiningTable;
 import rms.po.Customdish;
@@ -212,7 +215,7 @@ public class OrderHandler {
     /**
      * 
     * @Title: CheckoutofMember 
-    * @Description: 为会员结账准备数据
+    * @Description: 为会员使用会员卡结账准备数据
     * @param @param diningtableid
     * @param @return
     * @param @throws Exception    
@@ -224,6 +227,24 @@ public class OrderHandler {
 	ModelAndView mav=new ModelAndView();
 	mav.addObject("diningtableid", diningtableid);
 	mav.setViewName("order/getMembercardId");
+	return mav;
+    }
+    
+    /**
+     * 
+    * @Title: CheckoutofMemberPhone 
+    * @Description: 为会员使用会员绑定电话号码结算做准备
+    * @param @param diningtableid
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("CheckoutofMemberPhone")
+    public ModelAndView CheckoutofMemberPhone(Integer diningtableid) throws Exception{
+	ModelAndView mav=new ModelAndView();
+	mav.addObject("diningtableid", diningtableid);
+	mav.setViewName("order/getMembercardIdofPhone");
 	return mav;
     }
     /**
@@ -265,6 +286,54 @@ public class OrderHandler {
     }
     
     
+    /**
+     * 
+    * @Title: CheckoutofphoneAndcardid 
+    * @Description: 获取会员卡号并判断验证码，并为会员结账准备数据 
+    * @param @param diningtableid
+    * @param @param cardid
+    * @param @param PageValidationCode
+    * @param @param request
+    * @param @return
+    * @param @throws Exception    
+    * @return ModelAndView    
+    * @throws
+     */
+    @RequestMapping("CheckoutofphoneAndcardid")
+    public ModelAndView CheckoutofphoneAndcardid(Integer diningtableid,String cardid,String PageValidationCode,HttpServletRequest request) throws Exception{
+	
+	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
+	String  SessionValidationCode=(String) request.getSession().getAttribute("ValidationCode");
+	boolean iscorrect=cardService.ValidationCodecorrectOrwrong(user,SessionValidationCode,PageValidationCode);
+	
+	if(!iscorrect) {
+	    throw new CustomException("验证码输入错误");
+	}
+	
+	//得到订单数据
+	CustomOrder order = orderService
+		.findOrderBydiningtableid(diningtableid);
+	order.setrDiningtableId(diningtableid);
+	//得到会员卡数据
+	card card=cardService.findcardBycardid(cardid);
+	if(card==null) {
+	    throw new CustomException("该会员卡已失效");
+	}
+	//再得到该会员的折扣
+	cardLevel cardLevel=cardService.findcardLevelBycardLevel(card.getLevel());
+	
+	ModelAndView mav = new ModelAndView();
+	// 包括明细数据
+	mav.addObject("order", order);
+	mav.addObject("endtime",
+		StringUtils.DateToString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+	
+	mav.addObject("card", card);
+	mav.addObject("cardLevel", cardLevel);
+	mav.setViewName("order/OrdercheckoutofMember");
+
+	return mav;
+    }
     
     /**
      * 
@@ -419,5 +488,27 @@ public class OrderHandler {
 	return mav;
 
     }
-
+    
+    
+    
+    
+    /**
+     * Ajax 响应方法
+     */
+    
+    /**
+     * 
+    * @Title: findcardByPhoneNumberRetrunJson 
+    * @Description: 根据电话号码查询关联会员卡
+    * @param @param phoneNumber
+    * @param @return
+    * @param @throws Exception    
+    * @return List<card>    
+    * @throws
+     */
+    @RequestMapping("findcardByPhoneNumberRetrunJson")
+    public @ResponseBody List<card> findcardByPhoneNumberRetrunJson(String phoneNumber) throws Exception{
+		List<card> dishs=cardService.findcardsByphoneNumber(phoneNumber);
+		return dishs;
+     }
 }

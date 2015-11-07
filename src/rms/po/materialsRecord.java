@@ -1,11 +1,16 @@
 package rms.po;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class materialsRecord {
     private Integer id;
 
     private Integer materialsId;
+
+    private BigDecimal materialsSurplus;
+
+    private String materialsUnit;
 
     private Boolean save;
 
@@ -25,6 +30,22 @@ public class materialsRecord {
 
     public void setMaterialsId(Integer materialsId) {
         this.materialsId = materialsId;
+    }
+
+    public BigDecimal getMaterialsSurplus() {
+        return materialsSurplus;
+    }
+
+    public void setMaterialsSurplus(BigDecimal materialsSurplus) {
+        this.materialsSurplus = materialsSurplus;
+    }
+
+    public String getMaterialsUnit() {
+        return materialsUnit;
+    }
+
+    public void setMaterialsUnit(String materialsUnit) {
+        this.materialsUnit = materialsUnit == null ? null : materialsUnit.trim();
     }
 
     public Boolean getSave() {

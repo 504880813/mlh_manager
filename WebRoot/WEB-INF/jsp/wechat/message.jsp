@@ -16,7 +16,7 @@ ${message}
 	var nonceStr="${chenck.nonceStr}";
 	var signature="${chenck.signature}";
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/AccessTemlate.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/wechat/message.js"></script>

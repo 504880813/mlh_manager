@@ -1,8 +1,12 @@
 package rms.service.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -26,6 +30,7 @@ import rms.po.wechatTemplate;
 import rms.service.UserService;
 import rms.service.cardService;
 import rms.wechat.Enumeration.wechatTemplateidKey;
+import rms.wechat.entity.TemplateData;
 import rms.wechat.entity.TemplateMessage;
 import rms.wechat.service.wechatTemplateService;
 import rms.wechat.untils.DataUtils;
@@ -80,15 +85,22 @@ public class cardServiceImpl implements cardService {
     /*
      * (非 Javadoc) 
     * <p>Title: findAllRecordsBycardid</p> 
-    * <p>Description:根据会员卡id查询会员卡相关 如果是主卡，则查询主卡，及其子卡，，如果是子卡，则只查询子卡记录 </p> 
+    * <p>Description:根据会员卡id查询会员卡一段时间的消费记录 如果是主卡，则查询主卡，及其子卡，，如果是子卡，则只查询子卡记录 </p> 
     * @param cardid
+    * @param startTime
+    * @param endTime
     * @return
     * @throws Exception 
     * @see rms.service.cardService#findAllRecordsBycardid(java.lang.Integer)
      */
     @Override
-    public List<cardRecord> findAllRecordsBycardid(String cardid) throws Exception {
+    public List<cardRecord> findAllRecordsBycardid(String cardid,Date startTime,Date endTime) throws Exception {
 	card card=findcardBycardid(cardid);
+	boolean needselectTime=true;
+	if(startTime==null||endTime==null) {
+	    needselectTime=false;
+	}
+	
 	if(card==null) {
 	    return null;
 	}
@@ -104,16 +116,45 @@ public class cardServiceImpl implements cardService {
 	    for(card c:belongscards) {
 		cardids.add(c.getCardid());
 	    }
+	    
 	    cardRecordExample cardRecordExample=new cardRecordExample();
-	    cardRecordExample.createCriteria().andCardIdIn(cardids);
+	    if(needselectTime) {
+		 cardRecordExample.createCriteria().andCardIdIn(cardids).andTimeBetween(startTime, endTime);
+	    }else {
+		 cardRecordExample.createCriteria().andCardIdIn(cardids);
+	    }
 	    cardRecords=cardRecordMapper.selectByExample(cardRecordExample);
 	}else {
 	    //副卡
 	    cardRecordExample cardRecordExample=new cardRecordExample();
-	    cardRecordExample.createCriteria().andCardIdEqualTo(cardid);
+	    if(needselectTime) {
+		cardRecordExample.createCriteria().andCardIdEqualTo(cardid).andTimeBetween(startTime, endTime);
+	    }else {
+		cardRecordExample.createCriteria().andCardIdEqualTo(cardid);
+	    }
 	    cardRecords=cardRecordMapper.selectByExample(cardRecordExample);
 	}
 	return cardRecords;
+    }
+    
+    /*
+     * (非 Javadoc) 
+    * <p>Title: findcardsByphoneNumber</p> 
+    * <p>Description:根据电话号码查询会员卡列表</p> 
+    * @param phoneNumber
+    * @return
+    * @throws Exception 
+    * @see rms.service.cardService#findcardsByphoneNumber(java.lang.String)
+     */
+    @Override
+    public List<card> findcardsByphoneNumber(String phoneNumber)
+	    throws Exception {
+	cardExample example=new cardExample();
+	example.createCriteria().andPhoneEqualTo(phoneNumber);
+	
+	List<card> cards=cardMapper.selectByExample(example);
+	
+	return (cards==null||cards.size()<=0)?null:cards;
     }
     /*
      * (非 Javadoc) 
@@ -473,8 +514,8 @@ public class cardServiceImpl implements cardService {
     }
     /*
      * (非 Javadoc) 
-    * <p>Title: ReapplyCard</p> 
-    * <p>Description:更换卡号 返回验证码</p> 
+    * <p>Title: sendValidationCodeTocard</p> 
+    * <p>Description:给指定卡号发送验证码并 返回验证码</p> 
     * @param id
     * @param user
     * @return String
@@ -482,22 +523,9 @@ public class cardServiceImpl implements cardService {
     * @see rms.service.cardService#ReapplyCard(java.lang.String, rms.po.CustomUser)
      */
     @Override
-    public String ReapplyCard(String id, CustomUser user) throws Exception {
-	boolean isValidation=true;
-	if(!user.getSuperadmin()) {
-	CustomUser dbuser=userService.findUserById(user.getId());
-	Set<CustomRole> roles=dbuser.getRoles();
-	for(CustomRole role:roles) {
-	   Set<right> rights= role.getRights();
-	   for(right r:rights) {
-	       if("NotValidationCode".equals(r.getUrl())) {
-		   isValidation=false;
-	       }
-	   }
-	 }
-        }
-	if(isValidation) {
-	    card card=findcardBycardid(id);
+    public String sendValidationCodeTocard(String cardid, CustomUser user) throws Exception {
+	if(needValidation(user)) {
+	    card card=findcardBycardid(cardid);
 	    if(card!=null&&card.getWechatOpenid()!=null&&!card.getWechatOpenid().trim().equals("")) {
 		String ValidationCode=sendValidationCode(4,10,card.getWechatOpenid().trim());
 		return ValidationCode;
@@ -516,36 +544,73 @@ public class cardServiceImpl implements cardService {
     * @throws Exception 
     * @see rms.service.cardService#ReapplyCard(java.lang.String, java.lang.String, rms.po.CustomUser, java.lang.String)
      */
-    public void ReapplyCard(String oldid, String newid, CustomUser user,
+    public void ReapplyCard(String oldcardid, String newcardid, CustomUser user,
 		String SessionvalidationCode,String PagevalidationCode) throws Exception {
-	boolean isValidation=true;
 	boolean isupdate=true;
-	if(!user.getSuperadmin()) {
-	    CustomUser dbuser=userService.findUserById(user.getId());
-		Set<CustomRole> roles=dbuser.getRoles();
-		for(CustomRole role:roles) {
-		   Set<right> rights= role.getRights();
-		   for(right r:rights) {
-		       if("NotValidationCode".equals(r.getUrl())) {
-			   isValidation=false;
-		       }
-		   }
-		}
-	    if(isValidation) {
-		    if(SessionvalidationCode==null||PagevalidationCode==null||!SessionvalidationCode.equals(PagevalidationCode)) {
-			isupdate=false;
-			throw new CustomException("验证码输入错误");
-		    }
-	    }
+	if(ValidationCodecorrectOrwrong(user,SessionvalidationCode,PagevalidationCode)) {
+	    isupdate=false;
+	    throw new CustomException("验证码输入错误");
 	}
-	
 	if(isupdate) {
-	    card c=findcardBycardid(oldid);
-	    c.setId(Integer.parseInt(newid));
+	    card c=findcardBycardid(oldcardid);
+	    c.setCardid(newcardid);
 	    
 	    updatecard(c);
 	}
 	
+    }
+    
+    /*
+     * (非 Javadoc) 
+    * <p>Title: ValidationCodecorrectOrwrong</p> 
+    * <p>Description:验证验证码是否正确</p> 
+    * @param user
+    * @param sessionValidationCode
+    * @param pageValidationCode
+    * @throws Exception 
+    * @see rms.service.cardService#ValidationCodecorrectOrwrong(rms.po.CustomUser, java.lang.String, java.lang.String)
+     */
+    @Override
+    public boolean ValidationCodecorrectOrwrong(CustomUser user,
+	    String sessionValidationCode, String pageValidationCode)
+	    throws Exception {
+	if(needValidation(user)) {
+	     if(sessionValidationCode==null||pageValidationCode==null||!sessionValidationCode.equals(pageValidationCode)) {
+	        	return false;
+	     }
+	}
+	return true;
+    }
+    
+    /**
+     * 
+    * @Title: needValidation 
+    * @Description: 判断当前用户是否需要验证码
+    * @param @param user
+    * @param @return
+    * @param @throws Exception    
+    * @return boolean    
+    * @throws
+     */
+    private boolean needValidation(CustomUser user) throws Exception{
+	if(!user.getSuperadmin()) {
+	    CustomUser dbuser=userService.findUserById(user.getId());
+		Set<CustomRole> roles=dbuser.getRoles();
+		for(CustomRole role:roles) {
+		    if("-1".equals(role.getValue())) {
+			return false;
+		    }
+		   Set<right> rights= role.getRights();
+		   for(right r:rights) {
+		       if("NotValidationCode".equals(r.getUrl())) {
+			   return false;
+		       }
+		   }
+		}
+	}else {
+	    return false;
+	}
+	return true;
     }
     
     
@@ -563,13 +628,20 @@ public class cardServiceImpl implements cardService {
     private String sendValidationCode(int length,int range,String openid) throws Exception{
 	String ValidationCode=DataUtils.GenerationValidationCode(length, range);
 	TemplateMessage message=new TemplateMessage();
-	message.setTemplate_id(openid);
+	
 	wechatTemplate template=wechatTemplateService.findWechatTemplateBytemplateid(wechatTemplateidKey.Verification_Code_Message.value);
+	message.setTemplate_id(wechatTemplateidKey.Verification_Code_Message.value);
 	message.setTopcolor(template.getTopcolor());
 	message.setUrl(template.getUrl());
+	message.setTouser(openid);
+	//构建数据
+	Map<String,TemplateData> VerificationData=new HashMap<>();
+	VerificationData.put("Verification_Code", new TemplateData(ValidationCode, "#173177"));
+	VerificationData.put("date", new TemplateData(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()), "#173177"));
+	message.setData(VerificationData);
+	
 	wechatTemplateService.sendTemplateMessageTouser(message);
 	return ValidationCode;
     }
-    
     
 }

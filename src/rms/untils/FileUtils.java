@@ -25,6 +25,11 @@ public class FileUtils {
 	public static final String dishpath="C:\\tempImage\\rms\\dish\\";
 	public static final String dishMappingPath="/pic/rms/dish/";
 	/**
+	 * 微信广告图片的实际路径以及映射路径
+	 */
+	public static final String wechatAdvertisementpath="C:\\tempImage\\rms\\wechatAdvertisement\\";
+	public static final String wechatAdvertisementMappingPath="/pic/rms/wechatAdvertisement/";
+	/**
 	 * 
 	* @Title: uploadImage 
 	* @Description: 上传文件到指定位置

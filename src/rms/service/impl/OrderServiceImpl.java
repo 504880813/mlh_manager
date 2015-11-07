@@ -570,8 +570,8 @@ public class OrderServiceImpl implements OrderService {
 	 wechatTemplate template=wechatTemplateService.findWechatTemplateBytemplateid(wechatTemplateidKey.Instant_Consumption_Message.value);
 	 message.setTopcolor(template.getTopcolor());
 	 String url=template.getUrl();
-	 url=url.replaceAll("$id", card.getCardid());
-	 message.setUrl(url);
+	 String sendurl=url.replaceAll("\\$cardid", card.getCardid());
+	 message.setUrl(sendurl);
 	 
 	 wechatTemplateService.sendTemplateMessageTouser(message);
     }
@@ -589,19 +589,21 @@ public class OrderServiceImpl implements OrderService {
 
 	    BigDecimal nowQuantity = materials.getQuantity().multiply(
 		    new BigDecimal(dishNumber));
-	    
+	    //记录添加或减少的数量
+	    materials.setSurplus(nowQuantity);
 	    if (isadd) {
 		nowQuantity = dbmaterials.getSurplus().add(nowQuantity);
 	    } else {
 		nowQuantity = dbmaterials.getSurplus().subtract(nowQuantity);
 	    }
+	    //记录总数量
 	    dbmaterials.setSurplus(nowQuantity);
 	    int r = nowQuantity.compareTo(BigDecimal.ZERO); // 和0，Zero比较
 	    if (r == -1) {// 小
 		throw new Exception(materials.getName() + "库存不足");
 	    } else {
 		materialsService
-			.updateMaterials(materials.getId(), dbmaterials);
+			.updateMaterials(materials.getId(), dbmaterials,materials);
 	    }
 	}
     }

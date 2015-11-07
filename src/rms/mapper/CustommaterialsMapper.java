@@ -14,7 +14,19 @@ import rms.po.materials;
 *
  */
 public interface CustommaterialsMapper {
-
+    	
+    
+    	/**
+    	 * 
+    	* @Title: insertSelectiveRetrunPk 
+    	* @Description: 保存原料并返回主键
+    	* @param @param materials
+    	* @param @return
+    	* @param @throws Exception    
+    	* @return Integer    
+    	* @throws
+    	 */
+    	public Integer insertSelectiveRetrunPk(materials materials) throws Exception;
 	/**
 	 * 
 	* @Title: findAll 

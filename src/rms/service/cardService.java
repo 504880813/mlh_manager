@@ -1,6 +1,7 @@
 package rms.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import rms.po.CustomUser;
@@ -41,17 +42,33 @@ public interface cardService {
          * @throws
           */
          public  card findcardByid(Integer id)  throws Exception;
+
+         
+         /**
+          * 
+         * @Title: findcardsByphoneNumber 
+         * @Description: 根据电话号码查询卡片列表
+         * @param @param phoneNumber
+         * @param @return
+         * @param @throws Exception    
+         * @return List<card>    
+         * @throws
+          */
+         public  List<card> findcardsByphoneNumber(String phoneNumber) throws Exception;
+         
          /**
           * 
          * @Title: findAllRecordsBycardid 
-         * @Description: 根据会员卡id查询会员卡相关 如果是主卡，则查询主卡，及其子卡，，如果是子卡，则只查询子卡记录
+         * @Description: 根据会员卡id查询会员卡一段时间消费记录 如果是主卡，则查询主卡，及其子卡，，如果是子卡，则只查询子卡记录
          * @param @param cardid
+         * @param @param startTime
+         * @param @param endTime
          * @param @return
          * @param @throws Exception    
          * @return List<cardRecord>    
          * @throws
           */
-         public  List<cardRecord> findAllRecordsBycardid(String cardid) throws Exception;
+         public  List<cardRecord> findAllRecordsBycardid(String cardid,Date startTime,Date endTime) throws Exception;
         /**
          * 
         * @Title: savecard 
@@ -226,20 +243,20 @@ public interface cardService {
 	/**
 	 * 
 	* @Title: ReapplyCard 
-	* @Description: 准备更换卡号数据
-	* @param @param id
+	* @Description: 给指定卡号发送验证码并 返回验证码
+	* @param @param cardid
 	* @param @param user
 	* @param @throws Exception    
 	* @return String    
 	* @throws
 	 */
-	public String ReapplyCard(String id, CustomUser user) throws Exception;
+	public String sendValidationCodeTocard(String cardid, CustomUser user) throws Exception;
 	/**
 	 * 
 	* @Title: ReapplyCard 
 	* @Description: 更换卡号
-	* @param @param oldid
-	* @param @param newid
+	* @param @param oldcardid
+	* @param @param newcardid
 	* @param @param user
 	* @param @param SessionvalidationCode
 	* @param @param PagevalidationCode
@@ -247,6 +264,18 @@ public interface cardService {
 	* @return void    
 	* @throws
 	 */
-	public void ReapplyCard(String oldid, String newid, CustomUser user,
+	public void ReapplyCard(String oldcardid, String newcardid, CustomUser user,
 		String SessionvalidationCode,String PagevalidationCode) throws Exception;
+	/**
+	 * 
+	* @Title: ValidationCodecorrectOrwrong 
+	* @Description: 验证验证码是否正确
+	* @param @param user
+	* @param @param sessionValidationCode
+	* @param @param pageValidationCode
+	* @param @throws Exception    
+	* @return boolean    
+	* @throws
+	 */
+	public boolean ValidationCodecorrectOrwrong(CustomUser user,String sessionValidationCode,String pageValidationCode) throws Exception;
 }

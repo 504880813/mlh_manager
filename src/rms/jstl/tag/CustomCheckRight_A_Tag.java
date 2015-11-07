@@ -27,7 +27,11 @@ public class CustomCheckRight_A_Tag extends SimpleTagSupport {
      
      private String uri;
      
+     
+     
      private String a_TagContent;
+     
+     private String cssclass;
      
      //注入uri属性
      public void setUri(String uri) {
@@ -36,6 +40,10 @@ public class CustomCheckRight_A_Tag extends SimpleTagSupport {
      //注入a_TagContent属性
      public void setA_TagContent(String a_TagContent) {
 	 this.a_TagContent = a_TagContent;
+    }
+    //注入cssclass属性
+    public void setCssclass(String cssclass) {
+        this.cssclass = cssclass;
     }
     @Override
      public void doTag() throws JspException, IOException {
@@ -52,6 +60,10 @@ public class CustomCheckRight_A_Tag extends SimpleTagSupport {
  		 builder.append("<a href =");
  		 builder.append("'");
  		 builder.append(uri);
+ 		 builder.append("'");
+ 		 builder.append(" class =");
+ 		 builder.append("'");
+ 		 builder.append(cssclass);
  		 builder.append("'");
  		 builder.append(">");
  		 builder.append(content);

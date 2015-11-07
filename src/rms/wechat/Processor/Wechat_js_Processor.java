@@ -11,11 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import rms.po.card;
 import rms.po.cardRecord;
+import rms.po.wechatAdvertisementImage;
 import rms.service.cardService;
 import rms.wechat.entity.Access_Token_Request;
 import rms.wechat.entity.WechatCheck;
 import rms.wechat.entity.jsapi_ticket;
 import rms.wechat.service.Wechat_js_service;
+import rms.wechat.service.wechatAdvertisementImageService;
 import rms.wechat.service.wechatuserService;
 import rms.wechat.untils.HttpUtils;
 import rms.wechat.untils.PastUtil;
@@ -36,6 +38,8 @@ public class Wechat_js_Processor {
     private Wechat_js_service Wechat_js_service;
     @Resource
     private wechatuserService wechatuserService;
+    @Resource
+    private wechatAdvertisementImageService wecahtAdvertisementImageService;
     @Resource
     private cardService cardService;
     /**
@@ -85,18 +89,22 @@ public class Wechat_js_Processor {
 	    WechatCheck chenck=Wechat_js_service.getWechatCheckData(code,request.getRequestURL().toString()+"?"+request.getQueryString() );
 	    String openid = wechatuserService.getWechatOpenid(code);
 	    
-	    String id=request.getParameter("id");
+	    String cardid=request.getParameter("cardid");
 	    
-	    List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(id);
-            card card=cardService.findcardByid(Integer.parseInt(id));
+	    List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid);
+            card card=cardService.findcardBycardid(cardid);
             cardRecords=cardRecords.subList(cardRecords.size()-10, cardRecords.size());
             
+            //获取广告图片
+            List<wechatAdvertisementImage> wechatAdvertisementImages=wecahtAdvertisementImageService.getAllofusing();
+
+            request.setAttribute("wechatAdvertisementImages", wechatAdvertisementImages);
             request.setAttribute("card",card);
             request.setAttribute("cardRecords", cardRecords);
 	    request.setAttribute("chenck", chenck);
 	    request.setAttribute("openid", openid);
 	    
-	    request.getRequestDispatcher("/WEB-INF/jsp/cardManager/showAdvertisingAndMoney.jsp").forward(request, response);
+	    request.getRequestDispatcher("/WEB-INF/jsp/wechat/showAdvertisingAndMoney.jsp").forward(request, response);
 	    } catch (Exception e) {
 		e.printStackTrace();
 	     try {

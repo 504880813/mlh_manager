@@ -98,8 +98,6 @@ public interface DiningTableService {
 	 */
 	public void updateImage(MultipartFile freeimageFile, MultipartFile busyimageFile) throws Exception;
 	/**
-	 * @param customdiningTable 
-	 * 
 	* @Title: uploadImage 
 	* @Description: 上传餐桌图片 
 	* @param @param freeimageFile

@@ -24,6 +24,11 @@ public class TemplateData {
 	    this.value = value;
 	    this.color = color;
 	}
+	
+	
+	public TemplateData() {
+	    super();
+	}
 	public String getValue() {
 		return value;
 	}

@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import rms.controller.exception.CustomException;
@@ -247,28 +249,41 @@ public class cardHandler {
     }
     /**
      * 
-    * @Title: selectRecordsBycardid 
-    * @Description: 查询消费接口并显示
-    * @param @param cardid
+    * @Title: selectRecordsPage 
+    * @Description: 跳转到查询消费记录页面
     * @param @return
     * @param @throws Exception    
-    * @return ModelAndView    
+    * @return String   
     * @throws
      */
-    @RequestMapping("selectAllRecordsBycardid")
-    public ModelAndView selectAllRecordsBycardid(String cardid) throws Exception{
+    @RequestMapping("selectRecordsPage")
+    public String selectRecordsPage() throws Exception{
+	return "cardManager/cardRecordList";
+    }
+    
+    
+    
+    /**
+     * 
+    * @Title: selectAllRecordsBycardidofjson 
+    * @Description: 查询消费接口并显示
+    * @param @param cardid
+    * @param @param startTime
+    * @param @param endTime
+    * @param @return
+    * @param @throws Exception    
+    * @return List<cardRecord>    
+    * @throws
+     */
+    @RequestMapping("selectAllRecordsBycardidofjson")
+    public @ResponseBody List<cardRecord> selectAllRecordsBycardidofjson(String cardid,Date startTime,Date endTime) throws Exception{
 	
-	List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid);
+	List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid,startTime,endTime);
 	
-	ModelAndView mav=new ModelAndView();
 	if(cardRecords==null) {
-	    mav.addObject("message", "该卡号不存在");
-	    mav.setViewName("error");
-	}else {
-	    mav.addObject("cardRecords", cardRecords);
-	    mav.setViewName("cardManager/cardRecordList");
+	    throw new CustomException("该卡号不存在");
 	}
-	return mav;
+	return cardRecords;
     }
     
     
@@ -335,7 +350,7 @@ public class cardHandler {
      * 
     * @Title: ReapplyCard 
     * @Description: 更换卡号页面
-    * @param @param id
+    * @param @param cardid
     * @param @param request
     * @param @return
     * @param @throws Exception    
@@ -343,12 +358,15 @@ public class cardHandler {
     * @throws
      */
     @RequestMapping("ReapplyCard")
-    public ModelAndView ReapplyCard(String id,HttpServletRequest request) throws Exception{
+    public ModelAndView ReapplyCard(String cardid,HttpServletRequest request) throws Exception{
 	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
-	String ValidationCode=cardService.ReapplyCard(id, user);
+	
+	String ValidationCode=cardService.sendValidationCodeTocard(cardid, user);
+
 	request.getSession().setAttribute("ValidationCode", ValidationCode);
+	
 	ModelAndView mav=new ModelAndView();
-	mav.addObject("oldid", id);
+	mav.addObject("oldcardid", cardid);
 	mav.setViewName("cardManager/ReapplyCard");
 	return mav;
     }
@@ -357,7 +375,8 @@ public class cardHandler {
      * 
     * @Title: ReapplyCardSubMit
     * @Description: 更换卡号
-    * @param @param id
+    * @param @param oldcardid
+    * @param @param newcardid
     * @param @param request
     * @param @return
     * @param @throws Exception    
@@ -365,10 +384,10 @@ public class cardHandler {
     * @throws
      */
     @RequestMapping("ReapplyCardSubMit")
-    public ModelAndView ReapplyCardSubMit(String oldid,String newid,HttpServletRequest request,String PagevalidationCode) throws Exception{
+    public ModelAndView ReapplyCardSubMit(String oldcardid,String newcardid,HttpServletRequest request,String PagevalidationCode) throws Exception{
 	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
 	String  ValidationCode=(String) request.getSession().getAttribute("ValidationCode");
-	cardService.ReapplyCard(oldid,newid, user,ValidationCode,PagevalidationCode);
+	cardService.ReapplyCard(oldcardid,newcardid, user,ValidationCode,PagevalidationCode);
 	
 	ModelAndView mav=new ModelAndView();
 	mav.setViewName("redirect:getAllcard.action");
@@ -471,6 +490,57 @@ public class cardHandler {
     public String deletecardLevel(Integer id) throws Exception{
 	cardService.deletecardLevelByid(id);
 	return "redirect:getAllcardLevel.action";
+    }
+    
+    /**
+     * ajax
+     */
+    /**
+     * 
+    * @Title: sendVerificationCodeofajax 
+    * @Description: 向用户发送验证码 
+    * @param @param cardid
+    * @param @return
+    * @param @throws Exception    
+    * @return String    
+    * @throws
+     */
+ /*   @RequestMapping("sendVerificationCodeofajax")
+    public @ResponseBody String sendVerificationCodeofajax(HttpServletRequest request,String cardid) throws Exception{
+	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
+	String ValidationCode=cardService.sendValidationCodeTocard(cardid, user);
+	request.getSession().setAttribute("ValidationCode", ValidationCode);
+	return cardid;
+    }*/
+    /**
+     * 
+    * @Title: sendVerificationCodeofajax 
+    * @Description: 向用户发送验证码 
+    * @param @param cardid
+    * @param @return
+    * @param @throws Exception    
+    * @return void    
+    * @throws
+     */
+    @RequestMapping("sendVerificationCodeofajax")
+    public void sendVerificationCodeofajax(HttpServletRequest request,HttpServletResponse response,String cardid) throws Exception{
+	CustomUser user =(CustomUser) request.getSession().getAttribute("OnlineUser");
+	String ValidationCode=cardService.sendValidationCodeTocard(cardid, user);
+
+	request.getSession().setAttribute("ValidationCode", ValidationCode);
+	
+	response.setCharacterEncoding("utf-8");
+	
+//	response.setContentType("application/json;charset=utf-8");
+	
+	response.setContentType("text/html;charset=utf-8");
+	
+	response.getWriter().write(cardid);
+
+	
+//	response.getWriter().write(cardid);
+	
+//	return cardid;
     }
     
     

@@ -41,6 +41,13 @@
 		  <required>true</required>
 		  <rtexprvalue>true</rtexprvalue>
 		  <type>ObjectType</type>
+	</attribute> 
+	<attribute>
+		  <description>cssclass</description>
+		  <name>cssclass</name>
+		  <required>false</required>
+		  <rtexprvalue>true</rtexprvalue>
+		  <type>ObjectType</type>
 	</attribute>
 <!-- 	<attribute>
 		  <description>a标签体内容</description>
