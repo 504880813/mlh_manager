@@ -17,7 +17,7 @@
 <div class="right_cont">
    <div class="title_right"><strong>补办会员卡</strong></div>
    <div style="width:900px; margin:auto">
-<form action="${pageContext.request.contextPath}/card/ReapplyCardSubMit.action" method="post">
+<form id="dataform" action="${pageContext.request.contextPath}/card/ReapplyCardSubMit.action" method="post">
    <table  class="table table-bordered">
      <tbody>
      <tr>
@@ -29,13 +29,13 @@
       <tr>
        <td align="right" bgcolor="#f1f1f1" >旧卡号</td>
        <td>
-	       <input type="text" name="oldcardid" readonly="readonly" value="${oldcardid }"/>
+	       <input type="text" id="oldcardid" name="oldcardid" readonly="readonly" value="${oldcardid }"/>
 	   </td>
      </tr>
       <tr>
        <td align="right" bgcolor="#f1f1f1" >新卡号</td>
        <td>
-	       <input type="text" name="newcardid">
+	       <input type="text" id="newcardid" name="newcardid">
 	   </td>
      </tr>
       <random:hasRight uri="ValidationCode">
@@ -50,7 +50,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -72,7 +72,6 @@
 	</random:hasRight>
 	<input type="submit" value="submit"/>
 </form> --%>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/card/Card_reader_operation.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/card/ReapplyCard.js"></script>
 </body>

@@ -1,4 +1,24 @@
-
+//初始化
+$(function(){
+	$("#paypageForm").validate({
+	   rules: {
+		   cardId: "required",
+		   Nowexpense:{
+			   required:true,
+			   number:true
+		   },
+		   expense:"required"
+	  },
+	   messages: {
+		   cardId: "请录入卡号",
+		   Nowexpense:{
+			   required:"请录入消费金额",
+			   number:"金额必须为数字"
+		   },
+		   expense:"折后金额必须存在"
+	  }
+	 });
+});
 //$(function(){
 //	$("input[name=expense]").blur(function(){
 //		expenseChange();

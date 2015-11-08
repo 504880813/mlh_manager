@@ -1,6 +1,42 @@
 
+
+
 var htmltrtdTemplateStart="<tr><td align='right' bgcolor='#f1f1f1' >";
 var htmltrtdTemplatend="</td>";
+
+//初始化
+$(function(){
+	$("#cardchangeForm").validate({
+	   rules: {
+		   cardid:{
+			   required:true
+		   },
+		   username:{
+			   required:true
+		   },
+		   level:{
+			   required:true
+		   },
+		   belongsCardid:{
+			   required:true
+		   }
+	  },
+	   messages: {
+		   cardid:{
+			   required:"请录入卡号",
+		   },
+		   username:{
+			   required:"请录入用户名",
+		   },
+		   level:{
+			   required:"请选择会员卡等级",
+		   },
+		   belongsCardid:{
+			   required:"请添加主卡号",
+		   }
+	  }
+	 });
+});
 
 
 
@@ -61,7 +97,6 @@ function showInputdiv(ismain,cardid,belongsCardid,username,phone,money,cardLevel
 	
 	htmloldcode+="</td></tr>";
 	
-	alert(htmloldcode);
 	if(cardManagerisconnect==false){
 		timeFlagid=setInterval(ConnectUsb,2000);
 	}
@@ -130,7 +165,7 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="卡号";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='cardid'";
+	html+="<input type='text' id='cardid' name='cardid'";
 	html+=cardid==''?'':"value= "+cardid;
 	if(isedit=="true"){
 	html+="  readonly=readonly";
@@ -142,7 +177,7 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="用户名";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='username' ";
+	html+="<input type='text' id='username' name='username' ";
 	html+=username==''?'':"value= "+username;
 	html+=" />";
 	html+="</td></tr>";
@@ -151,7 +186,7 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="电话";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='phone' ";
+	html+="<input type='text' id='phone' name='phone' ";
 	html+=phone==''?'':"value= "+phone;
 	html+=" />";
 	html+="</td></tr>";
@@ -160,7 +195,7 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="开通金额";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='money' ";
+	html+="<input type='text' id='money' name='money' ";
 	html+=money==''?'':"value= "+money;
 	if(isedit=="true"){
 		html+="  readonly=readonly";
@@ -171,7 +206,6 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	//获取卡片分类并添加入主卡选项
 	
 	var cardlevelSpan=$("#levelSpan").text().trim();
-//	alert("cardlevelSpan---->"+cardlevelSpan);
 	
 	var cardlevelSpans= new Array(); //定义一数组 
 	cardlevelSpans=cardlevelSpan.split(",");
@@ -186,19 +220,19 @@ function addMaincardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 			continue;
 		}
 		if(cardlevelSpans[i].trim()==cardLevel){
-			html+="<input type='radio' name='level' ";
+			html+="<input type='radio' id='level'  name='level' ";
 			html+="value= "+cardlevelSpans[i].trim();
 			html+=" checked />";
 			html+=cardlevelSpans[i].trim();
 		}else{
-			html+="<input type='radio' name='level' ";
+			html+="<input type='radio' id='level' name='level' ";
 			html+="value= "+cardlevelSpans[i].trim();
 			html+=" />";
 			html+=cardlevelSpans[i].trim();
 		}
 	}
 	html+="</td></tr>";
-	
+
 	messagediv.append(html);
 }
 /**
@@ -241,7 +275,7 @@ function addVicecardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="卡号";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='cardid' ";
+	html+="<input type='text' id='cardid' name='cardid' ";
 	html+=cardid==''?'':"value= "+cardid;
 	if(isedit=="true"){
 	html+="  readonly=readonly";
@@ -253,7 +287,7 @@ function addVicecardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="主卡号";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='belongsCardid' ";
+	html+="<input type='text' id='belongsCardid' name='belongsCardid' ";
 	html+=belongsCardid==''?'':"value= "+belongsCardid;
 	if(isedit=="true"){
 	html+="  readonly=readonly";
@@ -265,7 +299,7 @@ function addVicecardInput(cardid,belongsCardid,username,phone,money,cardLevel,is
 	html+="用户名";
 	html+=htmltrtdTemplatend;
 	html+="<td>";
-	html+="<input type='text' name='username' ";
+	html+="<input type='text' id='username' name='username' ";
 	html+=username==''?'':"value= "+username;
 	html+=" />";
 	html+="</td></tr>";

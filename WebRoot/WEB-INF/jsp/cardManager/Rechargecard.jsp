@@ -22,7 +22,7 @@
    
    <div class="title_right"><strong>会员卡充值</strong></div>
    <div style="width:900px; margin:auto">
- <form action="${pageContext.request.contextPath}/card/RechargecardSubMit.action" method="post">
+<form id="RechargeForm" action="${pageContext.request.contextPath}/card/RechargecardSubMit.action" method="post">
    <input type="hidden" name="id" value="${card.id}" />
    <table  class="table table-bordered">
      <tbody>
@@ -47,14 +47,14 @@
       <tr>
        <td align="right" bgcolor="#f1f1f1" >充值金额</td>
        <td>
-	       <input type="text" name="RechargeMoney"/>元
+	       <input type="text" id="RechargeMoney" name="RechargeMoney"/>元
 	   </td>
      </tr>
    	</tbody>
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -73,5 +73,6 @@
 </form> --%>
 
 <%@ include file="/JspbaseTemplate/footer.jsp" %> 
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/card/Rechargecard.js"></script>
 </body>
 </html>

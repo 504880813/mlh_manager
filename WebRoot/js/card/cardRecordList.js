@@ -1,4 +1,44 @@
 
+$(function(){
+	
+	$("#selectRecordForm").validate({
+		onkeyup  : false,
+        onclick  : false,
+        onfocusout : false,
+	   rules: {
+		   cardid:{
+			   required:true
+		   },
+		   startTime:{
+			   required:true,
+		   },
+		   endTime:{
+			   required:true,
+		   }
+	  },
+	   messages: {
+		   cardid:{
+			   required:"请选择要查询的卡号",
+		   },
+		   startTime:{
+			   required:"请选择起始时间",
+		   },
+		   endTime:{
+			   required:"请选择结束时间",
+		   },
+	  },
+	  submitHandler: function(form) {  //通过之后回调
+		  selectRecordSubmit();
+		  return false;
+	  },
+	  invalidHandler: function(form, validator) {  //不通过回调
+	      return false;
+	  } 
+	 });
+});
+
+
+
 //响应表单提交按钮
 function selectRecordSubmit(){
 	ajaxSubmit($("#selectRecordForm"));

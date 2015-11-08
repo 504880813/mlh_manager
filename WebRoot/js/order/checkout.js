@@ -1,4 +1,24 @@
-
+//初始化
+$(function(){
+	$("#chenckForm").validate({
+	   rules: {
+		   discountamountPercent:{
+			   number:true
+		   },
+		   couponamount:{
+			   number:true
+		   },
+	  },
+	   messages: {
+		   discountamountPercent:{
+			   number:"折扣只能是数字",
+		   },
+		   couponamount:{
+			   number:"优惠金额只能是数字"
+		   },
+	  }
+	 });
+});
 
 
 /**

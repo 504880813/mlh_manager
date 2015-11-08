@@ -23,6 +23,28 @@ $(function(){
 	$('#all2').click(function(){
 		$('#right > option').appendTo($('#left'));
 	});	
+	
+	$("#userForm").validate({
+		   rules: {
+			   username:{
+				   required:true
+			   },
+			   password:{
+				   required:true,
+			   },
+		  },
+		   messages: {
+			   username:{
+				   required:"请录入用户名",
+			   },
+			   password:{
+				   required:"请录入用户密码",
+			   },
+		  }
+		 });
+	
+	
+	
 });
 
 function submitForm1(){

@@ -1,4 +1,29 @@
 
+
+//初始化
+$(function(){
+	$("#materialsdataForm").validate({
+	   rules: {
+		   name:{
+			   required:true
+		   },
+		   surplus:{
+			   required:true,
+			   number:true
+		   }
+	  },
+	   messages: {
+		   name:{
+			   required:"请选择要进货的原料",
+		   },
+		   surplus:{
+			   required:"必须录入进货数量",
+			   number:"进货数量必须为数字"
+		   }
+	  },
+	});
+});
+
 /**
  * 显示原料列表
  */

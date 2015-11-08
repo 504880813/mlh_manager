@@ -17,7 +17,7 @@
    
    <div class="title_right"><strong>初始化订单</strong></div>
    <div style="width:900px; margin:auto">
-<form action="${pageContext.request.contextPath}/order/startorderSubmit.action" method="post">
+<form id="startorderForm" action="${pageContext.request.contextPath}/order/startorderSubmit.action" method="post">
 	<input type="hidden" name="diningTableId" value="${diningTableId}"/>
 	<input type="hidden" name="createtime" value="${createtime }" />
    <table  class="table table-bordered">
@@ -25,19 +25,19 @@
      <tr>
        <td align="right" bgcolor="#f1f1f1" >桌号</td>
        <td>
-	       <input type="text" name="name" value="${diningTableSeatnumber }" />
+	       <input type="text" id="name" name="name" value="${diningTableSeatnumber }" />
 	   </td>
      </tr>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >人数</td>
        <td>
-	       <input type="text" name="numberofpeople"/>
+	       <input type="text" id="numberofpeople" name="numberofpeople"/>
 	   </td>
      </tr>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >服务员</td>
        <td>
-	      	<input type="text" name="waiter" />
+	      	<input type="text" id="waiter" name="waiter" />
 	   </td>
      </tr>
      <tr>
@@ -50,7 +50,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -83,4 +83,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/order/startorder.js"></script>
 </html>

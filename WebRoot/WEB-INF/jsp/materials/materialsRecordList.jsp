@@ -20,7 +20,8 @@
          <tr>
       <td width="10%" align="right" nowrap="nowrap" bgcolor="#f1f1f1">原料名</td>
      <td width="23%">
-        <input class="span1-1" type="text" name="name"/><input type="button" value="选择原料" onclick="showmaterials()"/>
+        <input class="span1-1" type="text" id="name" name="name"/>
+        <input type="button" value="选择原料" onclick="showmaterials()"/>
 	       <div id="materialsList" style="display:none">
 				<c:forEach items="${custommaterialsList }" var="materials">
 					<input type="radio" onclick="Selectthis('${materials.id}','${materials.name}')">${materials.name} <br>
@@ -29,7 +30,7 @@
      </td>
      <td width="10%" align="right" nowrap="nowrap" bgcolor="#f1f1f1">起始时间：</td>
      <td width="23%">
-     <input type="text" class="laydate-icon span1-1" name="startTime" id="startTime" readonly="readonly" />
+     <input type="text" class="laydate-icon span1-1" id="startTime" name="startTime" id="startTime" readonly="readonly" />
      </td>
      <td width="10%" align="right" nowrap="nowrap" bgcolor="#f1f1f1">结束时间：</td>
      <td width="23%">
@@ -39,7 +40,7 @@
        </table>
        <table  class="margin-bottom-20 table  no-border" >
         <tr>
-     	<td class="text-center"><input type="button" value="查询" class="btn btn-info " style="width:80px;" onclick="selectRecordSubmit()"/></td>
+     	<td class="text-center"><input type="submit" value="查询" class="btn btn-info submit" style="width:80px;" /></td>
      </tr>
  </table>
    </form>

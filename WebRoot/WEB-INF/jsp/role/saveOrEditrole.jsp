@@ -17,7 +17,7 @@
    
    <div class="title_right"><strong>添加或修改角色信息</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/role/${role.id ==null ? 'addroleSubmit' : 'editroleSubmit'}.action" method="post">
+  <form id="roleForm" action="${pageContext.request.contextPath}/role/${role.id ==null ? 'addroleSubmit' : 'editroleSubmit'}.action" method="post">
 	<input type="hidden" name="id" value="${role.id}" />
    <table  class="table table-bordered">
      <tbody>
@@ -25,7 +25,7 @@
      <tr>
        <td align="right" bgcolor="#f1f1f1" >角色名称</td>
        <td>
-	       <input type="text" name="name" value="${role.name}" > 
+	       <input type="text" id="name" name="name" value="${role.name}" > 
 	   </td>
      </tr>
        <tr>
@@ -76,7 +76,7 @@
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
         <td class="tdFormLabel"></td>
-     	<td class="text-center tdFormControl"><input value="确定" class="btn btn-info " style="width:80px;" type="submit" onclick='return submitForm1()'></td>
+     	<td class="text-center tdFormControl"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit" onclick='return submitForm1()'></td>
      </tr>
  	</tbody>
   </table>

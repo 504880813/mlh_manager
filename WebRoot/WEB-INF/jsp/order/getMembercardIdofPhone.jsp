@@ -17,7 +17,7 @@
    
    <div class="title_right"><strong>根据会员电话号码获取会员卡号</strong></div>
    <div style="width:900px; margin:auto">
-<form action="${pageContext.request.contextPath}/order/CheckoutofphoneAndcardid.action" method="post">
+<form id="dataForm" action="${pageContext.request.contextPath}/order/CheckoutofphoneAndcardid.action" method="post">
 	<input type="hidden" name="diningtableid" value="${diningtableid}">
 	<input type="hidden" name="cardid" />
 	
@@ -26,7 +26,7 @@
      <tr>
        <td align="right" bgcolor="#f1f1f1" >电话号码</td>
        <td>
-	       <input type="text" name="phoneNumber"/>
+	       <input type="text" id="phoneNumber" name="phoneNumber"/>
 		   <input type="button" value="确认电话" onclick="selectcardByphoneNumber('${pageContext.request.contextPath}')">
 	   		<div id="cardDiv"></div>
 	   </td>

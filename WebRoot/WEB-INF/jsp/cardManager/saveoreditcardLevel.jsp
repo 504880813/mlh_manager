@@ -15,7 +15,8 @@
    
    <div class="title_right"><strong>添加或修改会员卡等级信息</strong></div>
    <div style="width:900px; margin:auto">
-   <form action="${pageContext.request.contextPath}/card/${cardLevel.id ==null ? 'addcardLevelSubmit' : 'editcardLevelSubmit'}.action" method="post">
+<form id="cardLevelchangeForm" action="${pageContext.request.contextPath}/card/${cardLevel.id ==null ? 'addcardLevelSubmit' : 'editcardLevelSubmit'}.action" method="post">
+   <input type="hidden" id="id" name="id" value="${ cardLevel.id}">
    <table class="table table-bordered">
      <tbody>
      <tr>
@@ -30,7 +31,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody></table>
    </form>   
@@ -40,4 +41,5 @@
 
 <%@ include file="/JspbaseTemplate/footer.jsp" %> 
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/card/saveoreditcardLevel.js"></script>
 </html>

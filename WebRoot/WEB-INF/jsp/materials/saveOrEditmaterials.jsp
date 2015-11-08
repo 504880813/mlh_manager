@@ -17,7 +17,7 @@
    
    <div class="title_right"><strong>添加或修改分类信息</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/materials/${materials.id ==null ? 'addmaterialsSubmit' : 'editmaterialsSubmit'}.action" method="post">
+  <form id="materialsdataForm" action="${pageContext.request.contextPath}/materials/${materials.id ==null ? 'addmaterialsSubmit' : 'editmaterialsSubmit'}.action" method="post">
    	<input type="hidden" name="id" value="${materials.id}" />
    <table  class="table table-bordered">
      <tbody>
@@ -27,26 +27,26 @@
      <tr>
        <td align="right" bgcolor="#f1f1f1" >原料名</td>
        <td>
-	      <input type="text" name="name" value="${materials.name }" />
+	      <input type="text" id="name" name="name" value="${materials.name }" />
 	   </td>
      </tr>
       <tr>
        <td align="right" bgcolor="#f1f1f1" >库存</td>
        <td>
-	      <input type="text" name="surplus" value="${materials.surplus}" /> 
+	      <input type="text" id="surplus" name="surplus" value="${materials.surplus}" /> 
 	   </td>
      </tr>
        <tr>
        <td align="right" bgcolor="#f1f1f1" >库存单位</td>
        <td>
-	      <input type="text" name="unit" value="g">
+	      <input type="text" name="unit" value="g" readonly="readonly">
 	   </td>
      </tr>
    	</tbody>
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -89,4 +89,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/materials/saveOrEditmaterials.js"></script>
 </html>

@@ -17,7 +17,7 @@
    
    <div class="title_right"><strong>会员结账界面</strong></div>
    <div style="width:900px; margin:auto">
-<form action="${pageContext.request.contextPath}/order/MemberCheckout.action" method="post">
+<form id="checkoutForm" action="${pageContext.request.contextPath}/order/MemberCheckout.action" method="post">
 	<input type="hidden" name="id" value="${order.id }"/>
 	<input type="hidden" name="rDiningtableId" value="${order.rDiningtableId}"/>
 	<input type="hidden" name="createtime" value="${endtime }" />
@@ -116,7 +116,7 @@
 	<tr>
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">优惠券</td>
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="4">
-			<input type="text" name="couponamount" onchange="changeAllprice()">元
+			<input type="text" id="couponamount" name="couponamount" onchange="changeAllprice()">元
 		</td>
 	</tr>
 	<tr>

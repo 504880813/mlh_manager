@@ -37,6 +37,7 @@ $(function(){
 		var currentdishnumber=$(val).next().text();
 		retreatdishsMap[val.innerHTML]=currentdishnumber;
 	});
+	
 });
 
 /**

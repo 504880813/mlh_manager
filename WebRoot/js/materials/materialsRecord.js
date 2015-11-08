@@ -14,6 +14,45 @@ function submitQuery(){
 }
 */
 
+//初始化
+$(function(){
+	
+	$("#selectRecordForm").validate({
+		onkeyup  : false,
+        onclick  : false,
+        onfocusout : false,
+	   rules: {
+		   name:{
+			   required:true
+		   },
+		   startTime:{
+			   required:true,
+		   },
+		   endTime:{
+			   required:true,
+		   }
+	  },
+	   messages: {
+		   name:{
+			   required:"请选择要查询的原料",
+		   },
+		   startTime:{
+			   required:"请选择起始时间",
+		   },
+		   endTime:{
+			   required:"请选择结束时间",
+		   },
+	  },
+	  submitHandler: function(form) {  //通过之后回调
+		  selectRecordSubmit();
+		  return false;
+	  },
+	  invalidHandler: function(form, validator) {  //不通过回调
+	      return false;
+	  } 
+	 });
+});
+
 
 /**
  * 显示原料列表
@@ -76,12 +115,12 @@ function processMessage(json){
 		html+="</tr>";
 	});
 	
-	
 	$("#recordMessage").html(html);
 }
 
 //将form转为AJAX提交
 function ajaxSubmit(frm, fn) {
+	
   $.ajax({
       url: frm[0].action,
       type: frm[0].method,
@@ -90,6 +129,7 @@ function ajaxSubmit(frm, fn) {
       	processMessage(json);
 	}
   });
+  
 }
 
 

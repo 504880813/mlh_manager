@@ -19,7 +19,7 @@
    
    <div class="title_right"><strong>获取会员卡号</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/card/PayPage.action" method="post">
+  <form id="dataform" action="${pageContext.request.contextPath}/card/PayPage.action" method="post">
    <table  class="table table-bordered">
      <tbody id="cardMessage">
      <tr>
@@ -29,16 +29,16 @@
 	   </td>
      </tr>
        <tr>
-       <td align="right" bgcolor="#f1f1f1" >卡号</td>
+       <td align="right" bgcolor="#f1f1f1">卡号</td>
        <td>
-	       <input type="text" name="cardid"/>
+	       <input type="text" id="cardid" name="cardid"/>
 	   </td>
      </tr>
    	</tbody>
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -50,7 +50,6 @@
 
 <%@ include file="/JspbaseTemplate/footer.jsp" %> 
 	
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/card/Card_reader_operation.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/order/getMembercardIdofSetUpCard.js"></script>
 </body>

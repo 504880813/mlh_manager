@@ -18,20 +18,20 @@
    
    <div class="title_right"><strong>添加或修改本地微信接口信息</strong></div>
    <div style="width:900px; margin:auto">
- <form action="${pageContext.request.contextPath}/wechatInterface/${wechatInterface.id ==null ? 'addwechatInterfaceSubmit' : 'editwechatInterfaceSubmit'}.action" method="post">
+ <form id="wechatInterfaceForm" action="${pageContext.request.contextPath}/wechatInterface/${wechatInterface.id ==null ? 'addwechatInterfaceSubmit' : 'editwechatInterfaceSubmit'}.action" method="post">
 	<input type="hidden" name="id" value="${wechatInterface.id}" />
    <table  class="table table-bordered">
      <tbody>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >微信接口调用名称</td>
        <td>
-	      <input type="text" name="name" value="${wechatInterface.name }" />
+	      <input type="text" id="name" name="name" value="${wechatInterface.name }" />
 	   </td>
      </tr>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >微信接口调用url</td>
        <td>
-	       <input type="text" name="url" value="${wechatInterface.url}" />
+	       <input type="text" id="url" name="url" value="${wechatInterface.url}" />
 	   </td>
      </tr>
      <tr>
@@ -76,4 +76,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/wechatInterfaceManager/saveoreditWechatInterface.js"></script>
 </html>

@@ -7,6 +7,14 @@ var isconnect=false; //判断读卡器是否连接
 //初始化
 $(function(){
 	timeFlagid=setInterval(ConnectUsb,2000);
+	$("#dataform").validate({
+		   rules: {
+			   newcardid: "required"
+		  },
+		   messages: {
+			   newcardid: "请录入新卡号",
+		  }
+	});
 });
 function ConnectUsb(){
 	//链接读卡器，并显示读卡按钮

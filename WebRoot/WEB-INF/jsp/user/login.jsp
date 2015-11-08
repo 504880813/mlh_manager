@@ -27,7 +27,7 @@ body{ background:#0066A8 url(${pageContext.request.contextPath }/css/systemImg/l
 <body>
 <div class="tit"><img src="${pageContext.request.contextPath }/css/systemImg/tit.png" alt="" /></div>
 <div class="login-wrap">
-  <form action="${pageContext.request.contextPath }/user/loginSubmit.action" method="post">
+  <form id="loginForm" action="${pageContext.request.contextPath }/user/loginSubmit.action" method="post">
 	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	    <tr>
 	      <td height="25" valign="bottom">用户名：</td>
@@ -42,7 +42,7 @@ body{ background:#0066A8 url(${pageContext.request.contextPath }/css/systemImg/l
 	      <td><input type="password"  class="login_input login_password" id="password" name="password"/></td>
 	    </tr>
 	    <tr>
-	      <td height="60" valign="bottom"><input type="submit" value="登录" class="btn btn-block btn-login" /></td>
+	      <td height="60" valign="bottom"><input type="submit" value="登录" class="btn btn-block btn-login submit"   /></td>
 	    </tr>
 	  </table>
   </form>

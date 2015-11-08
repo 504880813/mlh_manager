@@ -19,7 +19,7 @@
    
    <div class="title_right"><strong>添加或修改菜品信息</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/dish/${dish.id ==null ? 'addDishSubmit' : 'editDishSubmit'}.action" method="post" enctype="multipart/form-data">
+  <form id="dishdataForm" action="${pageContext.request.contextPath}/dish/${dish.id ==null ? 'addDishSubmit' : 'editDishSubmit'}.action" method="post" enctype="multipart/form-data">
    	<input type="hidden" name="id" value="${dish.id}" />
    <table  class="table table-bordered">
      <tbody>
@@ -27,20 +27,20 @@
 	
        <td align="right" bgcolor="#f1f1f1" >菜品名</td>
        <td>
-	       <input type="text" name="name" value="${dish.name }" />
+	       <input type="text" id="name" name="name" value="${dish.name }" />
 	   </td>
      </tr>
        <tr>
        <td align="right" bgcolor="#f1f1f1" >价格</td>
        <td>
-	       <input type="text" name="price" value="${dish.price }" />
+	       <input type="text" id="price" name="price" value="${dish.price }" />
 	   </td>
      </tr>
        <tr>
        <td align="right" bgcolor="#f1f1f1" >分类</td>
        <td>
 	       	<c:forEach items="${ categorys}" var="category"> 
-				<input type="radio" name="rcategoryid" id="rcategoryid" value="${category.id }" ${dish.rcategoryid==category.id?'checked':'' }>${category.name }
+				<input type="radio" id="rcategoryid" name="rcategoryid" id="rcategoryid" value="${category.id }" ${dish.rcategoryid==category.id?'checked':'' }>${category.name }
 			</c:forEach>
 	   </td>
      </tr>
@@ -86,7 +86,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>

@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -458,7 +457,7 @@ public class cardHandler {
     @RequestMapping("addcardLevelSubmit")
     public String addcardLevelSubmit(cardLevel cardLevel) throws Exception{
 	cardService.addcardLevel(cardLevel);
-	return "redirect:getAllcardLevelaction";
+	return "redirect:getAllcardLevel.action";
     }
     /**
      * 

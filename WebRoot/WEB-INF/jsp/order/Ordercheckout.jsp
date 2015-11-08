@@ -17,7 +17,7 @@
    
    <div class="title_right"><strong>结账界面</strong></div>
    <div style="width:900px; margin:auto">
- <form action="${pageContext.request.contextPath}/order/Checkout.action" method="post">
+ <form id="chenckForm" action="${pageContext.request.contextPath}/order/Checkout.action" method="post">
 	<input type="hidden" name="id" value="${order.id }"/>
 	<input type="hidden" name="rDiningtableId" value="${order.rDiningtableId}"/>
 	<input type="hidden" name="createtime" value="${endtime }" />
@@ -106,14 +106,14 @@
 	<tr>
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">折扣</td>
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="4">
-			<input type="text" name="discountamountPercent" onchange="CalculatingDiscount(this)">折
+			<input type="text" name="discountamountPercent" id="discountamountPercent" onchange="CalculatingDiscount(this)">折
 			<span id="discountamountValue"></span>元<br>
 		</td>
 	</tr>
 	<tr>
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">优惠券</td>
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="4">
-			<input type="text" name="couponamount" onchange="changeAllprice()">元<br>
+			<input type="text" name="couponamount" id="couponamount" onchange="changeAllprice()">元<br>
 			<input type="hidden" name="price" value="${order.price}">
 		</td>
 	</tr>

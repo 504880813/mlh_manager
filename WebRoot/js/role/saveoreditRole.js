@@ -23,6 +23,24 @@ $(function(){
 	$('#all2').click(function(){
 		$('#right > option').appendTo($('#left'));
 	});	
+	
+	
+	$("#roleForm").validate({
+		   rules: {
+			   name:{
+				   required:true
+			   }
+		  },
+		   messages: {
+			   name:{
+				   required:"请录入角色名",
+			   }
+		  }
+		 });
+	
+	
+	
+	
 });
 
 function submitForm1(){

@@ -17,20 +17,20 @@
    
    <div class="title_right"><strong>添加或修改公众号信息</strong></div>
    <div style="width:900px; margin:auto">
- <form action="${pageContext.request.contextPath}/wechatuser/${wechatuser.id ==null ? 'addwechatuserSubmit' : 'editwechatuserSubmit'}.action" method="post">
+ <form id="wechatuserForm" action="${pageContext.request.contextPath}/wechatuser/${wechatuser.id ==null ? 'addwechatuserSubmit' : 'editwechatuserSubmit'}.action" method="post">
 	<input type="hidden" name="id" value="${wechatuser.id}" />
    <table  class="table table-bordered">
      <tbody>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >appid</td>
        <td>
-	       <input type="text" name="appid" value="${wechatuser.appid }" />
+	       <input type="text" name="appid" id="appid" value="${wechatuser.appid }" />
 	   </td>
      </tr>
           <tr>
        <td align="right" bgcolor="#f1f1f1" >appsecret</td>
        <td>
-	       <input type="text" name="appsecret" value="${wechatuser.appsecret}" />
+	       <input type="text" name="appsecret" id="appsecret" value="${wechatuser.appsecret}" />
 	   </td>
      </tr>
    	</tbody>
@@ -54,15 +54,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <%-- 公众号信息：
 <c:if test="${errors!=null }">
 <c:forEach items="${errors}" var="error">
@@ -77,4 +68,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/wechatMessageManager/saveoreditWechatUser.js"></script>
 </html>

@@ -19,7 +19,7 @@
    
    <div class="title_right"><strong>添加或修改消息模板信息</strong></div>
    <div style="width:900px; margin:auto">
-<form action="${pageContext.request.contextPath}/wechatTemplate/${wechatTemplate.id ==null ? 'addwechatTemplateSubmit' : 'editwechatTemplateSubmit'}.action" method="post">
+<form id="wechatTemplateForm" action="${pageContext.request.contextPath}/wechatTemplate/${wechatTemplate.id ==null ? 'addwechatTemplateSubmit' : 'editwechatTemplateSubmit'}.action" method="post">
 	<input type="hidden" name="id" value="${wechatTemplate.id}" />
    <table  class="table table-bordered">
      <tbody>
@@ -29,13 +29,13 @@
 	
        <td align="right" bgcolor="#f1f1f1" >模板名称</td>
        <td>
-	      <input type="text" name="name" value="${wechatTemplate.name }" />
+	      <input type="text" name="name" id="name" value="${wechatTemplate.name }" />
 	   </td>
      </tr>
         <tr>
        <td align="right" bgcolor="#f1f1f1" >模板id</td>
        <td>
-	       <input type="text" name="templateId" value="${wechatTemplate.templateId}" />
+	       <input type="text" name="templateId" id="templateId" value="${wechatTemplate.templateId}" />
 	   </td>
      </tr>
         <tr>
@@ -47,7 +47,7 @@
         <tr>
        <td align="right" bgcolor="#f1f1f1" >模板颜色</td>
        <td>
-	       <input type="text" name="topcolor" value="${wechatTemplate.topcolor}" />
+	       <input type="text" name="topcolor" id="topcolor" value="${wechatTemplate.topcolor}" />
 	   </td>
      </tr>
    	</tbody>
@@ -92,4 +92,6 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/wechatTemplateManager/saveoreditWechatTemplate.js"></script>
 </html>

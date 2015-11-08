@@ -6,7 +6,6 @@
 <title>获取会员卡号</title>
 </head>
 <body>
-<br />
 <%@ include file="/JspbaseTemplate/header.jsp" %>
 <%@ include file="/JspbaseTemplate/left.jsp" %>
 <!-- 读卡器设置 start-->
@@ -19,7 +18,7 @@
    
    <div class="title_right"><strong>添加或修改会员卡信息</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/order/CheckoutofMemberid.action" method="post">
+  <form id="dataform" action="${pageContext.request.contextPath}/order/CheckoutofMemberid.action" method="post">
   	<input type="hidden" name="diningtableid" id="diningtableid" value="${diningtableid }">
    <table  class="table table-bordered">
      <tbody id="cardMessage">
@@ -32,7 +31,7 @@
        <tr>
        <td align="right" bgcolor="#f1f1f1" >卡号</td>
        <td>
-	       <input type="text" name="cardid"/>
+	       <input type="text" id="cardid" name="cardid"/>
 	   </td>
      </tr>
    	</tbody>

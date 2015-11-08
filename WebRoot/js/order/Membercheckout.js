@@ -1,4 +1,6 @@
 
+
+
 /**
  * 计算折扣金额
  * @param self
@@ -48,27 +50,33 @@ function changeAllprice(){
  * 付款或者签单
  */
 function pay(ispayment){
-	var html="<input type='hidden'";
-	html+="name=isbalance";
-	html+="  value=";
-	html+="true >";
+	var couponamountValue=$("#couponamount").val();
 	
-	html+="<input type='hidden'";
-	html+="name=ispayment";
-	html+="  value=";
-	html+=ispayment;
-	html+=">";
-	
-	$("input[name=price]").val($("#showpayprice").text());
-	
-	$("input[name=expense]").val($("#showpayprice").text());
-	
-	$("form").append(html);
-	//计算应付现金
-	expenseChange();
-	
-	submitPage();
-	
+	if(isNaN(couponamountValue)){
+		alert("折扣金额只能为数字");
+	}else{
+		var html="<input type='hidden'";
+		html+="name=isbalance";
+		html+="  value=";
+		html+="true >";
+		
+		html+="<input type='hidden'";
+		html+="name=ispayment";
+		html+="  value=";
+		html+=ispayment;
+		html+=">";
+		
+		$("input[name=price]").val($("#showpayprice").text());
+		
+		$("input[name=expense]").val($("#showpayprice").text());
+		
+		$("form").append(html);
+		//计算应付现金
+		expenseChange();
+		
+		
+		submitPage();
+	}
 //	$("form")[0].submit();
 }
 /**

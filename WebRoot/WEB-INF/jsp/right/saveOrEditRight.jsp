@@ -17,20 +17,20 @@
    
    <div class="title_right"><strong>添加或修改权限信息</strong></div>
    <div style="width:900px; margin:auto">
- <form action="${pageContext.request.contextPath}/right/${right.id ==null ? 'addrightSubmit' : 'editrightSubmit'}.action" method="post">
+ <form id="rightForm" action="${pageContext.request.contextPath}/right/${right.id ==null ? 'addrightSubmit' : 'editrightSubmit'}.action" method="post">
 	<input type="hidden" name="id" value="${right.id}" />
    <table  class="table table-bordered">
      <tbody>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >权限名称</td>
        <td>
-	       <input type="text" name="name" value="${right.name}" > 
+	       <input type="text" id="name" name="name" value="${right.name}" > 
 	   </td>
      </tr>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >权限url</td>
        <td>
-	       <input type="text" name="url" value="${right.url}" > 
+	       <input type="text" id="url" name="url" value="${right.url}" > 
 	   </td>
      </tr>
      <tr>
@@ -74,7 +74,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -121,4 +121,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/right/saveOrEditRight.js"></script>
 </html>

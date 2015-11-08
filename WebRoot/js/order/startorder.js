@@ -1,0 +1,29 @@
+//初始化
+$(function(){
+	$("#startorderForm").validate({
+	   rules: {
+		   name:{
+			   required:true
+		   },
+		   numberofpeople:{
+			   required:true,
+			   number:true
+		   },
+		   waiter:{
+			   required:true,
+		   }
+	  },
+	   messages: {
+		   name:{
+			   required:"请录入餐桌号",
+		   },
+		   numberofpeople:{
+			   required:"请录入人数",
+			   number:"人数只能是数字"
+		   },
+		   waiter:{
+			   required:"请录入服务员名称",
+		   }
+	  }
+	 });
+});

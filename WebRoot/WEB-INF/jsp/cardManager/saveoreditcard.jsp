@@ -21,7 +21,7 @@
    
    <div class="title_right"><strong>添加或修改会员卡信息</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/card/${card.id ==null ? 'addcardSubmit' : 'editcardSubmit'}.action" method="post">
+  <form id="cardchangeForm" action="${pageContext.request.contextPath}/card/${card.id ==null ? 'addcardSubmit' : 'editcardSubmit'}.action" method="post">
    	<input type="hidden" name="id" value="${card.id}" />
 	<input type="hidden" name="isavailable" value="${card.isavailable}" />
 	<input type="hidden" name="wechatOpenid" value="${card.wechatOpenid}" />
@@ -50,7 +50,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>

@@ -18,7 +18,7 @@
    
    <div class="title_right"><strong>添加或修改本地微信广告图片信息</strong></div>
    <div style="width:900px; margin:auto">
-<form action="${pageContext.request.contextPath}/wechatAdvertisementImage/addoreditwechatAdvertisementImageSubmit.action" method="post" enctype="multipart/form-data">
+<form id="wechatAdvertisementImageForm" action="${pageContext.request.contextPath}/wechatAdvertisementImage/addoreditwechatAdvertisementImageSubmit.action" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="id" value="${wechatAdvertisementImage.id}" />
 	<input type="hidden" name="path" value="${ wechatAdvertisementImage.path}">
    <table  class="table table-bordered">
@@ -26,7 +26,7 @@
      <tr>
        <td align="right" bgcolor="#f1f1f1" >微信广告图片名称</td>
        <td>
-       		<input type="text" name="name" value="${wechatAdvertisementImage.name }" />
+       		<input type="text" id="name" name="name" value="${wechatAdvertisementImage.name }" />
 	   </td>
      </tr>
      <tr>
@@ -51,7 +51,7 @@
          <tr>
        <td align="right" bgcolor="#f1f1f1" >微信广告图片</td>
        <td>
-	       <input type="file" name="imageFile" />
+	       <input type="file" id="imageFile" name="imageFile" />
 	   </td>
      </tr>
           <tr>
@@ -64,7 +64,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -114,4 +114,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/wechatAdvertisementImageManager/saveoreditwechatAdvertisementImage.js"></script>
 </html>

@@ -16,21 +16,21 @@
    
    <div class="title_right"><strong>添加或修改分类信息</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/category/${category.id ==null ? 'addCategorySubmit' : 'editCategorySubmit'}.action" method="post">
+<form id="categorydataForm" action="${pageContext.request.contextPath}/category/${category.id ==null ? 'addCategorySubmit' : 'editCategorySubmit'}.action" method="post">
    	<input type="hidden" name="id" value="${category.id}" />
    <table  class="table table-bordered">
      <tbody>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >分类名</td>
        <td>
-	       <input type="text" name="name" value="${category.name }" />
+	       <input type="text" id="name" name="name" value="${category.name }" />
 	   </td>
      </tr>
    	</tbody>
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -63,4 +63,5 @@
 	<input type="submit" value="submit"/>
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/category/saveOrEditcategory.js"></script>
 </html>

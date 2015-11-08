@@ -45,7 +45,7 @@
 	<span id="cardidText">会员号</span>
 	<input type="text" id="cardid" name="cardid"/>
 	<br />
-	<input type="button" id="submit_validation" value="绑定" />
+	<input type="button" class="submit" id="submit_validation" value="绑定" />
 	<input type="button" id="close" value="退出" />
 	</form>
 	

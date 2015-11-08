@@ -1,4 +1,35 @@
-	
+
+
+//初始化
+$(function(){
+	$("#dishdataForm").validate({
+	   rules: {
+		   name:{
+			   required:true
+		   },
+		   price:{
+			   required:true,
+			   number:true
+		   },
+		   rcategoryid:{
+			   required:true
+		   }
+	  },
+	   messages: {
+		   name:{
+			   required:"请录入菜品名",
+		   },
+		   price:{
+			   required:"请录入价格",
+			   number:"价格只能是数字"
+		   },
+		   rcategoryid:{
+			   required:"请选择菜品分类",
+		   }
+	  }
+	 });
+});
+
 	/**
 	 * 显示所有菜品
 	

@@ -17,13 +17,13 @@
    
    <div class="title_right"><strong>进货</strong></div>
    <div style="width:900px; margin:auto">
-  <form action="${pageContext.request.contextPath}/materials/purchaseSubMit.action" method="post">
+  <form id="materialsdataForm" action="${pageContext.request.contextPath}/materials/purchaseSubMit.action" method="post">
    <table  class="table table-bordered">
      <tbody>
      <tr>
        <td align="right" bgcolor="#f1f1f1" >原料名 </td>
        <td>
-	       <input type="text" name="name"/><input type="button" value="选择原料" onclick="showmaterials()"/>
+	       <input type="text" id="name" name="name"/><input type="button" value="选择原料" onclick="showmaterials()"/>
 	       <div id="materialsList" style="display:none">
 				<c:forEach items="${custommaterialsList }" var="materials">
 					<input type="radio" onclick="Selectthis('${materials.id}','${materials.name}')">${materials.name} <br>
@@ -34,7 +34,7 @@
          <tr>
        <td align="right" bgcolor="#f1f1f1" >进货量 </td>
        <td>
-	       <input type="text" name="surplus"/><input type="text" name="unit" value="g" readonly="readonly"/>
+	       <input type="text" id="surplus" name="surplus"/><input type="text" name="unit" value="g" readonly="readonly"/>
 	   </td>
      </tr>
      
@@ -42,7 +42,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>

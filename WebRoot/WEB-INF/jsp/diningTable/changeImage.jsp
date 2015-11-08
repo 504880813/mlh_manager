@@ -18,7 +18,7 @@
    
    <div class="title_right"><strong>添加或修改餐桌图片信息</strong></div>
    <div style="width:900px; margin:auto">
- <form action="${pageContext.request.contextPath}/diningTable/changeImageSubmit.action" method="post" enctype="multipart/form-data">
+ <form id="diningTabledataForm" action="${pageContext.request.contextPath}/diningTable/changeImageSubmit.action" method="post" enctype="multipart/form-data">
    <table  class="table table-bordered">
      <tbody>
      <tr>
@@ -37,7 +37,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="submit"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="submit"></td>
      </tr>
  	</tbody>
   </table>
@@ -61,4 +61,5 @@
 		<input type="submit" value="submit">
 </form> --%>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/diningTable/saveOrEditdiningTable.js "></script>
 </html>

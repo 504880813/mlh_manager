@@ -3,6 +3,27 @@
  */
 
 
+//初始化
+$(function(){
+	$("#dataForm").validate({
+	   rules: {
+		   phoneNumber:{
+			   required:true,
+			   number:true
+		   },
+	  },
+	   messages: {
+		   phoneNumber:{
+			   required:"请录入手机号",
+			   number:"手机号只能是数字"
+		   },
+	  }
+	 });
+});
+
+
+
+
 //查询会员卡，根据电话号码
 function selectcardByphoneNumber(Rootpath){
 	

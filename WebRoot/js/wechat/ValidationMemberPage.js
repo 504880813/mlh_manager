@@ -8,5 +8,8 @@ $(function(){
 	 });
 	 $("#close").click(function(){
 	        wx.closeWindow();
-	  }); 
+	  });
+	 
+	 
+	 
 });  

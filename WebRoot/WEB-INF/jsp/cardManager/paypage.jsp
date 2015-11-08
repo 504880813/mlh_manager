@@ -20,7 +20,7 @@
      <tr>
        <td align="right" bgcolor="#f1f1f1" >卡号</td>
        <td>
-	      <input type="text" name="cardId" value="${card.cardid }"/>
+	      <input type="text" id="cardId" name="cardId" value="${card.cardid }"/>
 	   </td>
      </tr>
       <tr>
@@ -32,13 +32,13 @@
       <tr>
        <td align="right" bgcolor="#f1f1f1" >消费金额</td>
        <td>
-	      <input type="text" name="Nowexpense" onchange="CalculatingDiscount()"/><br/>
+	      <input type="text" id="Nowexpense" name="Nowexpense" onchange="CalculatingDiscount()"/><br/>
 	   </td>
      </tr>
       <tr>
 	       <td align="right" bgcolor="#f1f1f1" >折后金额</td>
 	       <td>
-		       <input type="text" name="expense" readonly="readonly"/><br/>
+		       <input type="text" id="expense" name="expense" readonly="readonly"/><br/>
 		   </td>
       </tr>
        <tr>
@@ -58,7 +58,7 @@
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
-     	<td class="text-center"><input value="确定" class="btn btn-info " style="width:80px;" type="button"  onclick="submitPage(this)"></td>
+     	<td class="text-center"><input value="确定" class="btn btn-info submit" style="width:80px;" type="button"  onclick="submitPage(this)"></td>
      </tr>
  	</tbody>
   </table>
@@ -94,7 +94,6 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/js/jDialog/jDialog.css" type="text/css">
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jDialog.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.drag.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.mask.js" ></script>

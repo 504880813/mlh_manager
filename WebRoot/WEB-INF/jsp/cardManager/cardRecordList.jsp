@@ -28,7 +28,7 @@
        </table>
        <table  class="margin-bottom-20 table  no-border" >
         <tr>
-     	<td class="text-center"><input type="button" value="查询" class="btn btn-info " style="width:80px;" onclick="selectRecordSubmit()"/></td>
+     	<td class="text-center"><input type="submit" value="查询" class="btn btn-info submit" style="width:80px;"/></td>
      </tr>
  </table>
    </form>
