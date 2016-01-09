@@ -71,12 +71,17 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void saveOrUpdateUser(CustomUser User,Integer[] ownRoleIds) throws Exception {
-	
-	//查询是否有效
-	if(findUserNmaeIsExist(User.getUsername())) {
-	    throw new CustomException("该用户名已存在");
-	}
-	
+	  //查询是否有效
+	 if(findUserNmaeIsExist(User.getUsername())) {
+	     if(User.getId()==null) {
+		 throw new CustomException("该用户名已存在");
+	     }else {
+		 CustomUser dbuser=findUserById(User.getId());
+		 if(!(dbuser.getUsername().equals(User.getUsername()))) {
+		     throw new CustomException("该用户名已存在");
+		 }
+	     }
+	  }
 	//将密码进行md5加密
 	String TempPassword=DataUtils.md5(User.getPassword());
 	User.setPassword(TempPassword);
@@ -90,7 +95,6 @@ public class UserServiceImpl implements UserService {
 	    //先更新基础信息
 	    UserMapper.updateByPrimaryKey(User);
 	    //更新关联关系
-	    
 	    //先根据用户id 删除关联
 	    customUserMapper.deleteUser_Role_LinkByUserId(User.getId());
 	}

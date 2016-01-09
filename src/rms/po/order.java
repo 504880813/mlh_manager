@@ -26,6 +26,8 @@ public class order {
 
     private Byte servingstatus;
 
+    private String cCardid;
+
     public Integer getId() {
         return id;
     }
@@ -112,5 +114,13 @@ public class order {
 
     public void setServingstatus(Byte servingstatus) {
         this.servingstatus = servingstatus;
+    }
+
+    public String getcCardid() {
+        return cCardid;
+    }
+
+    public void setcCardid(String cCardid) {
+        this.cCardid = cCardid == null ? null : cCardid.trim();
     }
 }

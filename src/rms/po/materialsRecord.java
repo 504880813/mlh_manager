@@ -6,7 +6,7 @@ import java.util.Date;
 public class materialsRecord {
     private Integer id;
 
-    private Integer materialsId;
+    private String materialsName;
 
     private BigDecimal materialsSurplus;
 
@@ -24,12 +24,12 @@ public class materialsRecord {
         this.id = id;
     }
 
-    public Integer getMaterialsId() {
-        return materialsId;
+    public String getMaterialsName() {
+        return materialsName;
     }
 
-    public void setMaterialsId(Integer materialsId) {
-        this.materialsId = materialsId;
+    public void setMaterialsName(String materialsName) {
+        this.materialsName = materialsName == null ? null : materialsName.trim();
     }
 
     public BigDecimal getMaterialsSurplus() {

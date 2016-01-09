@@ -1,8 +1,6 @@
 
 //初始化
 
-
-
 var orderdishsId= new Array();
 
 //当前类型id 如果是查询所有，则为-1
@@ -41,8 +39,8 @@ function adddishToorder(id,name,price,self,Rootpath,TypeId){
 	
 	html+="<input type='hidden' name=orderdetailList[";
 	html+=orderdishsId.length-1;
-	html+="].rdishid value=" ;
-	html+=id;
+	html+="].rdishname value=" ;
+	html+=name;
 	html+=">";
 	
 	html+="<input type='hidden' name=orderdetailList[";

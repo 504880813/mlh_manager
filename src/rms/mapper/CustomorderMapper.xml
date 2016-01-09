@@ -74,7 +74,7 @@
   			price=#{price}
 		</set>
 		<where>
-			cOrderId = #{corderid} and rDishId=#{rdishid} and echelon=#{echelon}
+			cOrderId = #{corderid} and rdishname=#{rdishname} and echelon=#{echelon}
 		</where>
 	</update>
 	
@@ -103,8 +103,8 @@
       		<if test="corderid != null" >
        			and cOrderId= #{corderid,jdbcType=INTEGER}
       		</if>
-            <if test="rdishid != null" >
-                and rDishId=#{rdishid,jdbcType=INTEGER}
+            <if test="rdishname != null" >
+                and rdishname=#{rdishname,jdbcType=VARCHAR}
             </if>
             <if test="echelon != null" >
                 and echelon=#{echelon,jdbcType=INTEGER}

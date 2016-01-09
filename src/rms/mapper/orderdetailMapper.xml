@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="rms.po.orderdetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="dishNumber" property="dishnumber" jdbcType="INTEGER" />
-    <result column="rDishId" property="rdishid" jdbcType="INTEGER" />
+    <result column="rDishname" property="rdishname" jdbcType="VARCHAR" />
     <result column="cOrderId" property="corderid" jdbcType="INTEGER" />
     <result column="echelon" property="echelon" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DECIMAL" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, dishNumber, rDishId, cOrderId, echelon, price, servingstatus
+    id, dishNumber, rDishname, cOrderId, echelon, price, servingstatus
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="rms.po.orderdetailExample" >
     select
@@ -102,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="rms.po.orderdetail" >
-    insert into c_orderdetail (id, dishNumber, rDishId, 
+    insert into c_orderdetail (id, dishNumber, rDishname, 
       cOrderId, echelon, price, 
       servingstatus)
-    values (#{id,jdbcType=INTEGER}, #{dishnumber,jdbcType=INTEGER}, #{rdishid,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{dishnumber,jdbcType=INTEGER}, #{rdishname,jdbcType=VARCHAR}, 
       #{corderid,jdbcType=INTEGER}, #{echelon,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
       #{servingstatus,jdbcType=TINYINT})
   </insert>
@@ -118,8 +118,8 @@
       <if test="dishnumber != null" >
         dishNumber,
       </if>
-      <if test="rdishid != null" >
-        rDishId,
+      <if test="rdishname != null" >
+        rDishname,
       </if>
       <if test="corderid != null" >
         cOrderId,
@@ -141,8 +141,8 @@
       <if test="dishnumber != null" >
         #{dishnumber,jdbcType=INTEGER},
       </if>
-      <if test="rdishid != null" >
-        #{rdishid,jdbcType=INTEGER},
+      <if test="rdishname != null" >
+        #{rdishname,jdbcType=VARCHAR},
       </if>
       <if test="corderid != null" >
         #{corderid,jdbcType=INTEGER},
@@ -173,8 +173,8 @@
       <if test="record.dishnumber != null" >
         dishNumber = #{record.dishnumber,jdbcType=INTEGER},
       </if>
-      <if test="record.rdishid != null" >
-        rDishId = #{record.rdishid,jdbcType=INTEGER},
+      <if test="record.rdishname != null" >
+        rDishname = #{record.rdishname,jdbcType=VARCHAR},
       </if>
       <if test="record.corderid != null" >
         cOrderId = #{record.corderid,jdbcType=INTEGER},
@@ -197,7 +197,7 @@
     update c_orderdetail
     set id = #{record.id,jdbcType=INTEGER},
       dishNumber = #{record.dishnumber,jdbcType=INTEGER},
-      rDishId = #{record.rdishid,jdbcType=INTEGER},
+      rDishname = #{record.rdishname,jdbcType=VARCHAR},
       cOrderId = #{record.corderid,jdbcType=INTEGER},
       echelon = #{record.echelon,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DECIMAL},
@@ -212,8 +212,8 @@
       <if test="dishnumber != null" >
         dishNumber = #{dishnumber,jdbcType=INTEGER},
       </if>
-      <if test="rdishid != null" >
-        rDishId = #{rdishid,jdbcType=INTEGER},
+      <if test="rdishname != null" >
+        rDishname = #{rdishname,jdbcType=VARCHAR},
       </if>
       <if test="corderid != null" >
         cOrderId = #{corderid,jdbcType=INTEGER},
@@ -233,7 +233,7 @@
   <update id="updateByPrimaryKey" parameterType="rms.po.orderdetail" >
     update c_orderdetail
     set dishNumber = #{dishnumber,jdbcType=INTEGER},
-      rDishId = #{rdishid,jdbcType=INTEGER},
+      rDishname = #{rdishname,jdbcType=VARCHAR},
       cOrderId = #{corderid,jdbcType=INTEGER},
       echelon = #{echelon,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},

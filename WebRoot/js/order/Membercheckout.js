@@ -19,12 +19,17 @@ function CalculatingDiscount(self){
  * 改变总价
  */
 function changeAllprice(){
+	
 	var allprice=parseFloat($("input[name=price]").val());
 	
 	var discountamount=parseFloat($("input[name=discountamount]").val());
 	
 	var couponamount=parseFloat($("input[name=couponamount]").val());
 	
+	if(couponamount<0){
+		alert("优惠券金额必须大于0");
+		return;
+	}
 	
 	var temp;
 	if(!isNaN(allprice)){

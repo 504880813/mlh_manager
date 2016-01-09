@@ -269,7 +269,7 @@ public class cardHandler {
     * @param @param cardid
     * @param @param startTime
     * @param @param endTime
-    * @param @return
+    * @param @return null表示卡号不存在
     * @param @throws Exception    
     * @return List<cardRecord>    
     * @throws
@@ -279,9 +279,9 @@ public class cardHandler {
 	
 	List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid,startTime,endTime);
 	
-	if(cardRecords==null) {
+/*	if(cardRecords==null) {
 	    throw new CustomException("该卡号不存在");
-	}
+	}*/
 	return cardRecords;
     }
     

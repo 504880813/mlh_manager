@@ -29,6 +29,7 @@ import rms.po.card;
 import rms.po.cardRecord;
 import rms.po.diningTable;
 import rms.po.dish;
+import rms.po.dishExample;
 import rms.po.order;
 import rms.po.orderdetail;
 import rms.po.wechatTemplate;
@@ -113,8 +114,7 @@ public class OrderServiceImpl implements OrderService {
 	    // 查询明细对应的菜品
 	    // dish dish=dishMapper.selectByPrimaryKey();
 
-	    Customdish dish = dishService.findDishWithImageById(orderdetail
-		    .getRdishid());
+	    Customdish dish = dishService.findDishWithImageByName(orderdetail.getRdishname());
 	    // 判断是套餐还是单菜
 	    if (dish.getCustommaterials() == null
 		    || dish.getCustommaterials().size() == 0) {
@@ -153,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
 
 	for (Customorderdetail orderdetail : orderdetails) {
 	    Customdish orderdish = dishService
-		    .findDishWithImageById(orderdetail.getRdishid());
+		    .findDishWithImageByName(orderdetail.getRdishname());
 	    // 判断是套餐还是单菜
 	    if (orderdish.getCustommaterials() == null
 		    || orderdish.getCustommaterials().size() == 0) {
@@ -193,8 +193,8 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrderDetailsBydetailsid(Integer id) throws Exception {
 	// customorderMapper.deleteorderdetailBydetailId(id);
 	orderdetail orderdetail = orderdetailMapper.selectByPrimaryKey(id);
-	Customdish orderdish = dishService.findDishWithImageById(orderdetail
-		.getRdishid());
+	Customdish orderdish = dishService.findDishWithImageByName(orderdetail
+		.getRdishname());
 	// 判断是套餐还是单菜
 	if (orderdish.getCustommaterials() == null
 		|| orderdish.getCustommaterials().size() == 0) {
@@ -252,7 +252,7 @@ public class OrderServiceImpl implements OrderService {
 	    // 对比加菜明细，如果有相关菜，加菜记录，则更新，否则插入
 	    for (Customorderdetail dbadddish : DBadddishorderdetails) {
 		for (Customorderdetail adddish : adddishorderdetails) {
-		    if (dbadddish.getRdishid() == adddish.getRdishid()) {
+		    if (dbadddish.getDishName().equals(adddish.getRdishname())) {
 			Tempadddishorderdetails.add(adddish);
 		    }
 		}
@@ -260,8 +260,8 @@ public class OrderServiceImpl implements OrderService {
 	    // 更新加菜数据
 	    for (Customorderdetail adddish : Tempadddishorderdetails) {
 		// 更新原料仓库数据
-		Customdish dish = dishService.findDishWithImageById(adddish
-			.getRdishid());
+		Customdish dish = dishService.findDishWithImageByName(adddish
+			.getRdishname());
 		// 判断是套餐还是单菜
 		if (dish.getCustommaterials() == null
 			|| dish.getCustommaterials().size() == 0) {
@@ -287,8 +287,8 @@ public class OrderServiceImpl implements OrderService {
 	    // 插入新加菜数据
 	    for (Customorderdetail adddish : adddishorderdetails) {
 		// 更新原料仓库数据
-		Customdish dish = dishService.findDishWithImageById(adddish
-			.getRdishid());
+		Customdish dish = dishService.findDishWithImageByName(adddish
+			.getRdishname());
 		// 判断是套餐还是单菜
 		if (dish.getCustommaterials() == null
 			|| dish.getCustommaterials().size() == 0) {
@@ -324,15 +324,15 @@ public class OrderServiceImpl implements OrderService {
 	    // 对比退菜明细，如果有相关菜，退菜记录，则更新，否则插入
 	    for (Customorderdetail dbretreatdish : DBretreatdishorderdetails) {
 		for (Customorderdetail retreatdish : retreatdishorderdetails) {
-		    if (dbretreatdish.getRdishid() == retreatdish.getRdishid()) {
+		    if (dbretreatdish.getRdishname().equals(retreatdish.getRdishname())) {
 			Tempretreatdishorderdetails.add(retreatdish);
 		    }
 		}
 	    }
 	    // 更新退菜数据
 	    for (Customorderdetail retreatdish : Tempretreatdishorderdetails) {
-		Customdish dish = dishService.findDishWithImageById(retreatdish
-			.getRdishid());
+		Customdish dish = dishService.findDishWithImageByName(retreatdish
+			.getRdishname());
 		// 判断是套餐还是单菜
 		if (dish.getCustommaterials() == null
 			|| dish.getCustommaterials().size() == 0) {
@@ -355,8 +355,8 @@ public class OrderServiceImpl implements OrderService {
 	    }
 	    // 插入新退菜数据
 	    for (Customorderdetail retreatdish : retreatdishorderdetails) {
-		Customdish dish = dishService.findDishWithImageById(retreatdish
-			.getRdishid());
+		Customdish dish = dishService.findDishWithImageByName(retreatdish
+			.getRdishname());
 		// 判断是套餐还是单菜
 		if (dish.getCustommaterials() == null
 			|| dish.getCustommaterials().size() == 0) {
@@ -471,7 +471,10 @@ public class OrderServiceImpl implements OrderService {
 		.findOrderdetailsByorderid(customOrder.getId());
 
 	for (Customorderdetail orderdetail : orderdetails) {
-	    dish dish = dishMapper.selectByPrimaryKey(orderdetail.getRdishid());
+	    dishExample example=new dishExample();
+	    example.createCriteria().andNameEqualTo(orderdetail.getRdishname());
+	    List<dish> dishs=dishMapper.selectByExample(example);
+	    dish dish = dishs==null?null:dishs.get(0);
 	    orderdetail.setDishName(dish.getName());
 	}
 	customOrder.setOrderdetailList(orderdetails);

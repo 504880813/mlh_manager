@@ -42,13 +42,14 @@
 	   </td>
      </tr>
      <tr>
-     	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">正常菜</td>
+     	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">初点菜</td>
      </tr>
      <tr>
      	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">菜品名</td>
      	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >数量</td>
      	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >单价</td>
-     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">总价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >总价</td>
+     	<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" >操作</td>
      </tr>
      <c:forEach items="${order.orderdetailList }" var="orderdetail">
 		<c:if test="${orderdetail.echelon==1 }">
@@ -57,29 +58,35 @@
 			<td class="dishnumber" nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.dishnumber}</td>
 			<td class="price" nowrap="nowrap" align="right" bgcolor="#f1f1f1">
 			<c:forEach items="${dishList}" var="dish">
-				<c:if test="${dish.id==orderdetail.rdishid }">
+				<c:if test="${dish.name == orderdetail.rdishname }">
 					${dish.price}
 				</c:if>
 			</c:forEach>
 			</td>
-			<td class="normaltotalprice" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="2">${orderdetail.price}</td>
+			<td class="normaltotalprice" nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.price}</td>
 			<td style="display:none" nowrap="nowrap" align="right" bgcolor="#f1f1f1">
-				<input type="text"  class="dishid" value="${orderdetail.rdishid}">
+				<input type="text"  class="dishid" value="${orderdetail.rdishname}">
+			</td>
+			<td nowrap="nowrap" align="right" bgcolor="#f1f1f1">
+			
+			<input value="加" name="add" class="btn btn-info" style="width:80px;" type="button" onclick="adddish('initial',this)">
+			<input value="退" name="retreat" class="btn btn-info" style="width:80px;" type="button" onclick="retreatdish('initial',this)">
+			
 			</td>
 			</tr>
 		</c:if>
 	</c:forEach>
 	 <tr>
      	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">
-     	加菜
-     	<input type="button" value="adddish" onclick="adddishofMessage('${pageContext.request.contextPath}')">
+     	加菜栏
+  <%--    	<input type="button" value="adddish" onclick="adddishofMessage('${pageContext.request.contextPath}')">
      	<div id="alldish" style="display:none">
 		<table>
 			<tr>
 				<td>菜品名</td><td>价格</td><td>操作</td>
 			</tr>
 		</table>
-		</div>
+		</div> --%>
      	</td>
      </tr>
      <tr>
@@ -97,24 +104,31 @@
 			<td class="dishnumber"  nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.dishnumber}</td>
 			<td class="price"  nowrap="nowrap" align="right" bgcolor="#f1f1f1">
 				<c:forEach items="${dishList}" var="dish">
-					<c:if test="${dish.id==orderdetail.rdishid }">${dish.price}</c:if>
+					<c:if test="${dish.name == orderdetail.rdishname }">${dish.price}</c:if>
 				</c:forEach>
 			</td>
 			<td class="addtotalprice"  nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.price}</td>
+			<td nowrap="nowrap" align="right" bgcolor="#f1f1f1">
+			
+			<input value="+1" name="add" class="btn btn-info" style="width:80px;" type="button" onclick="adddish('add',this)">
+			<input value="-1" name="retreat" class="btn btn-info" style="width:80px;" type="button" onclick="retreatdish('add',this)">
+			
+			</td>
 			</tr>
 		</c:if>
 		</c:forEach>
+	  <tr id="adddishtr"></tr>
       <tr>
      	<td width="100%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="6">
-     		退菜
-     		<input type="button" value="Retreatdish" onclick="RetreatdishofMessage(this)">
+     		退菜栏
+     		<!-- <input type="button" value="Retreatdish" onclick="RetreatdishofMessage(this)">
 				<div id="orderdish" style="display:none">
 					<table>
 						<tr>
 							<td>菜品名</td><td>价格</td><td>操作</td>
 						</tr>
 					</table>
-				</div>
+				</div> -->
      	</td>
      </tr>
      <tr>
@@ -131,7 +145,7 @@
 			<td class="dishnumber" nowrap="nowrap" align="right" bgcolor="#f1f1f1">${orderdetail.dishnumber}</td>
 			<td class="price" nowrap="nowrap" align="right" bgcolor="#f1f1f1">
 				<c:forEach items="${dishList}" var="dish">
-					<c:if test="${dish.id==orderdetail.rdishid }">
+					<c:if test="${dish.name == orderdetail.rdishname }">
 						${dish.price}
 					</c:if>
 				</c:forEach>
@@ -150,6 +164,59 @@
      
    	</tbody>
    </table>
+   
+      <!-- 分类start -->
+   <table  class="table table-bordered">
+     <tbody>
+     <tr>
+     	<td align="right" bgcolor="#f1f1f1" >分类</td>
+     	<td align="right" bgcolor="#f1f1f1" >
+     		<c:forEach items="${categorys }" var="category"  varStatus="status">
+			<c:if test="${status.count==1 }">
+				<input type="button" name="categoryAjax" value="all" onclick="finddishs('${pageContext.request.contextPath}')">
+			</c:if>
+			    <input type="button" name="categoryAjax" value="${category.name }" onclick="finddishBycategory('${pageContext.request.contextPath}','${category.id}')">
+			</c:forEach>
+     	</td>
+     </tr>
+     <tr>
+     	<td align="right" bgcolor="#f1f1f1" >菜品框</td>
+     	<td align="right" bgcolor="#f1f1f1" >
+     			
+	<div id="categorydishs">
+		<table>
+			<tr>
+				<td>菜品号</td>
+				<td>菜品名称</td>
+				<td>菜品价格</td>
+				<td colspan="2">操作</td>
+			</tr>
+			<c:forEach items="${dishList }" var="dish">
+			<tr>
+				<td>${dish.id }</td>
+				<td class="dishName">${dish.name }</td>
+				<td>${dish.price }</td>
+				<td colspan="2">
+				<input type="button" value="add" onclick="adddishToorderOfsetMeal('${dish.id }','${dish.name}','${dish.price }',this,'${pageContext.request.contextPath}','${dish.rcategoryid }')">
+				<input type="button" value="查看详情" onclick="OpenDishDetails('${pageContext.request.contextPath}/dish/findDishdetails.action',${dish.id })">
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</div>
+    </td>
+     	
+     </tr>
+     </tbody>
+    </table>
+    
+    <!-- 分类end -->
+   
+   
+   
+   
+   
+   
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
      	<td class="text-center">
@@ -163,7 +230,13 @@
   </table>
  	<!-- <div id="cardMessage"></div> -->
    </form>   
+   
    </div> 
+   
+ 
+   
+   
+   
   </div>     
 </div>
 
@@ -208,13 +281,13 @@
 			<td class="dishnumber">${orderdetail.dishnumber}</td>
 			<td class="price">
 			<c:forEach items="${dishList}" var="dish">
-				<c:if test="${dish.id==orderdetail.rdishid }">
+				<c:if test="${dish.id==orderdetail.rdishname }">
 					${dish.price}
 				</c:if>
 			</c:forEach></td>
 			<td class="normaltotalprice">${orderdetail.price}</td>
 			<td style="display:none">
-				<input type="text"  class="dishid" value="${orderdetail.rdishid}">
+				<input type="text"  class="dishid" value="${orderdetail.rdishname}">
 			</td>
 			</tr>
 		</c:if>
@@ -241,7 +314,7 @@
 			<td class="dishnumber">${orderdetail.dishnumber}</td>
 			<td class="price">
 				<c:forEach items="${dishList}" var="dish">
-					<c:if test="${dish.id==orderdetail.rdishid }">${dish.price}</c:if>
+					<c:if test="${dish.id==orderdetail.rdishname }">${dish.price}</c:if>
 				</c:forEach>
 			</td>
 			<td class="addtotalprice">${orderdetail.price}</td>
@@ -271,7 +344,7 @@
 			<td class="dishnumber">${orderdetail.dishnumber}</td>
 			<td class="price">
 				<c:forEach items="${dishList}" var="dish">
-					<c:if test="${dish.id==orderdetail.rdishid }">
+					<c:if test="${dish.id==orderdetail.rdishname }">
 						${dish.price}
 					</c:if>
 				</c:forEach>

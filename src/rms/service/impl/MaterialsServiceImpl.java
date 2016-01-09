@@ -72,7 +72,7 @@ public class MaterialsServiceImpl implements MaterialsService {
 	 */
 	public void saveMaterialsRecord(materials materials,boolean issave) throws Exception{
 	    materialsRecord materialsRecord =new materialsRecord();
-	    materialsRecord.setMaterialsId(materials.getId());
+	    materialsRecord.setMaterialsName(materials.getName());
 	    materialsRecord.setMaterialsSurplus(materials.getSurplus());
 	    materialsRecord.setMaterialsUnit(materials.getUnit());
 	    materialsRecord.setSave(issave);
@@ -261,7 +261,7 @@ public class MaterialsServiceImpl implements MaterialsService {
 	    
 	    materialsRecordExample Recordexample=new materialsRecordExample();
 	    
-	    Recordexample.createCriteria().andMaterialsIdEqualTo(materialsList.get(0).getId());
+	    Recordexample.createCriteria().andMaterialsNameEqualTo(materialsList.get(0).getName());
 	    
 	    List<materialsRecord> materialsRecords=materialsRecordMapper.selectByExample(Recordexample);
 	    
@@ -289,7 +289,7 @@ public class MaterialsServiceImpl implements MaterialsService {
 	    
 	    materialsRecordExample Recordexample=new materialsRecordExample();
 	    
-	    Recordexample.createCriteria().andMaterialsIdEqualTo(materialsList.get(0).getId()).andTimeBetween(startTime, endTime);
+	    Recordexample.createCriteria().andMaterialsNameEqualTo(materialsList.get(0).getName()).andTimeBetween(startTime, endTime);
 	    
 	    List<materialsRecord> materialsRecords=materialsRecordMapper.selectByExample(Recordexample);
 	    

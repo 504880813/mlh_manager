@@ -21,9 +21,9 @@
       <td width="10%" align="right" nowrap="nowrap" bgcolor="#f1f1f1">卡号</td>
      <td width="23%"><input type="text"  class="span1-1" id="cardid" name="cardid" /></td>
      <td width="10%" align="right" nowrap="nowrap" bgcolor="#f1f1f1">消费开始时间：</td>
-     <td width="23%"><input type="text"  class="laydate-icon span1-1" id="startTime" name="startTime" /></td>
+     <td width="23%"><input type="text"  class="laydate-icon span1-1" id="startTime" name="startTime" readonly="readonly"/></td>
      <td width="10%" align="right" nowrap="nowrap" bgcolor="#f1f1f1">消费结束时间：</td>
-     <td width="23%"><input type="text"  class="laydate-icon  span1-1" id="endTime" name="endTime"/></td>
+     <td width="23%"><input type="text"  class="laydate-icon  span1-1" id="endTime" name="endTime" readonly="readonly"/></td>
      </tr>
        </table>
        <table  class="margin-bottom-20 table  no-border" >

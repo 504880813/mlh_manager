@@ -7,10 +7,7 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/img/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/system/bootstrap.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/system/css.css" />
-
-<style type="text/css">
-span.error{color:#C00; padding:0 6px;}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/system/errorStyles.css" />
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/system/jquery1.9.0.min.js"></script>

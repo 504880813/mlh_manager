@@ -802,6 +802,76 @@ public class orderExample {
             addCriterion("servingstatus not between", value1, value2, "servingstatus");
             return (Criteria) this;
         }
+
+        public Criteria andCCardidIsNull() {
+            addCriterion("c_cardid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidIsNotNull() {
+            addCriterion("c_cardid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidEqualTo(String value) {
+            addCriterion("c_cardid =", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidNotEqualTo(String value) {
+            addCriterion("c_cardid <>", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidGreaterThan(String value) {
+            addCriterion("c_cardid >", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidGreaterThanOrEqualTo(String value) {
+            addCriterion("c_cardid >=", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidLessThan(String value) {
+            addCriterion("c_cardid <", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidLessThanOrEqualTo(String value) {
+            addCriterion("c_cardid <=", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidLike(String value) {
+            addCriterion("c_cardid like", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidNotLike(String value) {
+            addCriterion("c_cardid not like", value, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidIn(List<String> values) {
+            addCriterion("c_cardid in", values, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidNotIn(List<String> values) {
+            addCriterion("c_cardid not in", values, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidBetween(String value1, String value2) {
+            addCriterion("c_cardid between", value1, value2, "cCardid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCardidNotBetween(String value1, String value2) {
+            addCriterion("c_cardid not between", value1, value2, "cCardid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

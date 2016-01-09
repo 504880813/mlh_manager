@@ -31,7 +31,7 @@
       <tr>
        <td align="right" bgcolor="#f1f1f1" >用户密码</td>
        <td>
-	       <input type="text" id="password" name="password">  
+	       <input type="password" id="password" name="password">  
 	   </td>
      </tr>
       <tr>
@@ -46,10 +46,10 @@
      
      <tr>
 								<td class="tdFormLabel" colspan="2">
-											<table>
+											<table width="100%">
 												<tr>
 													<td width="45%" align="Role">
-														<select id="left" name="ownRoleIds" Style="width:100px"  multiple="true" size="15">
+														<select id="left" name="ownRoleIds" Style="width:100px;float: right;"  multiple="true" size="15">
 															<c:forEach items="${user.roles }" var="Role">
 																<option value ="${Role.id }">${Role.name}</option>
 															</c:forEach>

@@ -388,8 +388,13 @@ public class OrderHandler {
 
 	List<Customdish> dishList = dishservice.findAllDish();
 
+	List<Customcategory> categorys = categoryService.findAllCategory();
+	
 	ModelAndView mav = new ModelAndView();
+	
+	
 	// 包括明细数据
+	mav.addObject("categorys", categorys);
 	mav.addObject("order", order);
 	mav.addObject("dishList", dishList);
 	mav.addObject("endtime",

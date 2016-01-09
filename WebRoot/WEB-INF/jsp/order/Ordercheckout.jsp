@@ -23,11 +23,10 @@
 	<input type="hidden" name="createtime" value="${endtime }" />
 	<input type="hidden" name="numberofpeople" value="${order.numberofpeople }" />
 	<input type="hidden" name="waiter" value="${order.waiter }" />
-   <table  class="table table-bordered">
-     <tbody>
+   <table id="table_print"  class="table table-bordered">
       <tr>
        <td width="10%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >桌号</td>
-       <td width="23%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >
+       <td width="23%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" id="diningTableName">
 	       ${order.diningTableName }
 	   </td>
 	   <td width="10%" nowrap="nowrap" align="right" bgcolor="#f1f1f1" >服务员</td>
@@ -108,6 +107,7 @@
 		<td nowrap="nowrap" align="right" bgcolor="#f1f1f1" colspan="4">
 			<input type="text" name="discountamountPercent" id="discountamountPercent" onchange="CalculatingDiscount(this)">折
 			<span id="discountamountValue"></span>元<br>
+			<input type="hidden" name="discountamount"/>
 		</td>
 	</tr>
 	<tr>
@@ -123,7 +123,6 @@
 			<span id="showpayprice">${order.price}</span> 
 		</td>
 	</tr>
-   	</tbody>
    </table>
    <table class="margin-bottom-20 table  no-border">
         <tbody><tr>
@@ -232,6 +231,10 @@
 	<input type="button" name="writtenPermission" value="writtenPermission" onclick="pay('false')"/><br>
 	<input type="button" name="cancel"  value="cancel" onclick="back()"/>
 </form> --%>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+	<embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop.exe"></embed>
+</object> 
 </body>
+<script type="text/javascript"  src="${pageContext.request.contextPath }/js/system/print/LodopFuncs.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/order/checkout.js"></script>
 </html>

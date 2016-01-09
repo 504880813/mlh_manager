@@ -49,33 +49,39 @@ function selectRecordSubmit(){
  */
 function processMessage(json){
 	
+	alert(json.length);
+	
 	//清除原来的数据
 	$("#recordMessage").empty();
 	html="";
 	
-	html+="<tr align='center'><td><strong>卡号</strong></td><td><strong>消费金额</strong></td><td><strong>消费时间</strong></td><td><strong> </strong></td></tr>";
+	html+="<tr align='center'><td><strong>卡号</strong></td><td><strong>消费金额</strong></td><td><strong>消费时间</strong></td></tr>";
+	
+   
 	
 	if(json==null||json.length<=0){
-		html+="暂无数据";
-	}
-	
-	
-	$.each(json,function(key,val){
 		html+="<tr align='center'>";
-		html+="<td>";
-		html+=val.cardId;
-		html+="</td>";
-		html+="<td>";
-		html+=val.expense;
-		html+="</td>";
-		html+="<td>";
-		var d=new Date();
-		d.setTime(val.time);
-		html+=d.format("yyyy-MM-dd HH:mm:ss");
+		html+="<td colspan='3'>";
+		html+="暂无数据或卡号不存在";
 		html+="</td>";
 		html+="</tr>";
-	});
-	
+	}else{
+		$.each(json,function(key,val){
+			html+="<tr align='center'>";
+			html+="<td>";
+			html+=val.cardId;
+			html+="</td>";
+			html+="<td>";
+			html+=val.expense;
+			html+="</td>";
+			html+="<td>";
+			var d=new Date();
+			d.setTime(val.time);
+			html+=d.format("yyyy-MM-dd HH:mm:ss");
+			html+="</td>";
+			html+="</tr>";
+		});
+	}
 	
 	$("#recordMessage").html(html);
 }

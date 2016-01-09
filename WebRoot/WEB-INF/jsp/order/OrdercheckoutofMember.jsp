@@ -259,5 +259,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.drag.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.mask.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jDialog/jquery.dialog.js" ></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/order/Membercheckout.js"></script>
+
 </html>

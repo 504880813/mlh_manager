@@ -52,6 +52,17 @@ public interface DishService {
 	
 	/**
 	 * 
+	* @Title: findDishWithImageByName 
+	* @Description: 根据菜品名查询菜品信息包括图片
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return Customdish    返回类型 
+	* @throws
+	 */
+	public Customdish findDishWithImageByName(String name) throws Exception;
+	
+	/**
+	 * 
 	* @Title: findAllDishWithImage 
 	* @Description: 根据id查询菜品信息包括图片
 	* @param @return

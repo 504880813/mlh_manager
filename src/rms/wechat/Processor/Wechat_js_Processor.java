@@ -1,5 +1,6 @@
 package rms.wechat.Processor;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -91,7 +92,7 @@ public class Wechat_js_Processor {
 	    
 	    String cardid=request.getParameter("cardid");
 	    
-	    List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid);
+	    List<cardRecord> cardRecords=cardService.findAllRecordsBycardid(cardid,null,new Date());
             card card=cardService.findcardBycardid(cardid);
             cardRecords=cardRecords.subList(cardRecords.size()-10, cardRecords.size());
             

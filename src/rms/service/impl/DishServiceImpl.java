@@ -16,6 +16,7 @@ import rms.mapper.dishMapper;
 import rms.po.Customdish;
 import rms.po.Custommaterials;
 import rms.po.dish;
+import rms.po.dishExample;
 import rms.po.dishImage;
 import rms.po.dishcotent;
 import rms.service.DishService;
@@ -94,6 +95,43 @@ public class DishServiceImpl implements DishService {
 		//查询基础信息
 		Customdish customdish=new Customdish();
 		dish dish=dishMapper.selectByPrimaryKey(id);
+		BeanUtils.copyProperties(dish, customdish);
+		//查询图片信息
+		List<dishImage> dishImages=customdishImageMapper.findDishImageBydishId(customdish.getId());
+		customdish.setDishImagesList(dishImages);
+		//查询子原料
+		List<Custommaterials> custommaList=customdishMapper.findsubMaterialsBydishId(customdish.getId());
+		
+		if(custommaList!=null){
+		customdish.setCustommaterials(custommaList);
+		}
+		
+		//查询子菜品
+		List<Customdish> customdishList=customdishMapper.findsubDishBydishId(customdish.getId());
+		
+		if(customdishList!=null){
+		customdish.setSub_customdish(customdishList);;
+		}
+
+		return customdish;
+	}
+	/*
+	 * (非 Javadoc) 
+	* <p>Title: findDishWithImageByName</p> 
+	* <p>Description:根据name查询所有信息 </p> 
+	* @param id
+	* @return
+	* @throws Exception 
+	* @see rms.service.DishService#findDishWithImageById(java.lang.Integer)
+	 */
+	public Customdish findDishWithImageByName(String  name) throws Exception{
+		//查询基础信息
+		Customdish customdish=new Customdish();
+		dishExample example=new dishExample();
+		example.createCriteria().andNameEqualTo(name);
+		List<dish> dishs=dishMapper.selectByExample(example);
+		dish dish=dishs==null?null:dishs.get(0);
+		
 		BeanUtils.copyProperties(dish, customdish);
 		//查询图片信息
 		List<dishImage> dishImages=customdishImageMapper.findDishImageBydishId(customdish.getId());

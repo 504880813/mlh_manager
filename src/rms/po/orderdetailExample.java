@@ -225,63 +225,73 @@ public class orderdetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andRdishidIsNull() {
-            addCriterion("rDishId is null");
+        public Criteria andRdishnameIsNull() {
+            addCriterion("rDishname is null");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidIsNotNull() {
-            addCriterion("rDishId is not null");
+        public Criteria andRdishnameIsNotNull() {
+            addCriterion("rDishname is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidEqualTo(Integer value) {
-            addCriterion("rDishId =", value, "rdishid");
+        public Criteria andRdishnameEqualTo(String value) {
+            addCriterion("rDishname =", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidNotEqualTo(Integer value) {
-            addCriterion("rDishId <>", value, "rdishid");
+        public Criteria andRdishnameNotEqualTo(String value) {
+            addCriterion("rDishname <>", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidGreaterThan(Integer value) {
-            addCriterion("rDishId >", value, "rdishid");
+        public Criteria andRdishnameGreaterThan(String value) {
+            addCriterion("rDishname >", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("rDishId >=", value, "rdishid");
+        public Criteria andRdishnameGreaterThanOrEqualTo(String value) {
+            addCriterion("rDishname >=", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidLessThan(Integer value) {
-            addCriterion("rDishId <", value, "rdishid");
+        public Criteria andRdishnameLessThan(String value) {
+            addCriterion("rDishname <", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidLessThanOrEqualTo(Integer value) {
-            addCriterion("rDishId <=", value, "rdishid");
+        public Criteria andRdishnameLessThanOrEqualTo(String value) {
+            addCriterion("rDishname <=", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidIn(List<Integer> values) {
-            addCriterion("rDishId in", values, "rdishid");
+        public Criteria andRdishnameLike(String value) {
+            addCriterion("rDishname like", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidNotIn(List<Integer> values) {
-            addCriterion("rDishId not in", values, "rdishid");
+        public Criteria andRdishnameNotLike(String value) {
+            addCriterion("rDishname not like", value, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidBetween(Integer value1, Integer value2) {
-            addCriterion("rDishId between", value1, value2, "rdishid");
+        public Criteria andRdishnameIn(List<String> values) {
+            addCriterion("rDishname in", values, "rdishname");
             return (Criteria) this;
         }
 
-        public Criteria andRdishidNotBetween(Integer value1, Integer value2) {
-            addCriterion("rDishId not between", value1, value2, "rdishid");
+        public Criteria andRdishnameNotIn(List<String> values) {
+            addCriterion("rDishname not in", values, "rdishname");
+            return (Criteria) this;
+        }
+
+        public Criteria andRdishnameBetween(String value1, String value2) {
+            addCriterion("rDishname between", value1, value2, "rdishname");
+            return (Criteria) this;
+        }
+
+        public Criteria andRdishnameNotBetween(String value1, String value2) {
+            addCriterion("rDishname not between", value1, value2, "rdishname");
             return (Criteria) this;
         }
 

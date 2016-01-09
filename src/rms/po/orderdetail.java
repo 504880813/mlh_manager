@@ -7,7 +7,7 @@ public class orderdetail {
 
     private Integer dishnumber;
 
-    private Integer rdishid;
+    private String rdishname;
 
     private Integer corderid;
 
@@ -33,12 +33,12 @@ public class orderdetail {
         this.dishnumber = dishnumber;
     }
 
-    public Integer getRdishid() {
-        return rdishid;
+    public String getRdishname() {
+        return rdishname;
     }
 
-    public void setRdishid(Integer rdishid) {
-        this.rdishid = rdishid;
+    public void setRdishname(String rdishname) {
+        this.rdishname = rdishname == null ? null : rdishname.trim();
     }
 
     public Integer getCorderid() {

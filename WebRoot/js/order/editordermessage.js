@@ -2,43 +2,69 @@
 
 var adddishsname= new Array();
 var retreatdishsname= new Array();
-//添加的菜品数量
-var adddishsMap={};
-//删除的菜品数量
-var retreatdishsMap={};
-//正常的菜品数量
-var normaldishsMap={};
-
 
 /**
  * 在页面dom加载完毕后，初始化加菜，退菜数组数据
  */
 
 $(function(){
-	//初始化正常菜品数据
-	var normaldishname=$("table:first").find(".dishname");
-	$.each(normaldishname,function(key,val){
-		var currentdishnumber=$(val).next().text();
-		normaldishsMap[val.innerHTML]=currentdishnumber;
-//		alert("text-->"+val.innerHTML);
-//		alert(normaldishsMap[val.innerHTML]);
-	});
 	//初始化添加菜品数组数据
 	var adddishname=$("#alldish").next("table").find(".dishname");
 	$.each(adddishname,function(key,val){
 		adddishsname.push(val.innerHTML);
-		var currentdishnumber=$(val).next().text();
-		adddishsMap[val.innerHTML]=currentdishnumber;
 	});
 	//初始化删除菜品数组数据 
 	var retreatdishname=$("#orderdish").next("table").find(".dishname");
 	$.each(retreatdishname,function(key,val){
 		retreatdishsname.push(val.innerHTML);
-		var currentdishnumber=$(val).next().text();
-		retreatdishsMap[val.innerHTML]=currentdishnumber;
 	});
-	
 });
+
+
+/**
+ * 根据用户不同需求加菜
+ * @param method
+ * @param self 
+ */
+function adddish(method,self){
+	//点 初点菜 
+	if("initial"==method){
+		var jqs=$(self);
+		var orderdish=jqs.parents(".orderdish");
+		alert(orderdish.length);
+		//查询
+		var currentname=orderdish.find(".dishname").text().trim();
+		var currentprice=orderdish.find(".price").text().trim();
+		alert(currentname);
+		alert(currentprice);
+		//向加菜栏加入初点菜
+		adddishToListofuser(currentname, currentprice, "true", self);
+	}
+}
+/**
+ * 
+ * @param method
+ * @param self
+ */
+function retreatdish(method,self){
+	//退初点菜
+	if("initial"==method){
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * 表单提交
@@ -49,8 +75,8 @@ function formsubmit(){
 	var adddishData=$("#alldish").next();
 	var retreatdishData=$("#orderdish").next();
 	
-	//查询添加的菜品的菜品ID
-	var adddishidList=adddishData.find("input[name=adddishList.rdishid]");
+	//查询添加的菜品的菜品Name  adddishList.rdishname  adddishList.rdishname
+	var adddishNameList=adddishData.find("input[name=adddishList.rdishname]");
 	//查询添加的菜品的菜品类型
 	var addechelonList=adddishData.find("input[name=adddishList.echelon]");
 	//查询添加的菜品的价格
@@ -58,17 +84,19 @@ function formsubmit(){
 	//查询添加的菜品的数量
 	var adddishnumberList=adddishData.find("input[name=adddishList.dishnumber]");
 	
-	//查询要退的菜品的菜品ID
-	var retreatdishidList=retreatdishData.find("input[name=retreatdishList.rdishid]");
+	//查询要退的菜品的菜品Name
+	var retreatdishNameList=retreatdishData.find("input[name=retreatdishList.rdishname]");
 	//查询要退的菜品的菜品类型
 	var retreatechelonList=retreatdishData.find("input[name=retreatdishList.echelon]");
 	//查询要退的菜品的价格
 	var retreatpriceList=retreatdishData.find("input[name=retreatdishList.price]");
 	//查询要退的菜品的数量
 	var retreatdishnumberList=retreatdishData.find("input[name=retreatdishList.dishnumber]");
-	initAddDishIndex(adddishidList,addechelonList,addpriceList,adddishnumberList);
-	initRetreatDishIndex(retreatdishidList,retreatechelonList,retreatpriceList,retreatdishnumberList);
-	$("#editform").submit();
+	alert("add"+adddishNameList.length);
+	alert("retreat"+retreatdishNameList.length);
+	initAddDishIndex(adddishNameList,addechelonList,addpriceList,adddishnumberList);
+	initRetreatDishIndex(retreatdishNameList,retreatechelonList,retreatpriceList,retreatdishnumberList);
+//	$("#editform").submit();
 }
 /**
  * 初始化添加菜品的下标
@@ -77,9 +105,9 @@ function formsubmit(){
  * @param addpriceList
  * @param adddishnumberList
  */
-function initAddDishIndex(adddishidList,addechelonList,addpriceList,adddishnumberList){
-	$.each(adddishidList,function(k,v){
-		v.name="adddishList["+k+"].rdishid";
+function initAddDishIndex(adddishNameList,addechelonList,addpriceList,adddishnumberList){
+	$.each(adddishNameList,function(k,v){
+		v.name="adddishList["+k+"].rdishname";
 	});
 	$.each(addechelonList,function(k,v){
 		v.name="adddishList["+k+"].echelon";	
@@ -100,7 +128,7 @@ function initAddDishIndex(adddishidList,addechelonList,addpriceList,adddishnumbe
  */
 function initRetreatDishIndex(retreatdishidList,retreatechelonList,retreatpriceList,retreatdishnumberList){
 	$.each(retreatdishidList,function(k,v){
-		v.name="retreatdishList["+k+"].rdishid";
+		v.name="retreatdishList["+k+"].rdishname";
 	});
 	$.each(retreatechelonList,function(k,v){
 		v.name="retreatdishList["+k+"].echelon";	
@@ -113,148 +141,43 @@ function initRetreatDishIndex(retreatdishidList,retreatechelonList,retreatpriceL
 	});
 }
 
-/**
- * 为添加菜品准备资源
- */
-function adddishofMessage(Rootpath){
-	finddishs(Rootpath);
-}
-/**
- * 为退菜准备资源
- */
-function RetreatdishofMessage(self){
-	findorderdishs(self);
-}
-/**
- * 利用ajax查询所有菜品
- */
-function finddishs(Rootpath){
-	$("#alldish table:first tr:not(tr:first)").remove();
-	
-	$.ajax({ //一个Ajax过程 
-		type: "post", //以post方式与后台沟通 
-		url : Rootpath+"/dish/findAllDishRetrunJson.action", 
-		dataType:'json',
-		success: function(json){//如果调用成功 
-		//	alert(json[0].name);
-			adddishsfromAJaxBycategory(json);
-		},
-		error : function(data) {  
-			$("#alldish table:first").append("请求失败");
-		}  
-	}); 
-}
-
-/**
- * 将查询到的菜品信息，放入菜品模块页面中
- * 
- */
-function adddishsfromAJaxBycategory(json){
-	$.each(json, function(key, val) { 
-		var id=json[key].id;
-	   	var name=json[key].name;
-	    var price=json[key].price;
-//	    if(!ArrayContain(orderdishsId,id)){
-	    	adddishsofhtml(id,name,price,"true");
-//	    }
-	});
-}
 
 
-/**
- * 向菜品模块的添加html
- */
-function adddishsofhtml(id,name,price,isadd){
-	var html="<tr>";
-//	html+="<td>";
-//	html+=id;
-//	html+="</td>";
-	html+="<td>";
-	html+=name;
-	html+="</td>";
-	html+="<td>";
-	html+=price;
-	html+="</td>";
-//	<td>操作</td>
-	html+="<td>";
-	html+="<input type='button' value='add' onclick=";
-	html+="adddishToListofuser";
-	html+="('" +id;
-	html+="','" +name;
-	html+="','" +price;
-	html+="','" +isadd;
-	html+="',this)>";
-	html+="</td>";
-	html+="</tr>";
-	
-	
-	if(isadd=="true"){
-		$("#alldish").css("display","");
-		$("#alldish table:first").append(html);
-	}else{
-		$("#orderdish").css("display","");
-		$("#orderdish table:first").append(html);
-	}
-	
-}
-
-/**
- * 查询所有可以退的菜
- */
-function findorderdishs(self){
-	//移除旧数据
-	$(self).next().find("table tr:not(first)").remove();
-	
-	//添加新数据
-	var orderdishList=$(".orderdish");
-	
-	$.each(orderdishList,function(key,val){
-		var dishname=$(val).find(".dishname").text();
-		var dishid=$(val).find("input:first").val();
-		var price=$(val).find(".price").text();
-		price=$.trim(price);
-//		var dishname=$(val).find(".dishname");
-		adddishsofhtml(dishid,dishname,price,"false");
-	});
-	
-}
 
 /**
  * 根据用户的操作，判断，加菜/退菜操作
  */
-function adddishToListofuser(id,name,price,isadd,self){
+function adddishToListofuser(name,price,isadd,self){
 	//判断是加菜还是退菜
 	if(isadd=="true"){
 		//判断是叠加还是新增
 		//叠加
 		if(ArrayContain(adddishsname,name)){
-			changedishToList(id,name,price,isadd,self);
+			changedishToList(name,price,isadd,self);
 		}else{
 			//新增
-			adddishToList(id,name,1,price,price,isadd,self);
+			adddishToList(name,1,price,price,isadd,self);
 		}
 	}else{
 		//判断是叠加还是新增
 		//叠加
 		if(ArrayContain(retreatdishsname,name)){
-			changedishToList(id,name,price,isadd,self);
+			changedishToList(name,price,isadd,self);
 		}else{
 			//新增
-			adddishToList(id,name,1,price,price,isadd,self);
+			adddishToList(name,1,price,price,isadd,self);
 		}
 	}
-	
 	//改变总价
 	changeAllprice();
 }
 /**
  * 将商品放到指定的目录下，并修改总价
- * @param id
  * @param name
  * @param price
  */
-function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
-	
+function adddishToList(name,dishnumber,price,allprice,isadd,self){
+
 //	orderdishsId.push(id);
 	
 //	var jqs=$(self);
@@ -270,14 +193,12 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 		}
 	}
 	
-	
-	
 	var html="<tr class='orderdish'>";
 	
 	if("true"==isadd){
 			html+="<input type='hidden' name=adddishList";
-			html+=".rdishid value=" ;
-			html+=id;
+			html+=".rdishname value=" ;
+			html+=name;
 			html+=">";
 			
 			html+="<input type='hidden' name=adddishList";
@@ -290,12 +211,7 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 			html+=price;
 			html+=">";
 			
-		//	html+="<td>";
-		//	html+=id;
-		//	html+="</td>";
-			
-			
-			html+="<td class='dishname' >";
+			html+="<td class='dishname' nowrap='nowrap' align='right' bgcolor='#f1f1f1' colspan='2'>";
 			html+=name;
 			html+="</td>";
 			
@@ -305,17 +221,20 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 		//	html+="</td>";
 			
 			/*<td>数量</td>*/
-			html+="<td class='dishnumber'>";
-			html+="<input type='text' value='";
+			html+="<td class='dishnumber' nowrap='nowrap' align='right' bgcolor='#f1f1f1'>";
+			html+="<input type='hidden' value='";
 			html+=dishnumber;
 			html+="' name='adddishList";
 			html+=".dishnumber' class='dishnumberInput' readonly=‘readonly’ />";
+			html+="<span class='showNumber'>";
+			html+=dishnumber;
+			html+="</span>";
 			html+="</td>";
 	}else{
 		
 			html+="<input type='hidden' name=retreatdishList";
-			html+=".rdishid value=" ;
-			html+=id;
+			html+=".rdishname value=" ;
+			html+=name;
 			html+=">";
 			
 			html+="<input type='hidden' name=retreatdishList";
@@ -333,11 +252,11 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 		//	html+="</td>";
 			
 			
-			html+="<td class='dishname'>";
+			html+="<td class='dishname'nowrap='nowrap' align='right' bgcolor='#f1f1f1' colspan='2'>";
 			html+=name;
 			html+="</td>";
 			
-			html+="<td class='dishnumber'>";
+			html+="<td class='dishnumber' nowrap='nowrap' align='right' bgcolor='#f1f1f1'>";
 			html+="<input type='text' value='";
 			html+=dishnumber;
 			html+="' name='retreatdishList";
@@ -345,38 +264,44 @@ function adddishToList(id,name,dishnumber,price,allprice,isadd,self){
 			html+="</td>";
 	}
 	
-	html+="<td class='price'> ";
+	html+="<td class='price' nowrap='nowrap' align='right' bgcolor='#f1f1f1'> ";
 	html+=price;
 	html+="</td>";
 	
 //	<td>价格</td>
 	if(isadd=="true"){
-		html+="<td class='addtotalprice'> ";
+		html+="<td class='addtotalprice' nowrap='nowrap' align='right' bgcolor='#f1f1f1'> ";
 		html+=allprice;
 		html+="</td>";
 	}else{
-		html+="<td class='reducetotalprice'> ";
+		html+="<td class='reducetotalprice' nowrap='nowrap' align='right' bgcolor='#f1f1f1'> ";
 		html+=allprice;
 		html+="</td>";
 	}
 	
 	
 //	<td>操作</td>
-	html+="<td>";
-	html+="<input type='button' value='Reduce' onclick=";
-	html+="reducethisself";
-	html+="(this";
-//	html+=",'" +id;
-//	html+="','" +name;
-	html+=",'" +isadd;
-	html+="')>";
+	html+="<td nowrap='nowrap' align='right' bgcolor='#f1f1f1'>";
+	html+="<input value='+1' name='add' class='btn btn-info' style='width:80px;' type='button' onclick=";
+	html+="adddish";
+	html+="(add,this) >";
+	html+="<input value='-1' name='retreat' class='btn btn-info' style='width:80px;' type='button' onclick=";
+	html+="retreatdish";
+	html+="(add,this) >";
 	html+="</td>";
 	html+="</tr>";
+	
+//	<input value="+1" name="add" class="btn btn-info" style="width:80px;" type="button" onclick="adddish('add',this)">
+//	<input value="-1" name="retreat" class="btn btn-info" style="width:80px;" type="button" onclick="retreatdish('add',this)">
+//	
+//	</td>
+	
+	
 //	alert(html);
 	if(isadd=="true"){
-		$("#alldish").append(html);
+		$("#adddishtr").after(html);
 	}else{
-		$("#orderdish").append(html);
+		$("#orderdish").after(html);
 	}
 	
 //	changeprice(dishnameList, isadd);
@@ -394,6 +319,7 @@ function reducethisself(self,isadd){
 	
 	var dishnumber=parseFloat(dishnumberObject.val())-1;
 	if(dishnumber==0){
+		
 		$(self).parent().parent().remove();
 		if(isadd=="true"){
 			adddishsname.splice($.inArray(dishname,adddishsname),1);
@@ -428,9 +354,11 @@ function reducethisself(self,isadd){
 	
 }
 /**
+ * todo    改动。。
  * 改变指定菜品的菜品数量和总价
  */
-function changedishToList(id,name,price,isadd,self){
+function changedishToList(name,price,isadd,self){
+	
 	var jqs=$(self);
 	
 	var container=jqs.parent().parent().parent().parent().parent();
@@ -462,7 +390,7 @@ function changedishToList(id,name,price,isadd,self){
 				}
 			
 				currentdish.parent().remove();
-				adddishToList(id, name,addnumber,price,allprice, "true",currentdish.parent());
+				adddishToList(name,addnumber,price,allprice, "true",currentdish.parent());
 
 			}else{
 //				alert("add-->"+text);
@@ -490,7 +418,7 @@ function changedishToList(id,name,price,isadd,self){
 						allprice=currentdish.parent().find(".reducetotalprice").val();
 					}
 					currentdish.parent().remove();
-					adddishToList(id, name,addnumber,price,allprice, "false",currentdish.parent());
+					adddishToList(name,addnumber,price,allprice, "false",currentdish.parent());
 				}
 			}
 		}
@@ -542,6 +470,7 @@ function changeAllprice(){
 	//normaltotalprice
 	//addtotalprice
 	//reducetotalprice
+	
 	var normaltotalpriceList=$(".normaltotalprice");
 	var addtotalpriceList=$(".addtotalprice");
 	var reducetotalpriceList=$(".reducetotalprice");
@@ -557,7 +486,8 @@ function changeAllprice(){
 	$.each(reducetotalpriceList,function(key,val){
 		allprice=allprice-parseFloat(val.innerHTML);
 	});
-//	alert(allprice);
+	
+	
 	$("#allprice").text(allprice);
 	$("#allprice").next().val(allprice);
 }
